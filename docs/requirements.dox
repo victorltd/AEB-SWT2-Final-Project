@@ -20,5 +20,5 @@
  * | \anchor SwR-13 **SwR-13** | All parameters must allow calibration                                           | When developing or updating the system                                     |
  * | \anchor SwR-14 **SwR-14** | The software must send a message to deactivate the alarm in the instrument cluster | When TTC > 2 and alarms are active                                     |
  * | \anchor SwR-15 **SwR-15** | The CAN message sent by the AEB must signal an imminent collision so that the actuators can take action | When a collision is imminent                                |
- * | \anchor SwR-16 **SwR-16** | The AEB must be kept in the “on-state”                                          | When the vehicle is in reverse mode                                       |
+ * | \anchor SwR-16 **SwR-10** | The AEB must be kept in the “on-state”                                          | When the vehicle is in reverse mode                                       |
  */

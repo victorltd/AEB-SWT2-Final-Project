@@ -145,9 +145,8 @@ docs:
 
 .PHONY: clean-docs
 clean-docs:
-	rm -rf docs/html
-	rm -rf docs/latex
-	rm -rf docs/rtf
+		find docs/ -mindepth 1 ! -name '*.pdf' ! -name '.gitkeep' ! -name '*.dox' -print0 | xargs -0 rm -rf
+
 
 .PHONY: clean clean-cov
 clean:
