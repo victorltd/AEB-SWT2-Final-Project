@@ -20,8 +20,6 @@ jobs:
     - name: Generate Doxygen docs
       run: |
         doxygen Doxyfile
-        mkdir -p docs/doxygen
-        mv docs/html/* docs/doxygen/  # Organiza a saída
 
 
     - name: Deploy to GitHub Pages
