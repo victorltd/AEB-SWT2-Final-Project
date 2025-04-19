@@ -1,0 +1,187 @@
+\doxysection{inc/constants.h File Reference}
+\hypertarget{constants_8h}{}\label{constants_8h}\index{inc/constants.h@{inc/constants.h}}
+
+
+Defines constants and calibration values for the AEB system.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{constants_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{constants_8h_aab9d8e700a34c08a7d8bca1d5a2d31a5}{SENSORS\+\_\+\+MQ}}~"{}/mq\+\_\+aeb\+\_\+sensors"{}
+\item 
+\#define \mbox{\hyperlink{constants_8h_ab70848171cb403eb07c6f9e1fecdccd7}{ACTUATORS\+\_\+\+MQ}}~"{}/mq\+\_\+aeb\+\_\+actuators"{}
+\item 
+\#define \mbox{\hyperlink{constants_8h_abcda99a24ca583d06b2d88c6df456a43}{MQ\+\_\+\+MAX\+\_\+\+MESSAGES}}~10
+\item 
+\#define \mbox{\hyperlink{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}{MQ\+\_\+\+MAX\+\_\+\+MSG\+\_\+\+SIZE}}~12
+\item 
+\#define \mbox{\hyperlink{constants_8h_a86393b21e6f74e9870d92149e7fe7f20}{SHM\+\_\+\+NAME}}~"{}/shm\+\_\+aeb"{}
+\item 
+\#define \mbox{\hyperlink{constants_8h_aaa44133da93213090713e2f946df7b7a}{SEM\+\_\+\+NAME}}~"{}/sem\+\_\+aeb"{}
+\item 
+\#define \mbox{\hyperlink{constants_8h_a6ac27189e6d5d7759c4b2b674c0103bc}{SHM\+\_\+\+PERMISSIONS}}~0666
+\item 
+\#define \mbox{\hyperlink{constants_8h_af914e188aab1d10dc995ba2938e0b691}{THRESHOLD\+\_\+\+ALARM}}~2.\+0
+\begin{DoxyCompactList}\small\item\em Threshold for triggering the alarm (TTC \texorpdfstring{$<$}{<} 2.\+0 seconds). \mbox{[}Sw\+R-\/2\mbox{]} (\doxylink{software_requirements_SwR-2}{Sw\+R-\/2}) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a54bb76eeda8e1910c30bab2500d91325}{THRESHOLD\+\_\+\+BRAKING}}~1.\+0
+\begin{DoxyCompactList}\small\item\em Threshold for triggering the braking system (TTC \texorpdfstring{$<$}{<} 1.\+0 second). \mbox{[}Sw\+R-\/3\mbox{]} (\doxylink{software_requirements_SwR-3}{Sw\+R-\/3}) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_ad6212b1ad0c34c6212ec01d5aa81005b}{MAX\+\_\+\+SPD\+\_\+\+ENABLED}}~60.\+0
+\begin{DoxyCompactList}\small\item\em \mbox{[}Sys-\/\+F-\/9\mbox{]} \texorpdfstring{$<$}{<} Maximum speed for which AEB is enabled in km/h \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{constants_8h_a3f02e1e1a9f7e4eeba4cac6cfe6e18b1}{MIN\+\_\+\+SPD\+\_\+\+ENABLED}}~10.\+0
+\begin{DoxyCompactList}\small\item\em Minimum speed for which AEB is enabled in km/h \mbox{[}Sw\+R-\/7\mbox{]} (\doxylink{software_requirements_SwR-7}{Sw\+R-\/7}) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines constants and calibration values for the AEB system. 
+
+This file contains the definitions of constants, message queue names, shared memory names, and calibration thresholds used throughout the AEB system. These constants are shared across multiple modules, ensuring consistency in the system\textquotesingle{}s behavior.
+
+
+\begin{DoxyItemize}
+\item Defines message queue names and sizes for inter-\/process communication.
+\item Specifies shared memory and semaphore names for synchronization.
+\item Includes calibration thresholds for triggering alarms and braking in the AEB system.
+\item Provides speed limits for enabling the AEB system.
+\item Implementates calibration values \mbox{[}Sw\+R-\/13\mbox{]} (\doxylink{software_requirements_SwR-13}{Sw\+R-\/13}) 
+\end{DoxyItemize}
+
+Definition in file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{constants_8h_ab70848171cb403eb07c6f9e1fecdccd7}\label{constants_8h_ab70848171cb403eb07c6f9e1fecdccd7} 
+\index{constants.h@{constants.h}!ACTUATORS\_MQ@{ACTUATORS\_MQ}}
+\index{ACTUATORS\_MQ@{ACTUATORS\_MQ}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{ACTUATORS\_MQ}{ACTUATORS\_MQ}}
+{\footnotesize\ttfamily \#define ACTUATORS\+\_\+\+MQ~"{}/mq\+\_\+aeb\+\_\+actuators"{}}
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00022}{22}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_ad6212b1ad0c34c6212ec01d5aa81005b}\label{constants_8h_ad6212b1ad0c34c6212ec01d5aa81005b} 
+\index{constants.h@{constants.h}!MAX\_SPD\_ENABLED@{MAX\_SPD\_ENABLED}}
+\index{MAX\_SPD\_ENABLED@{MAX\_SPD\_ENABLED}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_SPD\_ENABLED}{MAX\_SPD\_ENABLED}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+SPD\+\_\+\+ENABLED~60.\+0}
+
+
+
+\mbox{[}Sys-\/\+F-\/9\mbox{]} \texorpdfstring{$<$}{<} Maximum speed for which AEB is enabled in km/h 
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00037}{37}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_a3f02e1e1a9f7e4eeba4cac6cfe6e18b1}\label{constants_8h_a3f02e1e1a9f7e4eeba4cac6cfe6e18b1} 
+\index{constants.h@{constants.h}!MIN\_SPD\_ENABLED@{MIN\_SPD\_ENABLED}}
+\index{MIN\_SPD\_ENABLED@{MIN\_SPD\_ENABLED}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_SPD\_ENABLED}{MIN\_SPD\_ENABLED}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+SPD\+\_\+\+ENABLED~10.\+0}
+
+
+
+Minimum speed for which AEB is enabled in km/h \mbox{[}Sw\+R-\/7\mbox{]} (\doxylink{software_requirements_SwR-7}{Sw\+R-\/7}) 
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00039}{39}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_abcda99a24ca583d06b2d88c6df456a43}\label{constants_8h_abcda99a24ca583d06b2d88c6df456a43} 
+\index{constants.h@{constants.h}!MQ\_MAX\_MESSAGES@{MQ\_MAX\_MESSAGES}}
+\index{MQ\_MAX\_MESSAGES@{MQ\_MAX\_MESSAGES}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{MQ\_MAX\_MESSAGES}{MQ\_MAX\_MESSAGES}}
+{\footnotesize\ttfamily \#define MQ\+\_\+\+MAX\+\_\+\+MESSAGES~10}
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00023}{23}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}\label{constants_8h_a28deba7f7a074fcec9ad971ac28521ee} 
+\index{constants.h@{constants.h}!MQ\_MAX\_MSG\_SIZE@{MQ\_MAX\_MSG\_SIZE}}
+\index{MQ\_MAX\_MSG\_SIZE@{MQ\_MAX\_MSG\_SIZE}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{MQ\_MAX\_MSG\_SIZE}{MQ\_MAX\_MSG\_SIZE}}
+{\footnotesize\ttfamily \#define MQ\+\_\+\+MAX\+\_\+\+MSG\+\_\+\+SIZE~12}
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00024}{24}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_aaa44133da93213090713e2f946df7b7a}\label{constants_8h_aaa44133da93213090713e2f946df7b7a} 
+\index{constants.h@{constants.h}!SEM\_NAME@{SEM\_NAME}}
+\index{SEM\_NAME@{SEM\_NAME}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{SEM\_NAME}{SEM\_NAME}}
+{\footnotesize\ttfamily \#define SEM\+\_\+\+NAME~"{}/sem\+\_\+aeb"{}}
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00027}{27}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_aab9d8e700a34c08a7d8bca1d5a2d31a5}\label{constants_8h_aab9d8e700a34c08a7d8bca1d5a2d31a5} 
+\index{constants.h@{constants.h}!SENSORS\_MQ@{SENSORS\_MQ}}
+\index{SENSORS\_MQ@{SENSORS\_MQ}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{SENSORS\_MQ}{SENSORS\_MQ}}
+{\footnotesize\ttfamily \#define SENSORS\+\_\+\+MQ~"{}/mq\+\_\+aeb\+\_\+sensors"{}}
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00021}{21}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_a86393b21e6f74e9870d92149e7fe7f20}\label{constants_8h_a86393b21e6f74e9870d92149e7fe7f20} 
+\index{constants.h@{constants.h}!SHM\_NAME@{SHM\_NAME}}
+\index{SHM\_NAME@{SHM\_NAME}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{SHM\_NAME}{SHM\_NAME}}
+{\footnotesize\ttfamily \#define SHM\+\_\+\+NAME~"{}/shm\+\_\+aeb"{}}
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00026}{26}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_a6ac27189e6d5d7759c4b2b674c0103bc}\label{constants_8h_a6ac27189e6d5d7759c4b2b674c0103bc} 
+\index{constants.h@{constants.h}!SHM\_PERMISSIONS@{SHM\_PERMISSIONS}}
+\index{SHM\_PERMISSIONS@{SHM\_PERMISSIONS}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{SHM\_PERMISSIONS}{SHM\_PERMISSIONS}}
+{\footnotesize\ttfamily \#define SHM\+\_\+\+PERMISSIONS~0666}
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00028}{28}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_af914e188aab1d10dc995ba2938e0b691}\label{constants_8h_af914e188aab1d10dc995ba2938e0b691} 
+\index{constants.h@{constants.h}!THRESHOLD\_ALARM@{THRESHOLD\_ALARM}}
+\index{THRESHOLD\_ALARM@{THRESHOLD\_ALARM}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{THRESHOLD\_ALARM}{THRESHOLD\_ALARM}}
+{\footnotesize\ttfamily \#define THRESHOLD\+\_\+\+ALARM~2.\+0}
+
+
+
+Threshold for triggering the alarm (TTC \texorpdfstring{$<$}{<} 2.\+0 seconds). \mbox{[}Sw\+R-\/2\mbox{]} (\doxylink{software_requirements_SwR-2}{Sw\+R-\/2}) 
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00033}{33}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+
+\Hypertarget{constants_8h_a54bb76eeda8e1910c30bab2500d91325}\label{constants_8h_a54bb76eeda8e1910c30bab2500d91325} 
+\index{constants.h@{constants.h}!THRESHOLD\_BRAKING@{THRESHOLD\_BRAKING}}
+\index{THRESHOLD\_BRAKING@{THRESHOLD\_BRAKING}!constants.h@{constants.h}}
+\doxysubsubsection{\texorpdfstring{THRESHOLD\_BRAKING}{THRESHOLD\_BRAKING}}
+{\footnotesize\ttfamily \#define THRESHOLD\+\_\+\+BRAKING~1.\+0}
+
+
+
+Threshold for triggering the braking system (TTC \texorpdfstring{$<$}{<} 1.\+0 second). \mbox{[}Sw\+R-\/3\mbox{]} (\doxylink{software_requirements_SwR-3}{Sw\+R-\/3}) 
+
+
+
+Definition at line \mbox{\hyperlink{constants_8h_source_l00035}{35}} of file \mbox{\hyperlink{constants_8h_source}{constants.\+h}}.
+

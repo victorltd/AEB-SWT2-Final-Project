@@ -1,0 +1,342 @@
+\doxysection{test/test\+\_\+mq\+\_\+utils.c File Reference}
+\hypertarget{test__mq__utils_8c}{}\label{test__mq__utils_8c}\index{test/test\_mq\_utils.c@{test/test\_mq\_utils.c}}
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include "{}unity.\+h"{}}\newline
+{\ttfamily \#include "{}mq\+\_\+utils.\+h"{}}\newline
+Include dependency graph for test\+\_\+mq\+\_\+utils.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{test__mq__utils_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test__mq__utils_8c_a63326a1b70b6e3f070e51687798e02de}{set\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Setup function to initialize AEB input state before each test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__mq__utils_8c_ab804e0f66def63262c1d6b4e3d2a2bd7}{tear\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Teardown function to clean up after each test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__mq__utils_8c_a5c93a2a89eaa1f78fc31605f97042720}{test\+\_\+get\+\_\+mq\+\_\+attr}} ()
+\item 
+void \mbox{\hyperlink{test__mq__utils_8c_a4c1e86e2b13a3ca1e31f9f4406bbb23c}{test\+\_\+create\+\_\+and\+\_\+close\+\_\+mq}} ()
+\item 
+void \mbox{\hyperlink{test__mq__utils_8c_ad70ae56c629d14cbb5213146584cb360}{test\+\_\+open\+\_\+mq}} ()
+\item 
+void \mbox{\hyperlink{test__mq__utils_8c_a09be1ec8ace6164d6010394da59876ce}{test\+\_\+open\+\_\+mq\+\_\+fail}} ()
+\item 
+void \mbox{\hyperlink{test__mq__utils_8c_a2c0ebe865c40069234a9d5aff82cfa46}{test\+\_\+read\+\_\+mq\+\_\+empty\+\_\+queue}} ()
+\item 
+void \mbox{\hyperlink{test__mq__utils_8c_ac8d7cd4f83405a17e7e558380d6fa738}{test\+\_\+write\+\_\+mq\+\_\+full\+\_\+queue}} ()
+\item 
+void \mbox{\hyperlink{test__mq__utils_8c_a362698c9f6f50b57fcbca2ea293b67df}{test\+\_\+read\+\_\+and\+\_\+write\+\_\+mq\+\_\+empty\+\_\+can\+\_\+msg}} ()
+\item 
+void \mbox{\hyperlink{test__mq__utils_8c_adba212f937d864223e4349ee3108e3e0}{test\+\_\+read\+\_\+and\+\_\+write\+\_\+mq\+\_\+valid\+\_\+can\+\_\+msg}} ()
+\item 
+int \mbox{\hyperlink{test__mq__utils_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\+\_\+name}} = "{}/test\+\_\+mq"{}
+\item 
+int \mbox{\hyperlink{test__mq__utils_8c_af6f68d7967a50e13f07d0f385fd908e7}{mq\+\_\+max\+\_\+messages}} = 10
+\item 
+mqd\+\_\+t \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{test__mq__utils_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test__mq__utils_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!main@{main}}
+\index{main@{main}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00114}{114}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00115\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_aaad15a5d10e50a412d0a6851d0e5091a}{UNITY\_BEGIN}}();}
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__mq__utils_8c_a5c93a2a89eaa1f78fc31605f97042720}{test\_get\_mq\_attr}});}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__mq__utils_8c_a4c1e86e2b13a3ca1e31f9f4406bbb23c}{test\_create\_and\_close\_mq}});}
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__mq__utils_8c_ad70ae56c629d14cbb5213146584cb360}{test\_open\_mq}});}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__mq__utils_8c_a09be1ec8ace6164d6010394da59876ce}{test\_open\_mq\_fail}});}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__mq__utils_8c_a2c0ebe865c40069234a9d5aff82cfa46}{test\_read\_mq\_empty\_queue}});}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__mq__utils_8c_ac8d7cd4f83405a17e7e558380d6fa738}{test\_write\_mq\_full\_queue}});}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__mq__utils_8c_a362698c9f6f50b57fcbca2ea293b67df}{test\_read\_and\_write\_mq\_empty\_can\_msg}});}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__mq__utils_8c_adba212f937d864223e4349ee3108e3e0}{test\_read\_and\_write\_mq\_valid\_can\_msg}});}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{unity__internals_8h_aa519129d3af737eb796fc91720fae26a}{UNITY\_END}}();}
+\DoxyCodeLine{00126\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_a63326a1b70b6e3f070e51687798e02de}\label{test__mq__utils_8c_a63326a1b70b6e3f070e51687798e02de} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!setUp@{setUp}}
+\index{setUp@{setUp}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{setUp()}{setUp()}}
+{\footnotesize\ttfamily void set\+Up (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Setup function to initialize AEB input state before each test. 
+
+Setup function to initialize AEB input state before each test. 
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00009}{9}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{//\ set\ stuff\ up\ here}}
+\DoxyCodeLine{00012\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_ab804e0f66def63262c1d6b4e3d2a2bd7}\label{test__mq__utils_8c_ab804e0f66def63262c1d6b4e3d2a2bd7} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!tearDown@{tearDown}}
+\index{tearDown@{tearDown}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{tearDown()}{tearDown()}}
+{\footnotesize\ttfamily void tear\+Down (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Teardown function to clean up after each test. 
+
+Teardown function to clean up after each test. 
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00014}{14}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ clean\ stuff\ up\ here}}
+\DoxyCodeLine{00017\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_a4c1e86e2b13a3ca1e31f9f4406bbb23c}\label{test__mq__utils_8c_a4c1e86e2b13a3ca1e31f9f4406bbb23c} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!test\_create\_and\_close\_mq@{test\_create\_and\_close\_mq}}
+\index{test\_create\_and\_close\_mq@{test\_create\_and\_close\_mq}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_create\_and\_close\_mq()}{test\_create\_and\_close\_mq()}}
+{\footnotesize\ttfamily void test\+\_\+create\+\_\+and\+\_\+close\+\_\+mq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00028}{28}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}}\ =\ \textcolor{stringliteral}{"{}/test\_mq"{}};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{struct\ }stat\ buffer;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{int}\ exists\ =\ stat(\textcolor{stringliteral}{"{}/dev/mqueue/test\_mq"{}},\ \&buffer);}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(-\/1,\ exists);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ mqd\_t\ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ exists\ =\ stat(\textcolor{stringliteral}{"{}/dev/mqueue/test\_mq"{}},\ \&buffer);}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(0,\ exists);}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{unity_8h_afe81f3cc9e16e2dfb46b8132861b8742}{TEST\_ASSERT\_NOT\_EQUAL}}((mqd\_t)-\/1,\ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}});}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00043\ \ \ \ \ exists\ =\ stat(\textcolor{stringliteral}{"{}/dev/mqueue/test\_mq"{}},\ \&buffer);}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(-\/1,\ exists);}
+\DoxyCodeLine{00045\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_a5c93a2a89eaa1f78fc31605f97042720}\label{test__mq__utils_8c_a5c93a2a89eaa1f78fc31605f97042720} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!test\_get\_mq\_attr@{test\_get\_mq\_attr}}
+\index{test\_get\_mq\_attr@{test\_get\_mq\_attr}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_get\_mq\_attr()}{test\_get\_mq\_attr()}}
+{\footnotesize\ttfamily void test\+\_\+get\+\_\+mq\+\_\+attr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00019}{19}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{struct\ }mq\_attr\ attr\ =\ \mbox{\hyperlink{mq__utils_8c_a1e06b8e09ecff9ff95ec9218ad2e6b11}{get\_mq\_attr}}();}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(O\_NONBLOCK,\ attr.mq\_flags);}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(0,\ attr.mq\_curmsgs);}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(10,\ attr.mq\_maxmsg);}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(12,\ attr.mq\_msgsize);}
+\DoxyCodeLine{00026\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_ad70ae56c629d14cbb5213146584cb360}\label{test__mq__utils_8c_ad70ae56c629d14cbb5213146584cb360} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!test\_open\_mq@{test\_open\_mq}}
+\index{test\_open\_mq@{test\_open\_mq}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_open\_mq()}{test\_open\_mq()}}
+{\footnotesize\ttfamily void test\+\_\+open\+\_\+mq (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00047}{47}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00050\ \ \ \ \ mqd\_t\ mq\_test\ =\ \mbox{\hyperlink{mq__utils_8c_a887671fb12fe2639b7be4a301927e497}{open\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{unity_8h_afe81f3cc9e16e2dfb46b8132861b8742}{TEST\_ASSERT\_NOT\_EQUAL}}(-\/1,\ mq\_test);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00053\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_a09be1ec8ace6164d6010394da59876ce}\label{test__mq__utils_8c_a09be1ec8ace6164d6010394da59876ce} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!test\_open\_mq\_fail@{test\_open\_mq\_fail}}
+\index{test\_open\_mq\_fail@{test\_open\_mq\_fail}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_open\_mq\_fail()}{test\_open\_mq\_fail()}}
+{\footnotesize\ttfamily void test\+\_\+open\+\_\+mq\+\_\+fail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00055}{55}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{unity_8h_aca1a170cd0581bacd7c918574f6838de}{TEST\_IGNORE\_MESSAGE}}(\textcolor{stringliteral}{"{}Not\ possible\ to\ test\ exit()\ function\ at\ the\ moment"{}});}
+\DoxyCodeLine{00058\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_a362698c9f6f50b57fcbca2ea293b67df}\label{test__mq__utils_8c_a362698c9f6f50b57fcbca2ea293b67df} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!test\_read\_and\_write\_mq\_empty\_can\_msg@{test\_read\_and\_write\_mq\_empty\_can\_msg}}
+\index{test\_read\_and\_write\_mq\_empty\_can\_msg@{test\_read\_and\_write\_mq\_empty\_can\_msg}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_read\_and\_write\_mq\_empty\_can\_msg()}{test\_read\_and\_write\_mq\_empty\_can\_msg()}}
+{\footnotesize\ttfamily void test\+\_\+read\+\_\+and\+\_\+write\+\_\+mq\+\_\+empty\+\_\+can\+\_\+msg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00080}{80}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00081\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00083\ \ \ \ \ mqd\_t\ mq\_write\ =\ \mbox{\hyperlink{mq__utils_8c_a887671fb12fe2639b7be4a301927e497}{open\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ msg\_to\_write\ =\ \{0\};}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\_mq}}(mq\_write,\ \&msg\_to\_write);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ msg\_read;}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_abee084f2648925ba92404d2d06f98581}{read\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \&msg\_read);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(msg\_to\_write.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}},\ msg\_read.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}});}
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00092\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_adba212f937d864223e4349ee3108e3e0}\label{test__mq__utils_8c_adba212f937d864223e4349ee3108e3e0} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!test\_read\_and\_write\_mq\_valid\_can\_msg@{test\_read\_and\_write\_mq\_valid\_can\_msg}}
+\index{test\_read\_and\_write\_mq\_valid\_can\_msg@{test\_read\_and\_write\_mq\_valid\_can\_msg}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_read\_and\_write\_mq\_valid\_can\_msg()}{test\_read\_and\_write\_mq\_valid\_can\_msg()}}
+{\footnotesize\ttfamily void test\+\_\+read\+\_\+and\+\_\+write\+\_\+mq\+\_\+valid\+\_\+can\+\_\+msg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00094}{94}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00095\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00097\ \ \ \ \ mqd\_t\ mq\_write\ =\ \mbox{\hyperlink{mq__utils_8c_a887671fb12fe2639b7be4a301927e497}{open\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ msg\_to\_write\ =\ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ 12345,}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0x11,\ 0x22,\ 0x33,\ 0x44,\ 0x55,\ 0x66,\ 0x77,\ 0x88\}\};}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\_mq}}(mq\_write,\ \&msg\_to\_write);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ msg\_read;}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_abee084f2648925ba92404d2d06f98581}{read\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \&msg\_read);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(msg\_to\_write.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}},\ msg\_read.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}});}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 8;\ i++)}
+\DoxyCodeLine{00108\ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(msg\_to\_write.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[i],\ msg\_read.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[i]);}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00112\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_a2c0ebe865c40069234a9d5aff82cfa46}\label{test__mq__utils_8c_a2c0ebe865c40069234a9d5aff82cfa46} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!test\_read\_mq\_empty\_queue@{test\_read\_mq\_empty\_queue}}
+\index{test\_read\_mq\_empty\_queue@{test\_read\_mq\_empty\_queue}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_read\_mq\_empty\_queue()}{test\_read\_mq\_empty\_queue()}}
+{\footnotesize\ttfamily void test\+\_\+read\+\_\+mq\+\_\+empty\+\_\+queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00060}{60}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00061\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ msg\_read;}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(-\/1,\ \mbox{\hyperlink{mq__utils_8c_abee084f2648925ba92404d2d06f98581}{read\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \&msg\_read));}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00066\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__mq__utils_8c_ac8d7cd4f83405a17e7e558380d6fa738}\label{test__mq__utils_8c_ac8d7cd4f83405a17e7e558380d6fa738} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!test\_write\_mq\_full\_queue@{test\_write\_mq\_full\_queue}}
+\index{test\_write\_mq\_full\_queue@{test\_write\_mq\_full\_queue}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_write\_mq\_full\_queue()}{test\_write\_mq\_full\_queue()}}
+{\footnotesize\ttfamily void test\+\_\+write\+\_\+mq\+\_\+full\+\_\+queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00068}{68}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ msg\_to\_write\ =\ \{0\};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{test__mq__utils_8c_af6f68d7967a50e13f07d0f385fd908e7}{mq\_max\_messages}};\ i++)}
+\DoxyCodeLine{00073\ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \&msg\_to\_write);}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(-\/1,\ \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \&msg\_to\_write));}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00078\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{test__mq__utils_8c_af6f68d7967a50e13f07d0f385fd908e7}\label{test__mq__utils_8c_af6f68d7967a50e13f07d0f385fd908e7} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!mq\_max\_messages@{mq\_max\_messages}}
+\index{mq\_max\_messages@{mq\_max\_messages}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{mq\_max\_messages}{mq\_max\_messages}}
+{\footnotesize\ttfamily int mq\+\_\+max\+\_\+messages = 10}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00006}{6}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+\Hypertarget{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}\label{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!mq\_name@{mq\_name}}
+\index{mq\_name@{mq\_name}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{mq\_name}{mq\_name}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} mq\+\_\+name = "{}/test\+\_\+mq"{}}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00005}{5}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+
+\Hypertarget{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}\label{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d} 
+\index{test\_mq\_utils.c@{test\_mq\_utils.c}!mqd@{mqd}}
+\index{mqd@{mqd}!test\_mq\_utils.c@{test\_mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{mqd}{mqd}}
+{\footnotesize\ttfamily mqd\+\_\+t mqd}
+
+
+
+Definition at line \mbox{\hyperlink{test__mq__utils_8c_source_l00007}{7}} of file \mbox{\hyperlink{test__mq__utils_8c_source}{test\+\_\+mq\+\_\+utils.\+c}}.
+

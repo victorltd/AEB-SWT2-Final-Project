@@ -1,0 +1,9 @@
+<map id="inc/ttc_control.h" name="inc/ttc_control.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="67,5,193,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,73,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,33,67,72,63,68,114,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="98,79,162,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="133,31,133,65,127,65,127,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="186,79,269,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="147,29,202,68,199,72,144,33"/>
+</map>

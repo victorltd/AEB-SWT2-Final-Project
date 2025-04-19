@@ -1,0 +1,1311 @@
+\doxysection{test/test\+\_\+aeb\+\_\+controller.c File Reference}
+\hypertarget{test__aeb__controller_8c}{}\label{test__aeb__controller_8c}\index{test/test\_aeb\_controller.c@{test/test\_aeb\_controller.c}}
+{\ttfamily \#include "{}unity.\+h"{}}\newline
+{\ttfamily \#include "{}constants.\+h"{}}\newline
+{\ttfamily \#include "{}sensors\+\_\+input.\+h"{}}\newline
+{\ttfamily \#include "{}dbc.\+h"{}}\newline
+{\ttfamily \#include $<$mqueue.\+h$>$}\newline
+{\ttfamily \#include "{}ttc\+\_\+control.\+h"{}}\newline
+Include dependency graph for test\+\_\+aeb\+\_\+controller.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{test__aeb__controller_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}{aeb\+\_\+controller\+\_\+state}} \{ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a}{AEB\+\_\+\+STATE\+\_\+\+ACTIVE}}
+, \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a06edf6bb0f2816cbb0074c27d62e81d4}{AEB\+\_\+\+STATE\+\_\+\+ALARM}}
+, \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a9f92c5be6a496ec11dcc37a5740b8bfa}{AEB\+\_\+\+STATE\+\_\+\+BRAKE}}
+, \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\+\_\+\+STATE\+\_\+\+STANDBY}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of AEB controller states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translate\+And\+Call\+Can\+Msg}} (\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Translates the received CAN message and calls the appropriate handler function based on the message identifier. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a6ba2245e7d2117f6190d0687e1d9beb0}{update\+Internal\+Pedals\+State}} (\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Updates the internal state for the brake and accelerator pedals from the received CAN message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010}{update\+Internal\+Speed\+State}} (\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Updates the internal speed state based on the received CAN message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}{update\+Internal\+Obstacle\+State}} (\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Updates the internal obstacle state based on the received CAN message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a0385dbe57c403b31fa857cced3197a0e}{update\+Internal\+Car\+CState}} (\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+frame)
+\begin{DoxyCompactList}\small\item\em Updates the internal car state based on the received CAN message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \mbox{\hyperlink{test__aeb__controller_8c_a46c3844253eb536d7b9f4a47d0b0e828}{update\+Can\+Msg\+Output}} (\mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}{aeb\+\_\+controller\+\_\+state}} state)
+\begin{DoxyCompactList}\small\item\em Generates the appropriate CAN message for the AEB system state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}{aeb\+\_\+controller\+\_\+state}} \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{get\+AEBState}} (\mbox{\hyperlink{structsensors__input__data}{sensors\+\_\+input\+\_\+data}} \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\+\_\+internal\+\_\+state}}, double ttc)
+\begin{DoxyCompactList}\small\item\em Determines the current state of the AEB system based on sensor input and TTC. \end{DoxyCompactList}\item 
+mqd\+\_\+t \mbox{\hyperlink{test__aeb__controller_8c_a887671fb12fe2639b7be4a301927e497}{open\+\_\+mq}} (char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\+\_\+name}})
+\begin{DoxyCompactList}\small\item\em Mock function to simulate opening a message queue. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{test__aeb__controller_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\+\_\+mq}} (mqd\+\_\+t mq\+\_\+sender, \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \texorpdfstring{$\ast$}{*}msg)
+\begin{DoxyCompactList}\small\item\em Mock function to simulate writing a message to a message queue. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{test__aeb__controller_8c_aac4648fa4d641dfd3ff8c3f50e0f621b}{read\+\_\+mq}} (mqd\+\_\+t mq, \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \texorpdfstring{$\ast$}{*}msg)
+\begin{DoxyCompactList}\small\item\em Mock function to simulate reading a message from a message queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a95c834d6178047ce9e1bce7cbfea2836}{set\+Up}} (void)
+\begin{DoxyCompactList}\small\item\em Setup function to initialize AEB input state before each test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a9909011e5fea0c018842eec4d93d0662}{tear\+Down}} (void)
+\begin{DoxyCompactList}\small\item\em Teardown function to clean up after each test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_aced5d214f2cace8a78f01948cff99bb4}{test\+\_\+update\+Internal\+Pedals\+State}} (void)
+\begin{DoxyCompactList}\small\item\em Test for the function update\+Internal\+Pedals\+State. \mbox{[}Sw\+R-\/6\mbox{]} (\doxylink{software_requirements_SwR-6}{Sw\+R-\/6}), \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_ae4e870639639abe60cba2fad937b4c59}{test\+\_\+update\+Internal\+Speed\+State}} (void)
+\begin{DoxyCompactList}\small\item\em Test for the function update\+Internal\+Speed\+State. \mbox{[}Sw\+R-\/6\mbox{]} (\doxylink{software_requirements_SwR-6}{Sw\+R-\/6}), \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a4338adbad0c6349a033bcbe38ec267f1}{test\+\_\+update\+Internal\+Obstacle\+State}} (void)
+\begin{DoxyCompactList}\small\item\em Test for the function update\+Internal\+Obstacle\+State. \mbox{[}Sw\+R-\/3\mbox{]} (\doxylink{software_requirements_SwR-3}{Sw\+R-\/3}), \mbox{[}Sw\+R-\/6\mbox{]} (\doxylink{software_requirements_SwR-6}{Sw\+R-\/6}), \mbox{[}Sw\+R-\/7\mbox{]} (\doxylink{software_requirements_SwR-7}{Sw\+R-\/7}), \mbox{[}Sw\+R-\/8\mbox{]}, \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}, \mbox{[}Sw\+R-\/15\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_af3005a42ce5f907b5a351f9b940d353f}{test\+\_\+update\+Internal\+Car\+CState}} (void)
+\begin{DoxyCompactList}\small\item\em Test for the function update\+Internal\+Car\+CState. \mbox{[}Sw\+R-\/2\mbox{]} (\doxylink{software_requirements_SwR-2}{Sw\+R-\/2}), \mbox{[}Sw\+R-\/3\mbox{]} (\doxylink{software_requirements_SwR-3}{Sw\+R-\/3}), \mbox{[}Sw\+R-\/7\mbox{]} (\doxylink{software_requirements_SwR-7}{Sw\+R-\/7}), \mbox{[}Sw\+R-\/8\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}, \mbox{[}Sw\+R-\/12\mbox{]}, \mbox{[}Sw\+R-\/16\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_aa6cd673b20d4e6740220e58bc8c30c6c}{test\+\_\+get\+AEBState}} (void)
+\begin{DoxyCompactList}\small\item\em Test for the function get\+AEBState. \mbox{[}Sw\+R-\/2\mbox{]} (\doxylink{software_requirements_SwR-2}{Sw\+R-\/2}), \mbox{[}Sw\+R-\/3\mbox{]} (\doxylink{software_requirements_SwR-3}{Sw\+R-\/3}), \mbox{[}Sw\+R-\/6\mbox{]} (\doxylink{software_requirements_SwR-6}{Sw\+R-\/6}), \mbox{[}Sw\+R-\/7\mbox{]}, \mbox{[}Sw\+R-\/8\mbox{]}, \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}, \mbox{[}Sw\+R-\/12\mbox{]}, \mbox{[}Sw\+R-\/15\mbox{]},\mbox{[}Sw\+R-\/16\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a352def22676bf9490ca39fc3e3b34ec9}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+1}} (void)
+\begin{DoxyCompactList}\small\item\em Series of tests for the function translate\+And\+Call\+Can\+Msg. \mbox{[}Sw\+R-\/9\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a6aea9a65541977ce182a4ef297d8c487}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+2}} ()
+\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a795a3b935bc7ef9390fa5373ee8410c4}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+3}} ()
+\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a5307625ee39d468cbd08d1554d4b32bd}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+4}} ()
+\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a358663990a317f4574ec949ee74abbbc}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+5}} ()
+\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a21c40339c6df87ecd1fc6c3a869cdefc}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+6}} ()
+\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a2e3c613c3ded4e87da5cd7c5f353e423}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+7}} ()
+\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_ae75c02d906d44831e60d3751391852b3}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+8}} ()
+\item 
+void \mbox{\hyperlink{test__aeb__controller_8c_a20663d6bbbc93aefa399a31dd2a5627e}{test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+9}} ()
+\item 
+int \mbox{\hyperlink{test__aeb__controller_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em Main function to run the tests. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structsensors__input__data}{sensors\+\_\+input\+\_\+data}} \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\+\_\+internal\+\_\+state}}
+\item 
+\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \mbox{\hyperlink{test__aeb__controller_8c_a5d2051893d3d3ea4e0dcc3c647770c95}{captured\+\_\+can\+\_\+frame}}
+\item 
+\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \mbox{\hyperlink{test__aeb__controller_8c_a4847c169e96fc59553ca7c852cc004d6}{out\+\_\+can\+\_\+frame}}
+\item 
+\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \mbox{\hyperlink{test__aeb__controller_8c_ae6763c5f7a5772f4680437dee47e8954}{empty\+\_\+msg}}
+\begin{DoxyCompactList}\small\item\em \mbox{[}Sw\+R-\/5\mbox{]} (\doxylink{software_requirements_SwR-5}{Sw\+R-\/5}) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}\label{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!aeb\_controller\_state@{aeb\_controller\_state}}
+\index{aeb\_controller\_state@{aeb\_controller\_state}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{aeb\_controller\_state}{aeb\_controller\_state}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}{aeb\+\_\+controller\+\_\+state}}}
+
+
+
+Enumeration of AEB controller states. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AEB\_STATE\_ACTIVE@{AEB\_STATE\_ACTIVE}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!AEB\_STATE\_ACTIVE@{AEB\_STATE\_ACTIVE}}}\Hypertarget{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a}\label{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a} 
+AEB\+\_\+\+STATE\+\_\+\+ACTIVE&AEB is active and functioning normally \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AEB\_STATE\_ALARM@{AEB\_STATE\_ALARM}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!AEB\_STATE\_ALARM@{AEB\_STATE\_ALARM}}}\Hypertarget{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a06edf6bb0f2816cbb0074c27d62e81d4}\label{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a06edf6bb0f2816cbb0074c27d62e81d4} 
+AEB\+\_\+\+STATE\+\_\+\+ALARM&AEB system is in alarm state due to a potential collision \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AEB\_STATE\_BRAKE@{AEB\_STATE\_BRAKE}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!AEB\_STATE\_BRAKE@{AEB\_STATE\_BRAKE}}}\Hypertarget{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a9f92c5be6a496ec11dcc37a5740b8bfa}\label{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a9f92c5be6a496ec11dcc37a5740b8bfa} 
+AEB\+\_\+\+STATE\+\_\+\+BRAKE&AEB system is in brake state to avoid a collision \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AEB\_STATE\_STANDBY@{AEB\_STATE\_STANDBY}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!AEB\_STATE\_STANDBY@{AEB\_STATE\_STANDBY}}}\Hypertarget{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}\label{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775} 
+AEB\+\_\+\+STATE\+\_\+\+STANDBY&AEB system is in standby mode, awaiting activation \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00012}{12}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a}{AEB\_STATE\_ACTIVE}},\ }
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a06edf6bb0f2816cbb0074c27d62e81d4}{AEB\_STATE\_ALARM}},\ }
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a9f92c5be6a496ec11dcc37a5740b8bfa}{AEB\_STATE\_BRAKE}},\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\_STATE\_STANDBY}}\ }
+\DoxyCodeLine{00017\ \}\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}{aeb\_controller\_state}};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}\label{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!getAEBState@{getAEBState}}
+\index{getAEBState@{getAEBState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{getAEBState()}{getAEBState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}{aeb\+\_\+controller\+\_\+state}} get\+AEBState (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsensors__input__data}{sensors\+\_\+input\+\_\+data}}}]{aeb\+\_\+internal\+\_\+state,  }\item[{double}]{ttc }\end{DoxyParamCaption})}
+
+
+
+Determines the current state of the AEB system based on sensor input and TTC. 
+
+This function evaluates the current AEB state based on multiple sensor parameters, such as relative velocity, obstacle presence, and TTC (Time to Collision).
+
+
+\begin{DoxyParams}{Parameters}
+{\em aeb\+\_\+internal\+\_\+state} & The current sensor data for the AEB system. \\
+\hline
+{\em ttc} & The time-\/to-\/collision value, calculated based on obstacle distance and vehicle speed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current AEB state. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00420}{420}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00421\ \{\textcolor{comment}{//\ Abstraction\ according\ to\ [SwR-\/12]}}
+\DoxyCodeLine{00422\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}}\ ==\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\_STATE\_STANDBY}};}
+\DoxyCodeLine{00424\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}}\ <\ \mbox{\hyperlink{constants_8h_a3f02e1e1a9f7e4eeba4cac6cfe6e18b1}{MIN\_SPD\_ENABLED}}\ \&\&\ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}}\ ==\ \textcolor{keyword}{false})\ \textcolor{comment}{//\ Required\ by\ [SwR-\/7][SwR-\/16]}}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\_STATE\_STANDBY}};}
+\DoxyCodeLine{00426\ \ \ \ \ \textcolor{comment}{//\ Required\ by\ [SwR-\/7][SwR-\/16]}}
+\DoxyCodeLine{00427\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}}\ >\ \mbox{\hyperlink{constants_8h_ad6212b1ad0c34c6212ec01d5aa81005b}{MAX\_SPD\_ENABLED}}\ \&\&\ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}}\ ==\ \textcolor{keyword}{false})\ }
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\_STATE\_STANDBY}};}
+\DoxyCodeLine{00429\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}}\ ==\ \textcolor{keyword}{false}\ \&\&\ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}}\ ==\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00430\ \ \ \ \ \{}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ttc\ <\ \mbox{\hyperlink{constants_8h_a54bb76eeda8e1910c30bab2500d91325}{THRESHOLD\_BRAKING}})}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a9f92c5be6a496ec11dcc37a5740b8bfa}{AEB\_STATE\_BRAKE}};}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ttc\ <\ \mbox{\hyperlink{constants_8h_af914e188aab1d10dc995ba2938e0b691}{THRESHOLD\_ALARM}})}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a06edf6bb0f2816cbb0074c27d62e81d4}{AEB\_STATE\_ALARM}};}
+\DoxyCodeLine{00435\ \ \ \ \ \}}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a}{AEB\_STATE\_ACTIVE}};\ \textcolor{comment}{//\ [SwR-\/8]}}
+\DoxyCodeLine{00437\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{test__aeb__controller_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!main@{main}}
+\index{main@{main}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Main function to run the tests. 
+
+\begin{DoxyReturn}{Returns}
+int The result of the test run. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00452}{452}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00453\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_aaad15a5d10e50a412d0a6851d0e5091a}{UNITY\_BEGIN}}();}
+\DoxyCodeLine{00454\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_aced5d214f2cace8a78f01948cff99bb4}{test\_updateInternalPedalsState}});}
+\DoxyCodeLine{00455\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_ae4e870639639abe60cba2fad937b4c59}{test\_updateInternalSpeedState}});}
+\DoxyCodeLine{00456\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a4338adbad0c6349a033bcbe38ec267f1}{test\_updateInternalObstacleState}});}
+\DoxyCodeLine{00457\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_af3005a42ce5f907b5a351f9b940d353f}{test\_updateInternalCarCState}});}
+\DoxyCodeLine{00458\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_aa6cd673b20d4e6740220e58bc8c30c6c}{test\_getAEBState}});}
+\DoxyCodeLine{00459\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a352def22676bf9490ca39fc3e3b34ec9}{test\_translateAndCallCanMsg\_1}});}
+\DoxyCodeLine{00460\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a6aea9a65541977ce182a4ef297d8c487}{test\_translateAndCallCanMsg\_2}});}
+\DoxyCodeLine{00461\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a795a3b935bc7ef9390fa5373ee8410c4}{test\_translateAndCallCanMsg\_3}});}
+\DoxyCodeLine{00462\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a5307625ee39d468cbd08d1554d4b32bd}{test\_translateAndCallCanMsg\_4}});}
+\DoxyCodeLine{00463\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a358663990a317f4574ec949ee74abbbc}{test\_translateAndCallCanMsg\_5}});}
+\DoxyCodeLine{00464\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a21c40339c6df87ecd1fc6c3a869cdefc}{test\_translateAndCallCanMsg\_6}});}
+\DoxyCodeLine{00465\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a2e3c613c3ded4e87da5cd7c5f353e423}{test\_translateAndCallCanMsg\_7}});}
+\DoxyCodeLine{00466\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_ae75c02d906d44831e60d3751391852b3}{test\_translateAndCallCanMsg\_8}});}
+\DoxyCodeLine{00467\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__aeb__controller_8c_a20663d6bbbc93aefa399a31dd2a5627e}{test\_translateAndCallCanMsg\_9}});}
+\DoxyCodeLine{00468\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{unity__internals_8h_aa519129d3af737eb796fc91720fae26a}{UNITY\_END}}();}
+\DoxyCodeLine{00469\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a887671fb12fe2639b7be4a301927e497}\label{test__aeb__controller_8c_a887671fb12fe2639b7be4a301927e497} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!open\_mq@{open\_mq}}
+\index{open\_mq@{open\_mq}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{open\_mq()}{open\_mq()}}
+{\footnotesize\ttfamily mqd\+\_\+t open\+\_\+mq (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{mq\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Mock function to simulate opening a message queue. 
+
+Opens a POSIX message queue.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mq\+\_\+name} & The name of the message queue to open. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mqd\+\_\+t The mock message queue descriptor. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00039}{39}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Opening\ message\ queue:\ \%s\(\backslash\)n\(\backslash\)n"{}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ 1;\ \ \textcolor{comment}{//\ Return\ a\ mock\ handle\ for\ the\ message\ queue}}
+\DoxyCodeLine{00042\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_aac4648fa4d641dfd3ff8c3f50e0f621b}\label{test__aeb__controller_8c_aac4648fa4d641dfd3ff8c3f50e0f621b} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!read\_mq@{read\_mq}}
+\index{read\_mq@{read\_mq}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{read\_mq()}{read\_mq()}}
+{\footnotesize\ttfamily int read\+\_\+mq (\begin{DoxyParamCaption}\item[{mqd\+\_\+t}]{mq,  }\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \texorpdfstring{$\ast$}{*}}]{msg }\end{DoxyParamCaption})}
+
+
+
+Mock function to simulate reading a message from a message queue. 
+
+Reads a message from a POSIX message queue.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mq} & The message queue descriptor. \\
+\hline
+{\em msg} & The CAN message to store the read data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The status of the read operation (0 for success). 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00065}{65}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \textcolor{comment}{//\ Simulate\ success\ in\ reading\ the\ message}}
+\DoxyCodeLine{00067\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a95c834d6178047ce9e1bce7cbfea2836}\label{test__aeb__controller_8c_a95c834d6178047ce9e1bce7cbfea2836} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!setUp@{setUp}}
+\index{setUp@{setUp}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{setUp()}{setUp()}}
+{\footnotesize\ttfamily void set\+Up (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Setup function to initialize AEB input state before each test. 
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00072}{72}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}}\ =\ 0.0;}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}}\ =\ 0.0;}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00080\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a9909011e5fea0c018842eec4d93d0662}\label{test__aeb__controller_8c_a9909011e5fea0c018842eec4d93d0662} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!tearDown@{tearDown}}
+\index{tearDown@{tearDown}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{tearDown()}{tearDown()}}
+{\footnotesize\ttfamily void tear\+Down (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Teardown function to clean up after each test. 
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00085}{85}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//\ No\ cleanup\ required\ for\ now}}
+\DoxyCodeLine{00087\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_aa6cd673b20d4e6740220e58bc8c30c6c}\label{test__aeb__controller_8c_aa6cd673b20d4e6740220e58bc8c30c6c} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_getAEBState@{test\_getAEBState}}
+\index{test\_getAEBState@{test\_getAEBState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_getAEBState()}{test\_getAEBState()}}
+{\footnotesize\ttfamily void test\+\_\+get\+AEBState (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Test for the function get\+AEBState. \mbox{[}Sw\+R-\/2\mbox{]} (\doxylink{software_requirements_SwR-2}{Sw\+R-\/2}), \mbox{[}Sw\+R-\/3\mbox{]} (\doxylink{software_requirements_SwR-3}{Sw\+R-\/3}), \mbox{[}Sw\+R-\/6\mbox{]} (\doxylink{software_requirements_SwR-6}{Sw\+R-\/6}), \mbox{[}Sw\+R-\/7\mbox{]}, \mbox{[}Sw\+R-\/8\mbox{]}, \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}, \mbox{[}Sw\+R-\/12\mbox{]}, \mbox{[}Sw\+R-\/15\mbox{]},\mbox{[}Sw\+R-\/16\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00255}{255}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{comment}{//\ Initial\ setup\ of\ AEB\ state}}
+\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}}\ =\ 80.0;}
+\DoxyCodeLine{00258\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00259\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}}\ =\ 10.0;}
+\DoxyCodeLine{00260\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00261\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00262\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}}\ =\ \textcolor{keyword}{true};\ \ \textcolor{comment}{//\ AEB\ system\ is\ ON}}
+\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}}\ =\ \textcolor{keyword}{false};\ \ \ \textcolor{comment}{//\ Reversing\ is\ not\ enabled}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordtype}{double}\ ttc\ =\ 1.9;\ \ \textcolor{comment}{//\ Example\ of\ TTC}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{comment}{//\ Case\ 1:\ AEB\ system\ active\ and\ TTC\ indicating\ alarm\ state}}
+\DoxyCodeLine{00268\ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}{aeb\_controller\_state}}\ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a06edf6bb0f2816cbb0074c27d62e81d4}{AEB\_STATE\_ALARM}});\ \ \textcolor{comment}{//\ Should\ be\ in\ ALARM\ state}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{comment}{//\ Case\ 2:\ AEB\ system\ active,\ but\ TTC\ too\ low\ (should\ go\ to\ brake\ state)}}
+\DoxyCodeLine{00272\ \ \ \ \ ttc\ =\ 0.9;}
+\DoxyCodeLine{00273\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00274\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a9f92c5be6a496ec11dcc37a5740b8bfa}{AEB\_STATE\_BRAKE}});\ \ \textcolor{comment}{//\ Should\ go\ to\ BRAKE\ state\ if\ speed\ is\ high\ and\ TTC\ low}}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{comment}{//\ Case\ 3:\ AEB\ system\ OFF\ (on\_off\_aeb\_system\ ==\ false)}}
+\DoxyCodeLine{00277\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00278\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00279\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\_STATE\_STANDBY}});\ \ \textcolor{comment}{//\ Should\ be\ in\ STANDBY\ state}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{comment}{//\ Case\ 4:\ Speed\ below\ MIN\_SPD\_ENABLED\ and\ no\ reverse\ enabled\ (should\ go\ to\ STANDBY)}}
+\DoxyCodeLine{00282\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00283\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}}\ =\ \mbox{\hyperlink{constants_8h_a3f02e1e1a9f7e4eeba4cac6cfe6e18b1}{MIN\_SPD\_ENABLED}}\ -\/\ 1;}
+\DoxyCodeLine{00284\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00285\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\_STATE\_STANDBY}});\ \ \textcolor{comment}{//\ Should\ go\ to\ STANDBY\ state}}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{comment}{//\ Case\ 5:\ Speed\ above\ MAX\_SPD\_ENABLED\ and\ no\ reverse\ enabled\ (should\ go\ to\ STANDBY)}}
+\DoxyCodeLine{00288\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}}\ =\ \mbox{\hyperlink{constants_8h_ad6212b1ad0c34c6212ec01d5aa81005b}{MAX\_SPD\_ENABLED}}\ +\ 1;}
+\DoxyCodeLine{00289\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00290\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\_STATE\_STANDBY}});\ \ \textcolor{comment}{//\ Should\ go\ to\ STANDBY\ state}}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{comment}{//\ Case\ 6:\ Pedals\ deactivated\ (accelerator\ and\ brake)\ with\ low\ TTC\ (should\ go\ to\ BRAKE\ state)}}
+\DoxyCodeLine{00294\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}}\ =\ 60.0;\ \ \textcolor{comment}{//\ Speed\ within\ allowed\ range}}
+\DoxyCodeLine{00295\ \ \ \ \ ttc\ =\ 0.8;\ \ \textcolor{comment}{//\ TTC\ lower\ than\ the\ braking\ threshold}}
+\DoxyCodeLine{00296\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00297\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a9f92c5be6a496ec11dcc37a5740b8bfa}{AEB\_STATE\_BRAKE}});\ \ \textcolor{comment}{//\ Should\ go\ to\ BRAKE\ state\ due\ to\ low\ TTC}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{comment}{//\ Case\ 7:\ Pedals\ deactivated\ with\ TTC\ within\ alarm\ range\ (should\ go\ to\ ALARM\ state)}}
+\DoxyCodeLine{00301\ \ \ \ \ ttc\ =\ 1.5;\ \ \textcolor{comment}{//\ TTC\ greater\ than\ the\ braking\ threshold\ but\ less\ than\ the\ alarm\ threshold}}
+\DoxyCodeLine{00302\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00303\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a06edf6bb0f2816cbb0074c27d62e81d4}{AEB\_STATE\_ALARM}});\ \ \textcolor{comment}{//\ Should\ go\ to\ ALARM\ state}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{comment}{//\ Case\ 8:\ Pedals\ deactivated\ with\ TTC\ greater\ than\ alarm\ threshold\ (should\ go\ to\ ACTIVE\ state)}}
+\DoxyCodeLine{00307\ \ \ \ \ ttc\ =\ 2.0;\ \ \textcolor{comment}{//\ TTC\ greater\ than\ alarm\ threshold}}
+\DoxyCodeLine{00308\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00309\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a}{AEB\_STATE\_ACTIVE}});\ \ \textcolor{comment}{//\ Should\ go\ to\ ACTIVE\ state}}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00312\ \ \ \ \ \textcolor{comment}{//\ Case\ 9:\ Brake\ pedal\ pressed\ (should\ go\ to\ ACTIVE\ state)}}
+\DoxyCodeLine{00313\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}}\ =\ \textcolor{keyword}{true};\ \ \textcolor{comment}{//\ Brake\ pedal\ pressed}}
+\DoxyCodeLine{00314\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00315\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a}{AEB\_STATE\_ACTIVE}});\ \ \textcolor{comment}{//\ Should\ go\ to\ ACTIVE\ state\ regardless\ of\ TTC}}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{comment}{//\ Case\ 10:\ Accelerator\ pedal\ pressed\ (should\ go\ to\ ACTIVE\ state)}}
+\DoxyCodeLine{00319\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}}\ =\ \textcolor{keyword}{true};\ \ \textcolor{comment}{//\ Accelerator\ pedal\ pressed}}
+\DoxyCodeLine{00320\ \ \ \ \ state\ =\ \mbox{\hyperlink{test__aeb__controller_8c_a56109d8ed6dda45e79e36b2bc4c42360}{getAEBState}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}},\ ttc);}
+\DoxyCodeLine{00321\ \ \ \ \ \mbox{\hyperlink{unity_8h_af52a321a93c580a6213fef3e0f85c237}{TEST\_ASSERT\_EQUAL\_INT}}(state,\ \mbox{\hyperlink{test__aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a}{AEB\_STATE\_ACTIVE}});\ \ \textcolor{comment}{//\ Should\ go\ to\ ACTIVE\ state\ regardless\ of\ TTC}}
+\DoxyCodeLine{00322\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a352def22676bf9490ca39fc3e3b34ec9}\label{test__aeb__controller_8c_a352def22676bf9490ca39fc3e3b34ec9} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_1@{test\_translateAndCallCanMsg\_1}}
+\index{test\_translateAndCallCanMsg\_1@{test\_translateAndCallCanMsg\_1}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_1()}{test\_translateAndCallCanMsg\_1()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+1 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Series of tests for the function translate\+And\+Call\+Can\+Msg. \mbox{[}Sw\+R-\/9\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00327}{327}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00331\ \ \ \ \ \textcolor{comment}{//\ Case\ 1:\ Pedal\ identifier\ (ID\_PEDALS)\ should\ call\ updateInternalPedalsState}}
+\DoxyCodeLine{00332\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aba7d5a0a42bbc6b35c9e5ff899fcbb9f}{ID\_PEDALS}};}
+\DoxyCodeLine{00333\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;\ \ \textcolor{comment}{//\ Accelerator\ ON}}
+\DoxyCodeLine{00334\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x00;\ \ \textcolor{comment}{//\ Brake\ OFF}}
+\DoxyCodeLine{00335\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00336\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}});\ \ \textcolor{comment}{//\ Accelerator\ pedal\ should\ be\ ON}}
+\DoxyCodeLine{00337\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}});\ \ \textcolor{comment}{//\ Brake\ pedal\ should\ be\ OFF}}
+\DoxyCodeLine{00338\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a6aea9a65541977ce182a4ef297d8c487}\label{test__aeb__controller_8c_a6aea9a65541977ce182a4ef297d8c487} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_2@{test\_translateAndCallCanMsg\_2}}
+\index{test\_translateAndCallCanMsg\_2@{test\_translateAndCallCanMsg\_2}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_2()}{test\_translateAndCallCanMsg\_2()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00340}{340}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00341\ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \ \ \ \ \textcolor{comment}{//\ Case\ 2:\ Pedal\ identifier\ (ID\_PEDALS)\ should\ call\ updateInternalPedalsState\ with\ Brake\ ON}}
+\DoxyCodeLine{00345\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aba7d5a0a42bbc6b35c9e5ff899fcbb9f}{ID\_PEDALS}};}
+\DoxyCodeLine{00346\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;\ \ \textcolor{comment}{//\ Accelerator\ OFF}}
+\DoxyCodeLine{00347\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x01;\ \ \textcolor{comment}{//\ Brake\ ON}}
+\DoxyCodeLine{00348\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00349\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}});\ \ \textcolor{comment}{//\ Accelerator\ pedal\ should\ be\ OFF}}
+\DoxyCodeLine{00350\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}});\ \ \textcolor{comment}{//\ Brake\ pedal\ should\ be\ ON}}
+\DoxyCodeLine{00351\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a795a3b935bc7ef9390fa5373ee8410c4}\label{test__aeb__controller_8c_a795a3b935bc7ef9390fa5373ee8410c4} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_3@{test\_translateAndCallCanMsg\_3}}
+\index{test\_translateAndCallCanMsg\_3@{test\_translateAndCallCanMsg\_3}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_3()}{test\_translateAndCallCanMsg\_3()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00353}{353}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00354\ \{}
+\DoxyCodeLine{00355\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00358\ \ \ \ \ \textcolor{comment}{//\ Case\ 3:\ Speed\ identifier\ (ID\_SPEED\_S)\ should\ call\ updateInternalSpeedState}}
+\DoxyCodeLine{00359\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_ae3477def1e243ca2530c658431decd62}{ID\_SPEED\_S}};}
+\DoxyCodeLine{00360\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;}
+\DoxyCodeLine{00361\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x64;\ \ \textcolor{comment}{//\ Speed\ =\ 100}}
+\DoxyCodeLine{00362\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x00;}
+\DoxyCodeLine{00363\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00364\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}},\ 100.0);\ \ \textcolor{comment}{//\ Speed\ should\ be\ 100\ km/h}}
+\DoxyCodeLine{00365\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a5307625ee39d468cbd08d1554d4b32bd}\label{test__aeb__controller_8c_a5307625ee39d468cbd08d1554d4b32bd} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_4@{test\_translateAndCallCanMsg\_4}}
+\index{test\_translateAndCallCanMsg\_4@{test\_translateAndCallCanMsg\_4}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_4()}{test\_translateAndCallCanMsg\_4()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+4 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00367}{367}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00368\ \{}
+\DoxyCodeLine{00369\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00372\ \ \ \ \ \textcolor{comment}{//\ Case\ 4:\ Obstacle\ identifier\ (ID\_OBSTACLE\_S)\ should\ call\ updateInternalObstacleState}}
+\DoxyCodeLine{00373\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a1622c4f92373810c870331dfba0ac7c2}{ID\_OBSTACLE\_S}};}
+\DoxyCodeLine{00374\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xD0;\ \ \textcolor{comment}{//\ Distance\ part\ 1}}
+\DoxyCodeLine{00375\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x07;\ \ \textcolor{comment}{//\ Distance\ part\ 2\ (Total\ 100\ meters)}}
+\DoxyCodeLine{00376\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x01;\ \ \textcolor{comment}{//\ Obstacle\ detected}}
+\DoxyCodeLine{00377\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00378\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});\ \ \textcolor{comment}{//\ Obstacle\ should\ be\ detected}}
+\DoxyCodeLine{00379\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}},\ 100.0);\ \ \textcolor{comment}{//\ Distance\ should\ be\ 100\ meters}}
+\DoxyCodeLine{00380\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a358663990a317f4574ec949ee74abbbc}\label{test__aeb__controller_8c_a358663990a317f4574ec949ee74abbbc} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_5@{test\_translateAndCallCanMsg\_5}}
+\index{test\_translateAndCallCanMsg\_5@{test\_translateAndCallCanMsg\_5}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_5()}{test\_translateAndCallCanMsg\_5()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+5 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00382}{382}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00383\ \{}
+\DoxyCodeLine{00384\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{comment}{//\ Case\ 5:\ Car\ identifier\ (ID\_CAR\_C)\ should\ call\ updateInternalCarCState}}
+\DoxyCodeLine{00388\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aed7b961aae1393ad39496b0d847580d7}{ID\_CAR\_C}};}
+\DoxyCodeLine{00389\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;\ \ \textcolor{comment}{//\ AEB\ system\ ON}}
+\DoxyCodeLine{00390\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00391\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}});\ \ \textcolor{comment}{//\ AEB\ system\ should\ be\ ON}}
+\DoxyCodeLine{00392\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a21c40339c6df87ecd1fc6c3a869cdefc}\label{test__aeb__controller_8c_a21c40339c6df87ecd1fc6c3a869cdefc} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_6@{test\_translateAndCallCanMsg\_6}}
+\index{test\_translateAndCallCanMsg\_6@{test\_translateAndCallCanMsg\_6}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_6()}{test\_translateAndCallCanMsg\_6()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+6 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00394}{394}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00395\ \{}
+\DoxyCodeLine{00396\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \ \ \ \ \mbox{\hyperlink{unity_8h_aca1a170cd0581bacd7c918574f6838de}{TEST\_IGNORE\_MESSAGE}}(\textcolor{stringliteral}{"{}Test\ case\ for\ unknown\ identifier"{}});}
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00400\ \ \ \ \ \textcolor{comment}{//\ Case\ 6:\ Unknown\ identifier\ should\ print\ "{}CAN\ Identifier\ unknown"{}}}
+\DoxyCodeLine{00401\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aae29e3539bd594d7ade539814febe97b}{ID\_EMPTY}};\ \textcolor{comment}{//\ Unknown\ ID}}
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{comment}{//\ The\ test\ could\ capture\ the\ printf\ output\ and\ verify\ the\ printed\ message.}}
+\DoxyCodeLine{00403\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00404\ \ \ \ \ \textcolor{comment}{//\ TEST\_ASSERT\_EQUAL\_STRING("{}CAN\ Identifier\ unknown\(\backslash\)n"{},\ capture\_stdout());}}
+\DoxyCodeLine{00405\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a2e3c613c3ded4e87da5cd7c5f353e423}\label{test__aeb__controller_8c_a2e3c613c3ded4e87da5cd7c5f353e423} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_7@{test\_translateAndCallCanMsg\_7}}
+\index{test\_translateAndCallCanMsg\_7@{test\_translateAndCallCanMsg\_7}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_7()}{test\_translateAndCallCanMsg\_7()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+7 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00407}{407}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00408\ \{}
+\DoxyCodeLine{00409\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \ \ \ \ \textcolor{comment}{//\ Case\ 7:\ Test\ reverse\ flag\ handling\ in\ Speed\ message}}
+\DoxyCodeLine{00412\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_ae3477def1e243ca2530c658431decd62}{ID\_SPEED\_S}};}
+\DoxyCodeLine{00413\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;}
+\DoxyCodeLine{00414\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x64;\ \ \textcolor{comment}{//\ Speed\ =\ 100}}
+\DoxyCodeLine{00415\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x01;\ \ \textcolor{comment}{//\ Reverse\ enabled}}
+\DoxyCodeLine{00416\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00417\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}});\ \ \textcolor{comment}{//\ Reverse\ should\ be\ enabled}}
+\DoxyCodeLine{00418\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_ae75c02d906d44831e60d3751391852b3}\label{test__aeb__controller_8c_ae75c02d906d44831e60d3751391852b3} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_8@{test\_translateAndCallCanMsg\_8}}
+\index{test\_translateAndCallCanMsg\_8@{test\_translateAndCallCanMsg\_8}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_8()}{test\_translateAndCallCanMsg\_8()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+8 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00420}{420}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00421\ \{}
+\DoxyCodeLine{00422\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ \ \ \ \ \textcolor{comment}{//\ Case\ 8:\ Test\ the\ behavior\ when\ receiving\ clear\ data\ for\ speed}}
+\DoxyCodeLine{00425\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xFE;\ \ \textcolor{comment}{//\ Clear\ data\ for\ speed}}
+\DoxyCodeLine{00426\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0xFF;\ \ }
+\DoxyCodeLine{00427\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x00;}
+\DoxyCodeLine{00428\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00429\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}},\ 0.0);\ \ \textcolor{comment}{//\ Speed\ should\ reset\ to\ 0}}
+\DoxyCodeLine{00430\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}});\ \ \textcolor{comment}{//\ Reverse\ should\ be\ disabled}}
+\DoxyCodeLine{00431\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a20663d6bbbc93aefa399a31dd2a5627e}\label{test__aeb__controller_8c_a20663d6bbbc93aefa399a31dd2a5627e} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_translateAndCallCanMsg\_9@{test\_translateAndCallCanMsg\_9}}
+\index{test\_translateAndCallCanMsg\_9@{test\_translateAndCallCanMsg\_9}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_translateAndCallCanMsg\_9()}{test\_translateAndCallCanMsg\_9()}}
+{\footnotesize\ttfamily void test\+\_\+translate\+And\+Call\+Can\+Msg\+\_\+9 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00433}{433}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00434\ \{}
+\DoxyCodeLine{00435\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame;}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00437\ \ \ \ \ \textcolor{comment}{//\ Case\ 9:\ Test\ the\ behavior\ when\ receiving\ invalid\ data\ for\ obstacle}}
+\DoxyCodeLine{00438\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a1622c4f92373810c870331dfba0ac7c2}{ID\_OBSTACLE\_S}};}
+\DoxyCodeLine{00439\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xFF;\ \ \textcolor{comment}{//\ Invalid\ obstacle\ data}}
+\DoxyCodeLine{00440\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0xFF;}
+\DoxyCodeLine{00441\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0xFF;\ \ \textcolor{comment}{//\ No\ obstacle}}
+\DoxyCodeLine{00442\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}{translateAndCallCanMsg}}(captured\_frame);}
+\DoxyCodeLine{00443\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});\ \ \textcolor{comment}{//\ No\ obstacle\ detected}}
+\DoxyCodeLine{00444\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}},\ 0.0);\ \ \textcolor{comment}{//\ Distance\ should\ be\ reset\ to\ 0}}
+\DoxyCodeLine{00445\ \}\ \ \ \ }
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_af3005a42ce5f907b5a351f9b940d353f}\label{test__aeb__controller_8c_af3005a42ce5f907b5a351f9b940d353f} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_updateInternalCarCState@{test\_updateInternalCarCState}}
+\index{test\_updateInternalCarCState@{test\_updateInternalCarCState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_updateInternalCarCState()}{test\_updateInternalCarCState()}}
+{\footnotesize\ttfamily void test\+\_\+update\+Internal\+Car\+CState (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Test for the function update\+Internal\+Car\+CState. \mbox{[}Sw\+R-\/2\mbox{]} (\doxylink{software_requirements_SwR-2}{Sw\+R-\/2}), \mbox{[}Sw\+R-\/3\mbox{]} (\doxylink{software_requirements_SwR-3}{Sw\+R-\/3}), \mbox{[}Sw\+R-\/7\mbox{]} (\doxylink{software_requirements_SwR-7}{Sw\+R-\/7}), \mbox{[}Sw\+R-\/8\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}, \mbox{[}Sw\+R-\/12\mbox{]}, \mbox{[}Sw\+R-\/16\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00227}{227}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00228\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame\ =\ \{\ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aed7b961aae1393ad39496b0d847580d7}{ID\_CAR\_C}},\ .dataFrame\ =\ \{0x01\}\ \};}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{comment}{//\ Case\ 1:\ AEB\ system\ ON\ (dataFrame[0]\ ==\ 0x01)}}
+\DoxyCodeLine{00232\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a0385dbe57c403b31fa857cced3197a0e}{updateInternalCarCState}}(captured\_frame);}
+\DoxyCodeLine{00233\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}});\ \ \textcolor{comment}{//\ AEB\ system\ should\ be\ ON}}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{comment}{//\ Case\ 2:\ AEB\ system\ OFF\ (dataFrame[0]\ ==\ 0x00)}}
+\DoxyCodeLine{00237\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;}
+\DoxyCodeLine{00238\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a0385dbe57c403b31fa857cced3197a0e}{updateInternalCarCState}}(captured\_frame);}
+\DoxyCodeLine{00239\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}});\ \ \textcolor{comment}{//\ AEB\ system\ should\ be\ OFF}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{comment}{//\ Case\ 3:\ Check\ that\ AEB\ system\ remains\ OFF\ for\ any\ value\ other\ than\ 0x01}}
+\DoxyCodeLine{00242\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x02;\ \ \textcolor{comment}{//\ Arbitrary\ value,\ different\ from\ 0x01}}
+\DoxyCodeLine{00243\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a0385dbe57c403b31fa857cced3197a0e}{updateInternalCarCState}}(captured\_frame);}
+\DoxyCodeLine{00244\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}});\ \ \textcolor{comment}{//\ AEB\ system\ should\ remain\ OFF}}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{comment}{//\ Case\ 4:\ Check\ that\ AEB\ system\ turns\ back\ ON\ when\ dataFrame[0]\ is\ 0x01\ again}}
+\DoxyCodeLine{00247\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;}
+\DoxyCodeLine{00248\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a0385dbe57c403b31fa857cced3197a0e}{updateInternalCarCState}}(captured\_frame);}
+\DoxyCodeLine{00249\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}});\ \ \textcolor{comment}{//\ AEB\ system\ should\ be\ back\ ON}}
+\DoxyCodeLine{00250\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a4338adbad0c6349a033bcbe38ec267f1}\label{test__aeb__controller_8c_a4338adbad0c6349a033bcbe38ec267f1} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_updateInternalObstacleState@{test\_updateInternalObstacleState}}
+\index{test\_updateInternalObstacleState@{test\_updateInternalObstacleState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_updateInternalObstacleState()}{test\_updateInternalObstacleState()}}
+{\footnotesize\ttfamily void test\+\_\+update\+Internal\+Obstacle\+State (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Test for the function update\+Internal\+Obstacle\+State. \mbox{[}Sw\+R-\/3\mbox{]} (\doxylink{software_requirements_SwR-3}{Sw\+R-\/3}), \mbox{[}Sw\+R-\/6\mbox{]} (\doxylink{software_requirements_SwR-6}{Sw\+R-\/6}), \mbox{[}Sw\+R-\/7\mbox{]} (\doxylink{software_requirements_SwR-7}{Sw\+R-\/7}), \mbox{[}Sw\+R-\/8\mbox{]}, \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}, \mbox{[}Sw\+R-\/15\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00175}{175}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame\ =\ \{\ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a1622c4f92373810c870331dfba0ac7c2}{ID\_OBSTACLE\_S}},\ .dataFrame\ =\ \{0xD0,\ 0x07,\ 0x01\}\ \};}
+\DoxyCodeLine{00177\ \ \ \ \ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{comment}{//\ Case\ 1:\ Obstacle\ detected\ and\ distance\ calculated\ correctly}}
+\DoxyCodeLine{00180\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}{updateInternalObstacleState}}(captured\_frame);}
+\DoxyCodeLine{00181\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});\ \ \textcolor{comment}{//\ Obstacle\ detected}}
+\DoxyCodeLine{00182\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}},\ 100.0);\ \ \textcolor{comment}{//\ Expected\ distance\ =\ \ (0xD0\ +\ (0x07\ <<\ 8))\ *\ RES\_OBSTACLE\ =\ 100.0}}
+\DoxyCodeLine{00183\ \ \ \ \ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{comment}{//\ Case\ 2:\ No\ obstacle\ (0x00\ in\ dataFrame[2])}}
+\DoxyCodeLine{00186\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x00;}
+\DoxyCodeLine{00187\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}{updateInternalObstacleState}}(captured\_frame);}
+\DoxyCodeLine{00188\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});\ \ \textcolor{comment}{//\ No\ obstacle}}
+\DoxyCodeLine{00189\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}},\ 100.0);\ \ \textcolor{comment}{//\ Distance\ should\ remain\ the\ same}}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{comment}{//\ Logic\ problem:\ if\ the\ obstacle\ is\ not\ detected,\ the\ distance\ should\ be\ set\ to\ 300.0\ (max\ distance).}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{comment}{//\ Case\ 3:\ Data\ reset\ with\ 0xFE,\ 0xFF}}
+\DoxyCodeLine{00194\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xFE;}
+\DoxyCodeLine{00195\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0xFF;}
+\DoxyCodeLine{00196\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}{updateInternalObstacleState}}(captured\_frame);}
+\DoxyCodeLine{00197\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});\ \ \textcolor{comment}{//\ Obstacle\ not\ changed}}
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}},\ 300.0);\ \ \textcolor{comment}{//\ Distance\ should\ be\ set\ to\ max\ value\ (300.0)}}
+\DoxyCodeLine{00199\ \ \ \ \ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{comment}{//\ Case\ 4:\ Data\ doesn't\ need\ action\ (0xFF,\ 0xFF)}}
+\DoxyCodeLine{00201\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xFF;}
+\DoxyCodeLine{00202\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0xFF;}
+\DoxyCodeLine{00203\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}{updateInternalObstacleState}}(captured\_frame);}
+\DoxyCodeLine{00204\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});\ \ \textcolor{comment}{//\ Obstacle\ not\ changed}}
+\DoxyCodeLine{00205\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}},\ 0.0);\ \ \textcolor{comment}{//\ Distance\ should\ be\ set\ to\ 0.0}}
+\DoxyCodeLine{00206\ \ \ \ \ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{comment}{//\ Case\ 5:\ Calculated\ distance\ from\ CAN\ data}}
+\DoxyCodeLine{00208\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xD0;}
+\DoxyCodeLine{00209\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x07;\ \textcolor{comment}{//\ Data\ distance\ =\ 0x0D07\ =\ 100}}
+\DoxyCodeLine{00210\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x01;\ \textcolor{comment}{//\ Obstacle\ exists}}
+\DoxyCodeLine{00211\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}{updateInternalObstacleState}}(captured\_frame);}
+\DoxyCodeLine{00212\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});\ \ \textcolor{comment}{//\ Obstacle\ detected}}
+\DoxyCodeLine{00213\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}},\ 100.0);\ \ \textcolor{comment}{//\ Calculated\ distance}}
+\DoxyCodeLine{00214\ \ \ \ \ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{comment}{//\ Case\ 6:\ Maximum\ distance\ capped\ at\ 300.0}}
+\DoxyCodeLine{00217\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xFF;}
+\DoxyCodeLine{00218\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0xFD;\ \textcolor{comment}{//\ Data\ distance\ =\ 0xFFFF\ =\ 65535}}
+\DoxyCodeLine{00219\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}{updateInternalObstacleState}}(captured\_frame);}
+\DoxyCodeLine{00220\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});\ \ \textcolor{comment}{//\ Obstacle\ detected}}
+\DoxyCodeLine{00221\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}},\ 300.0);\ \ \textcolor{comment}{//\ Should\ be\ capped\ at\ 300.0}}
+\DoxyCodeLine{00222\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_aced5d214f2cace8a78f01948cff99bb4}\label{test__aeb__controller_8c_aced5d214f2cace8a78f01948cff99bb4} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_updateInternalPedalsState@{test\_updateInternalPedalsState}}
+\index{test\_updateInternalPedalsState@{test\_updateInternalPedalsState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_updateInternalPedalsState()}{test\_updateInternalPedalsState()}}
+{\footnotesize\ttfamily void test\+\_\+update\+Internal\+Pedals\+State (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Test for the function update\+Internal\+Pedals\+State. \mbox{[}Sw\+R-\/6\mbox{]} (\doxylink{software_requirements_SwR-6}{Sw\+R-\/6}), \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00092}{92}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame\ =\ \{\ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aba7d5a0a42bbc6b35c9e5ff899fcbb9f}{ID\_PEDALS}},\ .dataFrame\ =\ \{0x01,\ 0x00\}\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6ba2245e7d2117f6190d0687e1d9beb0}{updateInternalPedalsState}}(captured\_frame);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}});\ \ \textcolor{comment}{//\ Accelerator\ pedal\ should\ be\ ON\ \ }}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}});\ \ \textcolor{comment}{//\ Brake\ pedal\ should\ be\ OFF}}
+\DoxyCodeLine{00100\ \ \ \ \ }
+\DoxyCodeLine{00101\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;}
+\DoxyCodeLine{00102\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x01;}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6ba2245e7d2117f6190d0687e1d9beb0}{updateInternalPedalsState}}(captured\_frame);}
+\DoxyCodeLine{00104\ \ \ \ \ }
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}});\ \ \textcolor{comment}{//\ Accelerator\ pedal\ should\ be\ ON}}
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}});\ \ \textcolor{comment}{//\ Brake\ pedal\ should\ be\ ON}}
+\DoxyCodeLine{00108\ \ \ \ \ }
+\DoxyCodeLine{00109\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;}
+\DoxyCodeLine{00110\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x00;}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6ba2245e7d2117f6190d0687e1d9beb0}{updateInternalPedalsState}}(captured\_frame);}
+\DoxyCodeLine{00112\ \ \ \ \ }
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}});\ \ \textcolor{comment}{//\ Accelerator\ pedal\ should\ be\ OFF}}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}});\ \ \textcolor{comment}{//\ Brake\ pedal\ should\ be\ OFF}}
+\DoxyCodeLine{00116\ \ \ \ \ }
+\DoxyCodeLine{00117\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;}
+\DoxyCodeLine{00118\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x01;}
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_a6ba2245e7d2117f6190d0687e1d9beb0}{updateInternalPedalsState}}(captured\_frame);}
+\DoxyCodeLine{00120\ \ \ \ \ }
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}});\ \ \textcolor{comment}{//\ Accelerator\ pedal\ should\ be\ OFF}}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}});\ \ \textcolor{comment}{//\ Brake\ pedal\ should\ be\ ON}}
+\DoxyCodeLine{00124\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_ae4e870639639abe60cba2fad937b4c59}\label{test__aeb__controller_8c_ae4e870639639abe60cba2fad937b4c59} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!test\_updateInternalSpeedState@{test\_updateInternalSpeedState}}
+\index{test\_updateInternalSpeedState@{test\_updateInternalSpeedState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{test\_updateInternalSpeedState()}{test\_updateInternalSpeedState()}}
+{\footnotesize\ttfamily void test\+\_\+update\+Internal\+Speed\+State (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Test for the function update\+Internal\+Speed\+State. \mbox{[}Sw\+R-\/6\mbox{]} (\doxylink{software_requirements_SwR-6}{Sw\+R-\/6}), \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}. 
+
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00129}{129}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ captured\_frame\ =\ \{\ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_ae3477def1e243ca2530c658431decd62}{ID\_SPEED\_S}},\ .dataFrame\ =\ \{0x00,\ 0x64,\ 0x00\}\ \};}
+\DoxyCodeLine{00131\ \ \ \ \ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//\ Case\ 1:\ Normal\ case\ where\ the\ speed\ is\ updated\ correctly}}
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010}{updateInternalSpeedState}}(captured\_frame);}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}},\ 100.0);\ \textcolor{comment}{//\ (0x64\ +\ (0x00\ <<\ 8))\ *\ RES\_SPEED\_S\ =\ 100.0\ }}
+\DoxyCodeLine{00136\ \ \ \ \ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//\ Case\ 2:\ Case\ where\ the\ CAN\ data\ is\ set\ to\ clear\ data\ (0xFE,\ 0xFF)}}
+\DoxyCodeLine{00139\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xFE;}
+\DoxyCodeLine{00140\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0xFF;}
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010}{updateInternalSpeedState}}(captured\_frame);}
+\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}},\ 0.0);\ \textcolor{comment}{//\ Should\ reset\ speed\ to\ 0.0}}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}});\ \textcolor{comment}{//\ Should\ also\ reset\ reverseEnabled\ to\ false}}
+\DoxyCodeLine{00144\ \ \ \ \ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//\ Case\ 3:\ Case\ where\ the\ CAN\ data\ is\ set\ to\ indicate\ reverse\ (0x01\ in\ dataFrame[2])}}
+\DoxyCodeLine{00147\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x01;}
+\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010}{updateInternalSpeedState}}(captured\_frame);}
+\DoxyCodeLine{00149\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}});\ \textcolor{comment}{//\ Should\ enable\ reverse}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{comment}{//\ Case\ 4:\ Max\ speed\ value\ constraint\ (should\ be\ capped\ at\ 251.0)}}
+\DoxyCodeLine{00153\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xFF;\ }
+\DoxyCodeLine{00154\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0xFD;\ \textcolor{comment}{//\ Maximum\ possible\ value}}
+\DoxyCodeLine{00155\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010}{updateInternalSpeedState}}(captured\_frame);}
+\DoxyCodeLine{00156\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}},\ 251.0);\ \textcolor{comment}{//\ Should\ be\ capped\ at\ 251.0}}
+\DoxyCodeLine{00157\ \ \ \ \ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{comment}{//\ Case\ 5:\ Test\ when\ the\ CAN\ frame\ data\ doesn't\ require\ any\ action\ (0xFF,\ 0xFF\ in\ dataFrame[0]\ and\ dataFrame[1])}}
+\DoxyCodeLine{00160\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0xFF;}
+\DoxyCodeLine{00161\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0xFF;}
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010}{updateInternalSpeedState}}(captured\_frame);}
+\DoxyCodeLine{00163\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}},\ 0.0);\ \textcolor{comment}{//\ Should\ set\ speed\ to\ 0.0}}
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}});\ \textcolor{comment}{//\ Should\ remain\ in\ the\ reverseDisabled\ state}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{comment}{//\ Case\ 6:\ Ensure\ that\ reverseEnabled\ remains\ false\ for\ non-\/reverse\ signals}}
+\DoxyCodeLine{00167\ \ \ \ \ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x00;\ \textcolor{comment}{//\ Non-\/reverse\ case}}
+\DoxyCodeLine{00168\ \ \ \ \ \mbox{\hyperlink{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010}{updateInternalSpeedState}}(captured\_frame);}
+\DoxyCodeLine{00169\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}});\ \textcolor{comment}{//\ Reverse\ should\ not\ be\ enabled}}
+\DoxyCodeLine{00170\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5}\label{test__aeb__controller_8c_aa981d9343b3eb6ab97a07e44dc0e9db5} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!translateAndCallCanMsg@{translateAndCallCanMsg}}
+\index{translateAndCallCanMsg@{translateAndCallCanMsg}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{translateAndCallCanMsg()}{translateAndCallCanMsg()}}
+{\footnotesize\ttfamily void translate\+And\+Call\+Can\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}}}]{captured\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Translates the received CAN message and calls the appropriate handler function based on the message identifier. 
+
+This function checks the message identifier and calls the appropriate function to handle the CAN message data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em captured\+\_\+frame} & The received CAN message to be processed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00174}{174}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00175\ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordflow}{switch}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}})}
+\DoxyCodeLine{00177\ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{dbc_8h_aba7d5a0a42bbc6b35c9e5ff899fcbb9f}{ID\_PEDALS}}:}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a6ba2245e7d2117f6190d0687e1d9beb0}{updateInternalPedalsState}}(captured\_frame);}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{dbc_8h_ae3477def1e243ca2530c658431decd62}{ID\_SPEED\_S}}:}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_ac1567ee14cae1132278047c889744010}{updateInternalSpeedState}}(captured\_frame);}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{dbc_8h_a1622c4f92373810c870331dfba0ac7c2}{ID\_OBSTACLE\_S}}:}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}{updateInternalObstacleState}}(captured\_frame);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{dbc_8h_aed7b961aae1393ad39496b0d847580d7}{ID\_CAR\_C}}:}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a0385dbe57c403b31fa857cced3197a0e}{updateInternalCarCState}}(captured\_frame);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}CAN\ Identifier\ unknown\(\backslash\)n"{}});}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a46c3844253eb536d7b9f4a47d0b0e828}\label{test__aeb__controller_8c_a46c3844253eb536d7b9f4a47d0b0e828} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!updateCanMsgOutput@{updateCanMsgOutput}}
+\index{updateCanMsgOutput@{updateCanMsgOutput}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{updateCanMsgOutput()}{updateCanMsgOutput()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} update\+Can\+Msg\+Output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928}{aeb\+\_\+controller\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+
+
+Generates the appropriate CAN message for the AEB system state. 
+
+This function creates a CAN message to be sent to the actuators based on the current state of the AEB system (e.\+g., brake, alarm, etc.).
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The current state of the AEB system. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The generated CAN message. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00381}{381}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00382\ \{}
+\DoxyCodeLine{00383\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ aux\ =\ \{.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},\ .dataFrame\ =\ \mbox{\hyperlink{dbc_8h_af30056253fdd3a5987a1cab7062f7847}{BASE\_DATA\_FRAME}}\};}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \ \ \ \ \textcolor{keywordflow}{switch}\ (state)}
+\DoxyCodeLine{00386\ \ \ \ \ \{}
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a9f92c5be6a496ec11dcc37a5740b8bfa}{AEB\_STATE\_BRAKE}}:}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;\ \textcolor{comment}{//\ activate\ warning\ system}}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x01;\ \textcolor{comment}{//\ activate\ braking\ system}}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a06edf6bb0f2816cbb0074c27d62e81d4}{AEB\_STATE\_ALARM}}:}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;\ \textcolor{comment}{//\ activate\ warning\ system}}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x00;\ \textcolor{comment}{//\ don't\ activate\ braking\ system}}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00395\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928ae454b2a27eae83a0c57bd2ffde66e09a}{AEB\_STATE\_ACTIVE}}:}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;\ \textcolor{comment}{//\ don't\ activate\ warning\ system}}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x00;\ \textcolor{comment}{//\ don't\ activate\ braking\ system}}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00399\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{aeb__controller_8c_a60d56dbca0466eb23ba7c109132a5928a6d038f8cafa588e741d3b930b758b775}{AEB\_STATE\_STANDBY}}:}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;\ \textcolor{comment}{//\ don't\ activate\ warning\ system}}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x00;\ \textcolor{comment}{//\ don't\ activate\ braking\ system}}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00403\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00405\ \ \ \ \ \}}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \ \ \ \ \textcolor{keywordflow}{return}\ aux;}
+\DoxyCodeLine{00408\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a0385dbe57c403b31fa857cced3197a0e}\label{test__aeb__controller_8c_a0385dbe57c403b31fa857cced3197a0e} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!updateInternalCarCState@{updateInternalCarCState}}
+\index{updateInternalCarCState@{updateInternalCarCState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{updateInternalCarCState()}{updateInternalCarCState()}}
+{\footnotesize\ttfamily void update\+Internal\+Car\+CState (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}}}]{captured\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Updates the internal car state based on the received CAN message. 
+
+This function updates the status of the AEB system (on/off) based on the data in the CAN message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em captured\+\_\+frame} & The captured CAN message containing car state data. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00360}{360}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00361\ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0x00)}
+\DoxyCodeLine{00363\ \ \ \ \ \{}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00365\ \ \ \ \ \}}
+\DoxyCodeLine{00366\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0x01)}
+\DoxyCodeLine{00367\ \ \ \ \ \{}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00369\ \ \ \ \ \}}
+\DoxyCodeLine{00370\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf}\label{test__aeb__controller_8c_a6abe9c41325ac131ce28c7922cc509bf} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!updateInternalObstacleState@{updateInternalObstacleState}}
+\index{updateInternalObstacleState@{updateInternalObstacleState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{updateInternalObstacleState()}{updateInternalObstacleState()}}
+{\footnotesize\ttfamily void update\+Internal\+Obstacle\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}}}]{captured\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Updates the internal obstacle state based on the received CAN message. 
+
+This function updates whether an obstacle is detected and the distance to it based on the received CAN message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em captured\+\_\+frame} & The captured CAN message containing obstacle data. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00315}{315}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00316\ \{}
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ data\_distance;\ \textcolor{comment}{//\ used\ for\ can\ frame\ conversion}}
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keywordtype}{double}\ new\_internal\_distance\ =\ 0.0;}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ ==\ 0x00)}
+\DoxyCodeLine{00321\ \ \ \ \ \{}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00323\ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ ==\ 0x01)}
+\DoxyCodeLine{00325\ \ \ \ \ \{}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00327\ \ \ \ \ \}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ ==\ 0xFF\ \&\&\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0xFE)}
+\DoxyCodeLine{00330\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Clear\ Data}}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Defined\ to\ max\ distance,\ to\ avoid\ problems\ with\ TTC\ calculation}}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ new\_internal\_distance\ =\ 300.0;}
+\DoxyCodeLine{00333\ \ \ \ \ \}}
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ ==\ 0xFF\ \&\&\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0xFF)}
+\DoxyCodeLine{00335\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Do\ nothing}}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{00337\ \ \ \ \ \}}
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00339\ \ \ \ \ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Conversion\ from\ CAN\ data\ frame,\ according\ to\ dbc\ in\ the\ requirement\ file}}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ data\_distance\ =\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ +\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ <<\ 8);}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ new\_internal\_distance\ =\ data\_distance\ *\ \mbox{\hyperlink{dbc_8h_ad208b54e7611f9e1696db6646f2b83a1}{RES\_OBSTACLE\_S}};}
+\DoxyCodeLine{00343\ \ \ \ \ \}}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \ \ \ \ \textcolor{keywordflow}{if}\ (new\_internal\_distance\ >\ 300.0)}
+\DoxyCodeLine{00346\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Max\ value\ constraint}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ new\_internal\_distance\ =\ 300.0;}
+\DoxyCodeLine{00348\ \ \ \ \ \}}
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}}\ =\ new\_internal\_distance;}
+\DoxyCodeLine{00351\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a6ba2245e7d2117f6190d0687e1d9beb0}\label{test__aeb__controller_8c_a6ba2245e7d2117f6190d0687e1d9beb0} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!updateInternalPedalsState@{updateInternalPedalsState}}
+\index{updateInternalPedalsState@{updateInternalPedalsState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{updateInternalPedalsState()}{updateInternalPedalsState()}}
+{\footnotesize\ttfamily void update\+Internal\+Pedals\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}}}]{captured\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Updates the internal state for the brake and accelerator pedals from the received CAN message. 
+
+This function updates the brake and accelerator pedals\textquotesingle{} states based on the received CAN message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em captured\+\_\+frame} & The captured CAN message containing pedal data. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00203}{203}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00204\ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0x00)}
+\DoxyCodeLine{00206\ \ \ \ \ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00208\ \ \ \ \ \}}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0x01)}
+\DoxyCodeLine{00210\ \ \ \ \ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00212\ \ \ \ \ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ ==\ 0x00)}
+\DoxyCodeLine{00215\ \ \ \ \ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00217\ \ \ \ \ \}}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ ==\ 0x01)}
+\DoxyCodeLine{00219\ \ \ \ \ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00221\ \ \ \ \ \}}
+\DoxyCodeLine{00222\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010}\label{test__aeb__controller_8c_ac1567ee14cae1132278047c889744010} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!updateInternalSpeedState@{updateInternalSpeedState}}
+\index{updateInternalSpeedState@{updateInternalSpeedState}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{updateInternalSpeedState()}{updateInternalSpeedState()}}
+{\footnotesize\ttfamily void update\+Internal\+Speed\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}}}]{captured\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Updates the internal speed state based on the received CAN message. 
+
+This function updates the internal speed (relative velocity) from the received CAN message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em captured\+\_\+frame} & The captured CAN message containing speed data. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00231}{231}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00232\ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ data\_speed;\ \textcolor{comment}{//\ used\ for\ can\ frame\ conversion}}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordtype}{double}\ new\_internal\_speed\ =\ 0.0;}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ data\_acel;\ \textcolor{comment}{//\ used\ for\ can\ frame\ conversion\ for\ acceleration}}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordtype}{double}\ new\_internal\_acel\ =\ 0.0;}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{comment}{//\ update\ internal\ data\ according\ to\ the\ relative\ velocity\ detected\ by\ the\ sensor}}
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0xFE\ \&\&\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ ==\ 0xFF)}
+\DoxyCodeLine{00240\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Clear\ Data}}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ new\_internal\_speed\ =\ 0.0;}
+\DoxyCodeLine{00242\ \ \ \ \ \}}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0xFF\ \&\&\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ ==\ 0xFF)}
+\DoxyCodeLine{00244\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Do\ nothing}}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{00246\ \ \ \ \ \}}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00248\ \ \ \ \ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Conversion\ from\ CAN\ data\ frame,\ according\ to\ dbc\ in\ the\ requirement\ file}}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ [SwR-\/10]}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ data\_speed\ =\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ +\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ <<\ 8);}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ new\_internal\_speed\ =\ data\_speed\ *\ \mbox{\hyperlink{dbc_8h_a646c6bfdb7d9573fc91d5d934d37ef43}{RES\_SPEED\_S}};}
+\DoxyCodeLine{00253\ \ \ \ \ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordflow}{if}\ (new\_internal\_speed\ >\ 251.0)}
+\DoxyCodeLine{00256\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Max\ value\ constraint}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ new\_internal\_speed\ =\ 251.0;}
+\DoxyCodeLine{00258\ \ \ \ \ \}}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}}\ =\ new\_internal\_speed;}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{comment}{//\ update\ internal\ data\ according\ to\ the\ movement\ direction\ reported\ by\ the\ sensor}}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ ==\ 0x00)}
+\DoxyCodeLine{00264\ \ \ \ \ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00266\ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ ==\ 0x01)}
+\DoxyCodeLine{00268\ \ \ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00270\ \ \ \ \ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{comment}{//\ update\ internal\ data\ according\ to\ the\ relative\ acceleration\ detected\ by\ the\ sensor}}
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[3]\ ==\ 0xFE\ \&\&\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[4]\ ==\ 0xFF)}
+\DoxyCodeLine{00274\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Clear\ Data}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ new\_internal\_acel\ =\ 0.0;}
+\DoxyCodeLine{00276\ \ \ \ \ \}}
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[3]\ ==\ 0xFF\ \&\&\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[4]\ ==\ 0xFF)}
+\DoxyCodeLine{00278\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Do\ nothing}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{00280\ \ \ \ \ \}}
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00282\ \ \ \ \ \{}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Conversion\ from\ CAN\ data\ frame,\ according\ to\ dbc\ in\ the\ requirement\ file\ }}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ [SwR-\/10]}}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ data\_acel\ =\ captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[3]\ +\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[4]\ <<\ 8);}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ new\_internal\_acel\ =\ (data\_acel\ +\ \mbox{\hyperlink{dbc_8h_a6e352da7481d147cdd83581ea8f8dbb9}{OFFSET\_ACCELERATION\_S}})\ *\ \mbox{\hyperlink{dbc_8h_a5eff1a9687fa5bffca0f3fd845904782}{RES\_ACCELERATION\_S}};}
+\DoxyCodeLine{00287\ \ \ \ \ \}}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordflow}{if}(captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[5]\ ==\ 0x01)\{}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ new\_internal\_acel\ *=\ -\/1;}
+\DoxyCodeLine{00291\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ ;}
+\DoxyCodeLine{00293\ \ \ \ \ \}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordflow}{if}\ (new\_internal\_acel\ >\ \mbox{\hyperlink{dbc_8h_a87a12837cc18d05d01e84f339fa0c2b0}{MAX\_ACCELERATION\_S}})}
+\DoxyCodeLine{00296\ \ \ \ \ \{\ \textcolor{comment}{//\ DBC:\ Max\ value\ constraint}}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ new\_internal\_acel\ =\ \mbox{\hyperlink{dbc_8h_a87a12837cc18d05d01e84f339fa0c2b0}{MAX\_ACCELERATION\_S}};}
+\DoxyCodeLine{00298\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}(new\_internal\_acel\ <\ \mbox{\hyperlink{dbc_8h_aa44de3c36739ea779d9f4d61414ccc74}{MIN\_ACCELERATION\_S}})\{}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ DBC:\ Min\ value\ constraint}}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ new\_internal\_acel\ =\ \mbox{\hyperlink{dbc_8h_aa44de3c36739ea779d9f4d61414ccc74}{MIN\_ACCELERATION\_S}};}
+\DoxyCodeLine{00301\ \ \ \ \ \}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \mbox{\hyperlink{aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}{aeb\_internal\_state}}.\mbox{\hyperlink{structsensors__input__data_a6d9d7c897f6485d71742ef8166991c22}{relative\_acceleration}}\ =\ new\_internal\_acel;}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{comment}{//printf("{}acel\ is:\ \%.3lf\(\backslash\)n"{},\ aeb\_internal\_state.relative\_acceleration);}}
+\DoxyCodeLine{00306\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a57d5de8d149ae20eb2026dac0cef7d08}\label{test__aeb__controller_8c_a57d5de8d149ae20eb2026dac0cef7d08} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!write\_mq@{write\_mq}}
+\index{write\_mq@{write\_mq}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{write\_mq()}{write\_mq()}}
+{\footnotesize\ttfamily int write\+\_\+mq (\begin{DoxyParamCaption}\item[{mqd\+\_\+t}]{mq\+\_\+sender,  }\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \texorpdfstring{$\ast$}{*}}]{msg }\end{DoxyParamCaption})}
+
+
+
+Mock function to simulate writing a message to a message queue. 
+
+Writes a message from a POSIX message queue.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mq\+\_\+sender} & The message queue descriptor. \\
+\hline
+{\em msg} & The CAN message to be written. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The status of the write operation (0 for success). 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{test__aeb__controller_8c_source_l00051}{51}} of file \mbox{\hyperlink{test__aeb__controller_8c_source}{test\+\_\+aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//printf("{}Writing\ message\ to\ MQ:\ Identifier:\ \%d,\ Data:\ \%02X\ \%02X\ \%02X\ \%02X\ \%02X\ \%02X\ \%02X\ \%02X\(\backslash\)n\(\backslash\)n"{},}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ msg-\/>identifier,\ msg-\/>dataFrame[0],\ msg-\/>dataFrame[1],\ msg-\/>dataFrame[2],\ }}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ msg-\/>dataFrame[3],\ msg-\/>dataFrame[4],\ msg-\/>dataFrame[5],\ msg-\/>dataFrame[6],\ msg-\/>dataFrame[7]);}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \ \textcolor{comment}{//\ Simulate\ success\ in\ writing\ to\ the\ message\ queue}}
+\DoxyCodeLine{00056\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884}\label{test__aeb__controller_8c_a15b2dc1261c867c309a53e7342596884} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!aeb\_internal\_state@{aeb\_internal\_state}}
+\index{aeb\_internal\_state@{aeb\_internal\_state}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{aeb\_internal\_state}{aeb\_internal\_state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structsensors__input__data}{sensors\+\_\+input\+\_\+data}} aeb\+\_\+internal\+\_\+state\hspace{0.3cm}{\ttfamily [extern]}}
+
+External declaration of global variables Internal AEB system state data 
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00044}{44}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ .relative\_velocity\ =\ 0.0,}
+\DoxyCodeLine{00046\ \ \ \ \ .has\_obstacle\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00047\ \ \ \ \ .obstacle\_distance\ =\ 0.0,}
+\DoxyCodeLine{00048\ \ \ \ \ .brake\_pedal\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00049\ \ \ \ \ .accelerator\_pedal\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00050\ \ \ \ \ .on\_off\_aeb\_system\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00051\ \ \ \ \ .reverseEnabled\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00052\ \ \ \ \ .relative\_acceleration\ =\ 0.0\};}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a5d2051893d3d3ea4e0dcc3c647770c95}\label{test__aeb__controller_8c_a5d2051893d3d3ea4e0dcc3c647770c95} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!captured\_can\_frame@{captured\_can\_frame}}
+\index{captured\_can\_frame@{captured\_can\_frame}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{captured\_can\_frame}{captured\_can\_frame}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+can\+\_\+frame\hspace{0.3cm}{\ttfamily [extern]}}
+
+Captured CAN message 
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00029}{29}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ .identifier\ =\ 0x0CFFB027,}
+\DoxyCodeLine{00031\ \ \ \ \ .dataFrame\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\}\};}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_ae6763c5f7a5772f4680437dee47e8954}\label{test__aeb__controller_8c_ae6763c5f7a5772f4680437dee47e8954} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!empty\_msg@{empty\_msg}}
+\index{empty\_msg@{empty\_msg}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{empty\_msg}{empty\_msg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} empty\+\_\+msg\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+\mbox{[}Sw\+R-\/5\mbox{]} (\doxylink{software_requirements_SwR-5}{Sw\+R-\/5}) 
+
+Empty CAN message 
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00063}{63}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{comment}{//\ [SwR-\/5]}}
+\DoxyCodeLine{00064\ \ \ \ \ .identifier\ =\ \mbox{\hyperlink{dbc_8h_aae29e3539bd594d7ade539814febe97b}{ID\_EMPTY}},}
+\DoxyCodeLine{00065\ \ \ \ \ .dataFrame\ =\ \{0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00\}\};}
+
+\end{DoxyCode}
+\Hypertarget{test__aeb__controller_8c_a4847c169e96fc59553ca7c852cc004d6}\label{test__aeb__controller_8c_a4847c169e96fc59553ca7c852cc004d6} 
+\index{test\_aeb\_controller.c@{test\_aeb\_controller.c}!out\_can\_frame@{out\_can\_frame}}
+\index{out\_can\_frame@{out\_can\_frame}!test\_aeb\_controller.c@{test\_aeb\_controller.c}}
+\doxysubsubsection{\texorpdfstring{out\_can\_frame}{out\_can\_frame}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} out\+\_\+can\+\_\+frame\hspace{0.3cm}{\ttfamily [extern]}}
+
+Output CAN message 
+
+Definition at line \mbox{\hyperlink{aeb__controller_8c_source_l00058}{58}} of file \mbox{\hyperlink{aeb__controller_8c_source}{aeb\+\_\+controller.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ .identifier\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},}
+\DoxyCodeLine{00060\ \ \ \ \ .dataFrame\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\}\};}
+
+\end{DoxyCode}

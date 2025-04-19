@@ -1,0 +1,274 @@
+\doxysection{test\+\_\+actuators.\+c}
+\hypertarget{test__actuators_8c_source}{}\label{test__actuators_8c_source}\index{test/test\_actuators.c@{test/test\_actuators.c}}
+\mbox{\hyperlink{test__actuators_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{unity_8h}{unity.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{actuators_8h}{actuators.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dbc_8h}{dbc.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{constants_8h}{constants.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mq__utils_8h}{mq\_utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00008}00008\ \textcolor{comment}{//\ Declare\ the\ actuatorsResponseLoop\ function\ if\ it's\ defined\ elsewhere}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00009}00009\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{test__actuators_8c_a2e65ffc061b664d39102b09c560ac7a3}{actuatorsResponseLoop}}(\textcolor{keywordtype}{void}\ *arg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00012}\mbox{\hyperlink{test__actuators_8c_ab0b4f8f98c3eb2f7041948c148ceadf8}{00012}}\ \textcolor{preprocessor}{\#define\ LOOP\_EMPTY\_ITERATIONS\_MAX\ 11}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00015}00015\ \textcolor{comment}{//\ Mock\ to\ open\_mq\ function}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00016}\mbox{\hyperlink{test__actuators_8c_a887671fb12fe2639b7be4a301927e497}{00016}}\ mqd\_t\ \mbox{\hyperlink{test__actuators_8c_a887671fb12fe2639b7be4a301927e497}{open\_mq}}(\textcolor{keywordtype}{char}\ *\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00017}00017\ \ \ \ \ printf(\textcolor{stringliteral}{"{}[MOCK]\ open\_mq\ called\ with\ name:\ \%s\(\backslash\)n"{}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{return}\ (mqd\_t)1;\ \textcolor{comment}{//\ Return\ a\ mock\ mqd\_t\ value}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00021}00021\ \textcolor{comment}{//\ Mock\ to\ read\_mq}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00022}\mbox{\hyperlink{test__actuators_8c_aac4648fa4d641dfd3ff8c3f50e0f621b}{00022}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{test__actuators_8c_aac4648fa4d641dfd3ff8c3f50e0f621b}{read\_mq}}(mqd\_t\ mq,\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ *msg)\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (counter\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ msg-\/>\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ msg-\/>\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ msg-\/>\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x01;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00028}00028\ \ \ \ \ \ \ \ \ counter++;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00030}00030\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (counter\ ==\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00031}00031\ \ \ \ \ \ \ \ \ msg-\/>\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aae29e3539bd594d7ade539814febe97b}{ID\_EMPTY}};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ counter++;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;\ \textcolor{comment}{//\ EMpty\ queue}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00036}00036\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00040}00040\ \textcolor{comment}{//\ Mock\ to\ log\_event}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00041}\mbox{\hyperlink{test__actuators_8c_acf303e3f3f7d320a1113be573509bb63}{00041}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_acf303e3f3f7d320a1113be573509bb63}{log\_event}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *id\_aeb,\ uint32\_t\ event\_id,\ \mbox{\hyperlink{structactuators__abstraction}{actuators\_abstraction}}\ actuators)\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00042}00042\ \ \ \ \ printf(\textcolor{stringliteral}{"{}[MOCK\ LOG]\ ID:\ \%s,\ Event:\ 0x\%X,\ BELT:\ \%d,\ DOOR:\ \%d,\ ABS:\ \%d,\ LED:\ \%d,\ BUZZ:\ \%d\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ id\_aeb,\ event\_id,\ actuators.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}},\ actuators.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}},}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ actuators.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}},\ actuators.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}},\ actuators.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00047}00047\ \textcolor{comment}{//\ Mock\ to\ global\ variable\ actuators\_state}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00048}00048\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{structactuators__abstraction}{actuators\_abstraction}}\ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00050}00050\ \textcolor{comment}{//\ Funções\ de\ setup\ e\ teardown}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00051}\mbox{\hyperlink{test__actuators_8c_a95c834d6178047ce9e1bce7cbfea2836}{00051}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_a95c834d6178047ce9e1bce7cbfea2836}{setUp}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00053}00053\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00054}00054\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00055}00055\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00059}\mbox{\hyperlink{test__actuators_8c_a9909011e5fea0c018842eec4d93d0662}{00059}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_a9909011e5fea0c018842eec4d93d0662}{tearDown}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00060}00060\ \ \ \ \ \textcolor{comment}{//\ Nothing\ to\ do\ here}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00061}00061\ \ \ \ \ \textcolor{comment}{//\ This\ function\ is\ called\ after\ each\ test}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00068}\mbox{\hyperlink{test__actuators_8c_a4419b1ec0c4cba0cdbae15585c2f0ede}{00068}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_a4419b1ec0c4cba0cdbae15585c2f0ede}{test\_actuatorsTranslateCanMsg\_AEB\_S\_Identifier}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ test\_msg\ =\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0xFF,\ 0x01,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00\}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00072}00072\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00074}00074\ \ \ \ \ \mbox{\hyperlink{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8}{actuatorsTranslateCanMsg}}(test\_msg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00076}00076\ \ \ \ \ \textcolor{comment}{//\ Checks\ if\ the\ actuators'\ state\ was\ updated\ correctly}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00078}00078\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00079}00079\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00080}00080\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00083}00083\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00089}\mbox{\hyperlink{test__actuators_8c_aebdb0a8f35d06cbf6177ffdd98704c6c}{00089}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_aebdb0a8f35d06cbf6177ffdd98704c6c}{test\_actuatorsTranslateCanMsg\_Empty\_Identifier}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00090}00090\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ test\_msg\ =\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00091}00091\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aae29e3539bd594d7ade539814febe97b}{ID\_EMPTY}},}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00092}00092\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x01\}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00093}00093\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00095}00095\ \ \ \ \ \mbox{\hyperlink{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8}{actuatorsTranslateCanMsg}}(test\_msg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00097}00097\ \ \ \ \ \textcolor{comment}{//\ Checks\ that\ the\ actuators'\ state\ remains\ unchanged}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00099}00099\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00100}00100\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00101}00101\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00102}00102\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00103}00103\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00104}00104\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00110}\mbox{\hyperlink{test__actuators_8c_aa59d80108c20dca29bc4c1f5ca9d1ede}{00110}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_aa59d80108c20dca29bc4c1f5ca9d1ede}{test\_updateInternalActuatorsState\_Correct\_State}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00111}00111\ \ \ \ \ \textcolor{comment}{//\ Verifies\ if\ updateInternalActuatorsState\ correctly\ updates\ the\ actuators'\ state}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00112}00112\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ test\_msg\ =\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0x01,\ 0x01,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00\}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00115}00115\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00117}00117\ \ \ \ \ \mbox{\hyperlink{actuators_8c_a8636c5193582ea95742cd24349cf3aa2}{updateInternalActuatorsState}}(test\_msg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00119}00119\ \ \ \ \ \textcolor{comment}{//\ Checks\ the\ expected\ state\ of\ the\ actuators}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00121}00121\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00122}00122\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00123}00123\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00124}00124\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00125}00125\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00126}00126\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00132}\mbox{\hyperlink{test__actuators_8c_a1ff8c7f4dc67fd81a0a9a3d226923152}{00132}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_a1ff8c7f4dc67fd81a0a9a3d226923152}{test\_actuatorsTranslateCanMsg}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00133}00133\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ test\_msg\ =\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0xFF,\ 0x01,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00\}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00136}00136\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00138}00138\ \ \ \ \ \mbox{\hyperlink{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8}{actuatorsTranslateCanMsg}}(test\_msg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00140}00140\ \ \ \ \ \textcolor{comment}{//\ Checks\ if\ the\ state\ was\ updated\ correctly}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00142}00142\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00143}00143\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00144}00144\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00145}00145\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00146}00146\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00147}00147\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00153}\mbox{\hyperlink{test__actuators_8c_a0f131aba045d2ed0db17336f51a6e002}{00153}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_a0f131aba045d2ed0db17336f51a6e002}{test\_actuatorsTranslateCanMsg\_Unknown\_Identifier}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00154}00154\ \ \ \ \ \textcolor{comment}{//\ Verifies\ if\ actuatorsTranslateCanMsg\ handles\ an\ unknown\ identifier\ correctly}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00155}00155\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ test\_msg\ =\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ 0xFFFF,\ \textcolor{comment}{//\ Invalid\ identifier}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00\}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00158}00158\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00160}00160\ \ \ \ \ \mbox{\hyperlink{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8}{actuatorsTranslateCanMsg}}(test\_msg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00162}00162\ \ \ \ \ \textcolor{comment}{//\ Checks\ that\ the\ actuators'\ state\ remains\ unchanged}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00164}00164\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00165}00165\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00166}00166\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00167}00167\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00168}00168\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00169}00169\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00171}\mbox{\hyperlink{test__actuators_8c_a7e38bd661d02f19e96fbf0c67cf24f88}{00171}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_a7e38bd661d02f19e96fbf0c67cf24f88}{test\_updateInternalActuatorsState\_DataFrame0\_Active}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00172}00172\ \ \ \ \ \textcolor{comment}{//\ Verifies\ if\ updateInternalActuatorsState\ processes\ correctly\ when\ dataFrame[0]\ ==\ 0x01}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00173}00173\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ test\_msg\ =\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0x01,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00\}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00176}00176\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00178}00178\ \ \ \ \ \mbox{\hyperlink{actuators_8c_a8636c5193582ea95742cd24349cf3aa2}{updateInternalActuatorsState}}(test\_msg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00179}00179\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00180}00180\ \ \ \ \ \textcolor{comment}{//\ Checks\ the\ expected\ state\ of\ the\ actuators}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00182}00182\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00183}00183\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00184}00184\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00185}00185\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00186}00186\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00187}00187\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00194}\mbox{\hyperlink{test__actuators_8c_adad798d28d5bdbb1d496bec9d82c765f}{00194}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_adad798d28d5bdbb1d496bec9d82c765f}{test\_InitialActuatorsState}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00195}00195\ \ \ \ \ \textcolor{comment}{//\ Verifies\ that\ the\ initial\ state\ of\ the\ actuators\ is\ zero}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00197}00197\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00198}00198\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00199}00199\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00200}00200\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00201}00201\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00202}00202\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00204}\mbox{\hyperlink{test__actuators_8c_a3ec1f8784034136ff3033c9273bf0914}{00204}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_a3ec1f8784034136ff3033c9273bf0914}{test\_actuatorsTranslateCanMsg\_Unexpected\_DataFrame}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00205}00205\ \ \ \ \ \textcolor{comment}{//\ Verifies\ if\ actuatorsTranslateCanMsg\ handles\ an\ unexpected\ dataFrame\ correctly}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00206}00206\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ test\_msg\ =\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0xAA,\ 0xBB,\ 0xCC,\ 0xDD,\ 0xEE,\ 0xFF,\ 0x00,\ 0x11\}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00209}00209\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00211}00211\ \ \ \ \ \mbox{\hyperlink{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8}{actuatorsTranslateCanMsg}}(test\_msg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00213}00213\ \ \ \ \ \textcolor{comment}{//\ Expected\ state:\ should\ follow\ the\ general\ rule\ of\ the\ \`{}updateInternalActuatorsState`\ function}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00215}00215\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00216}00216\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00217}00217\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00218}00218\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00219}00219\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00220}00220\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00226}\mbox{\hyperlink{test__actuators_8c_a21802279516d95b89c8672ed4364df76}{00226}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_a21802279516d95b89c8672ed4364df76}{test\_actuatorsResponseLoop\_EmptyQueue}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00229}00229\ \ \ \ \ \textcolor{keywordtype}{int}\ initial\_empty\_mq\_counter\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00230}00230\ \ \ \ \ pthread\_t\ thread;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00232}00232\ \ \ \ \ \textcolor{comment}{//\ Starts\ the\ actuators\ response\ loop\ thread}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00233}00233\ \ \ \ \ pthread\_create(\&thread,\ NULL,\ \mbox{\hyperlink{test__actuators_8c_a2e65ffc061b664d39102b09c560ac7a3}{actuatorsResponseLoop}},\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00235}00235\ \ \ \ \ \textcolor{comment}{//\ Waits\ enough\ time\ to\ reach\ the\ limit}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00236}00236\ \ \ \ \ sleep((\mbox{\hyperlink{test__actuators_8c_ab0b4f8f98c3eb2f7041948c148ceadf8}{LOOP\_EMPTY\_ITERATIONS\_MAX}}\ +\ 1)\ *\ 0.2);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00237}00237\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00238}00238\ \ \ \ \ \textcolor{comment}{//\ Checks\ if\ the\ empty\ iterations\ counter\ reached\ the\ limit}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00240}00240\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(\mbox{\hyperlink{test__actuators_8c_ab0b4f8f98c3eb2f7041948c148ceadf8}{LOOP\_EMPTY\_ITERATIONS\_MAX}},\ initial\_empty\_mq\_counter);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00242}00242\ \ \ \ \ \textcolor{comment}{//\ Cancels\ and\ joins\ the\ thread}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00243}00243\ \ \ \ \ pthread\_cancel(thread);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00244}00244\ \ \ \ \ pthread\_join(thread,\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00245}00245\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00246}00246\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00247}00247\ \textcolor{comment}{//\ Mock\ for\ mock\_mq\_send}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00248}\mbox{\hyperlink{test__actuators_8c_ad620b99662007e63d34ee54bbee36483}{00248}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{test__actuators_8c_ad620b99662007e63d34ee54bbee36483}{mock\_mq\_send}}(mqd\_t\ mq,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ *msg)\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00249}00249\ \ \ \ \ printf(\textcolor{stringliteral}{"{}[MOCK]\ mock\_mq\_send\ called\ with\ identifier:\ 0x\%X\(\backslash\)n"{}},\ msg-\/>\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00250}00250\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;\ \textcolor{comment}{//\ Simula\ sucesso\ no\ envio\ da\ mensagem}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00251}00251\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00257}\mbox{\hyperlink{test__actuators_8c_ae92da91959525914b67158036fb4083d}{00257}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{test__actuators_8c_ae92da91959525914b67158036fb4083d}{test\_actuatorsResponseLoop\_UnknownMessages}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00259}00259\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00260}00260\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00261}00261\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00262}00262\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00263}00263\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00265}00265\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ unknown\_msg\ =\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00266}00266\ \ \ \ \ \ \ \ \ .\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},\ \ \textcolor{comment}{//\ Invalid\ identifier}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00267}00267\ \ \ \ \ \ \ \ \ .dataFrame\ =\ \{0xFF,\ 0x01,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00,\ 0x00\}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00268}00268\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00269}00269\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00270}00270\ \ \ \ \ \textcolor{comment}{//\ Mock\ to\ simulate\ sending\ a\ message\ to\ the\ queue}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00271}00271\ \ \ \ \ mqd\_t\ \mbox{\hyperlink{actuators_8c_a888ff70e2de4c8fbaedc5134dbe2a441}{actuators\_mq}}\ =\ \mbox{\hyperlink{test__actuators_8c_a887671fb12fe2639b7be4a301927e497}{open\_mq}}(\textcolor{stringliteral}{"{}/mock\_actuators\_mq"{}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00272}00272\ \ \ \ \ \mbox{\hyperlink{test__actuators_8c_ad620b99662007e63d34ee54bbee36483}{mock\_mq\_send}}(\mbox{\hyperlink{actuators_8c_a888ff70e2de4c8fbaedc5134dbe2a441}{actuators\_mq}},\ \&unknown\_msg);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00274}00274\ \ \ \ \ \textcolor{comment}{//\ Creates\ a\ thread\ to\ execute\ the\ response\ loop}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00275}00275\ \ \ \ \ pthread\_t\ thread;}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00276}00276\ \ \ \ \ pthread\_create(\&thread,\ NULL,\ \mbox{\hyperlink{test__actuators_8c_a2e65ffc061b664d39102b09c560ac7a3}{actuatorsResponseLoop}},\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00277}00277\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00278}00278\ \ \ \ \ \textcolor{comment}{//\ Waits\ for\ the\ loop\ to\ process\ the\ message}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00279}00279\ \ \ \ \ sleep(1);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00280}00280\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00281}00281\ \ \ \ \ \textcolor{comment}{//\ Checks\ that\ the\ actuators'\ state\ did\ NOT\ change}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00283}00283\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00284}00284\ \ \ \ \ \mbox{\hyperlink{unity_8h_a9d18ac80652af344ba355a6a9fed1c30}{TEST\_ASSERT\_FALSE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00285}00285\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00286}00286\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00287}00287\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(\mbox{\hyperlink{test__actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00289}00289\ \ \ \ \ \textcolor{comment}{//\ Cancels\ and\ joins\ the\ thread}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00290}00290\ \ \ \ \ pthread\_cancel(thread);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00291}00291\ \ \ \ \ pthread\_join(thread,\ NULL);}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00292}00292\ \}}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00295}\mbox{\hyperlink{test__actuators_8c_a840291bc02cba5474a4cb46a9b9566fe}{00295}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{test__actuators_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}}(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00296}00296\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_aaad15a5d10e50a412d0a6851d0e5091a}{UNITY\_BEGIN}}();}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00297}00297\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_a4419b1ec0c4cba0cdbae15585c2f0ede}{test\_actuatorsTranslateCanMsg\_AEB\_S\_Identifier}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00298}00298\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_aebdb0a8f35d06cbf6177ffdd98704c6c}{test\_actuatorsTranslateCanMsg\_Empty\_Identifier}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00299}00299\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_aa59d80108c20dca29bc4c1f5ca9d1ede}{test\_updateInternalActuatorsState\_Correct\_State}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00300}00300\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_a1ff8c7f4dc67fd81a0a9a3d226923152}{test\_actuatorsTranslateCanMsg}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00301}00301\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_a0f131aba045d2ed0db17336f51a6e002}{test\_actuatorsTranslateCanMsg\_Unknown\_Identifier}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00302}00302\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_a7e38bd661d02f19e96fbf0c67cf24f88}{test\_updateInternalActuatorsState\_DataFrame0\_Active}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00303}00303\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_adad798d28d5bdbb1d496bec9d82c765f}{test\_InitialActuatorsState}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00304}00304\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_a3ec1f8784034136ff3033c9273bf0914}{test\_actuatorsTranslateCanMsg\_Unexpected\_DataFrame}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00305}00305\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__actuators_8c_ae92da91959525914b67158036fb4083d}{test\_actuatorsResponseLoop\_UnknownMessages}});}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00306}00306\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{unity__internals_8h_aa519129d3af737eb796fc91720fae26a}{UNITY\_END}}();}
+\DoxyCodeLine{\Hypertarget{test__actuators_8c_source_l00307}00307\ \}}
+
+\end{DoxyCode}

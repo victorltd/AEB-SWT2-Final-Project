@@ -1,0 +1,24 @@
+/**
+ * @page software_requirements Software Requirements
+ *
+ * This page describes the software requirements for the AEB (Autonomous Emergency Braking) system.
+ *
+ * | Requirement Code | Action                                                                 | Condition                                                                 |
+ * |------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------|
+ * | \anchor SwR-1 **SwR-1**   | The software must calculate the TTC (time to collision) to the obstacle being detected | As long as an obstacle is being detected                                  |
+ * | \anchor SwR-2 **SwR-2**   | The software must send a signal to the ICM to activate an alarm                  | When TTC < 2s                                                              |
+ * | \anchor SwR-3 **SwR-3**   | The software must send a signal to the ABS system to brake the car              | When TTC < 1s and the driver is not pressing the brakes                   |
+ * | \anchor SwR-4 **SwR-4**   | The software must store brake and alarm events                                  | When TTC < 2s                                                              |
+ * | \anchor SwR-5 **SwR-5**   | When in off-state, the software must keep the ECU active but shouldn’t send messages | When the driver turns it off                                              |
+ * | \anchor SwR-6 **SwR-6**   | When in on-state, the software must continuously query sensor data, calculate TTC, and send messages as needed | When the driver turns it on                          |
+ * | \anchor SwR-7 **SwR-7**   | The software must be able to change the AEB system to standby state             | When the vehicle velocity exceeds 60 km/h or is less than 10 km/h         |
+ * | \anchor SwR-8 **SwR-8**   | The software must change the AEB system from standby mode to active mode       | When the vehicle slows down to a speed of less than 60 km/h and more than 10 km/h |
+ * | \anchor SwR-9 **SwR-9**   | The software must be able to receive data from the sensors                      | While is activated                                                         |
+ * | \anchor SwR-10 **SwR-10** | The software must be able to calculate the vehicle speed relative to the obstacle detected | As long as an obstacle is being detected                          |
+ * | \anchor SwR-11 **SwR-11** | The software must be developed in a way that the functionalities are decoupled and modularized | During the software development process                   |
+ * | \anchor SwR-12 **SwR-12** | The software must define the following operational states: on-state, alarm, brake, off-state and standby | During the software development process    |
+ * | \anchor SwR-13 **SwR-13** | All parameters must allow calibration                                           | When developing or updating the system                                     |
+ * | \anchor SwR-14 **SwR-14** | The software must send a message to deactivate the alarm in the instrument cluster | When TTC > 2 and alarms are active                                     |
+ * | \anchor SwR-15 **SwR-15** | The CAN message sent by the AEB must signal an imminent collision so that the actuators can take action | When a collision is imminent                                |
+ * | \anchor SwR-16 **SwR-16** | The AEB must be kept in the “on-state”                                          | When the vehicle is in reverse mode                                       |
+ */

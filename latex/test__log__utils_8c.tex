@@ -1,0 +1,360 @@
+\doxysection{test/test\+\_\+log\+\_\+utils.c File Reference}
+\hypertarget{test__log__utils_8c}{}\label{test__log__utils_8c}\index{test/test\_log\_utils.c@{test/test\_log\_utils.c}}
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include "{}unity.\+h"{}}\newline
+{\ttfamily \#include "{}log\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}actuators.\+h"{}}\newline
+{\ttfamily \#include "{}dbc.\+h"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for test\+\_\+log\+\_\+utils.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{test__log__utils_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+FILE \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{test__log__utils_8c_a16ae887be1c0eb695ec725bcd0477a62}{\+\_\+\+\_\+real\+\_\+fopen}} (const char \texorpdfstring{$\ast$}{*}path, const char \texorpdfstring{$\ast$}{*}mode)
+\item 
+FILE \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{test__log__utils_8c_a8fbd1d76989bb6a085a48aa0f6dc53e9}{\+\_\+\+\_\+wrap\+\_\+fopen}} (const char \texorpdfstring{$\ast$}{*}path, const char \texorpdfstring{$\ast$}{*}mode)
+\item 
+void \mbox{\hyperlink{test__log__utils_8c_a0283bf5b0b88ae44d55c0c9a471b6f8d}{\+\_\+\+\_\+real\+\_\+perror}} (const char \texorpdfstring{$\ast$}{*}s)
+\item 
+void \mbox{\hyperlink{test__log__utils_8c_a682bba03171a50fcba429bd5d16585f3}{\+\_\+\+\_\+wrap\+\_\+perror}} (const char \texorpdfstring{$\ast$}{*}s)
+\item 
+void \mbox{\hyperlink{test__log__utils_8c_a63326a1b70b6e3f070e51687798e02de}{set\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Setup function to initialize AEB input state before each test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__log__utils_8c_ab804e0f66def63262c1d6b4e3d2a2bd7}{tear\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Teardown function to clean up after each test. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__log__utils_8c_a28b90621caeb0a471568aab91831280a}{test\+\_\+log\+\_\+event\+\_\+fopen\+\_\+fail}} ()
+\item 
+\mbox{\hyperlink{structactuators__abstraction}{actuators\+\_\+abstraction}} \mbox{\hyperlink{test__log__utils_8c_a77606b44aaf41b4128433504c207f3d8}{read\+\_\+line\+\_\+test}} ()
+\item 
+void \mbox{\hyperlink{test__log__utils_8c_a356a8a3ccad05e8bf2abb6785de8fbfd}{test\+\_\+log\+\_\+event\+\_\+check\+\_\+writing\+\_\+no1}} ()
+\item 
+int \mbox{\hyperlink{test__log__utils_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \mbox{\hyperlink{test__log__utils_8c_a891d95d274ac865ebd7ded656c0ffc1a}{can\+\_\+frame\+\_\+test}}
+\item 
+\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \mbox{\hyperlink{test__log__utils_8c_ae1e8b5ed1706c9fb46220e501c6de19c}{can\+\_\+frame\+\_\+empty}}
+\item 
+\mbox{\hyperlink{structactuators__abstraction}{actuators\+\_\+abstraction}} \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\+\_\+test}}
+\item 
+\mbox{\hyperlink{structactuators__abstraction}{actuators\+\_\+abstraction}} \mbox{\hyperlink{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2}{actuators\+\_\+try}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{test__log__utils_8c_a16ae887be1c0eb695ec725bcd0477a62}\label{test__log__utils_8c_a16ae887be1c0eb695ec725bcd0477a62} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!\_\_real\_fopen@{\_\_real\_fopen}}
+\index{\_\_real\_fopen@{\_\_real\_fopen}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{\_\_real\_fopen()}{\_\_real\_fopen()}}
+{\footnotesize\ttfamily FILE \texorpdfstring{$\ast$}{*} \+\_\+\+\_\+real\+\_\+fopen (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{mode }\end{DoxyParamCaption})}
+
+\Hypertarget{test__log__utils_8c_a0283bf5b0b88ae44d55c0c9a471b6f8d}\label{test__log__utils_8c_a0283bf5b0b88ae44d55c0c9a471b6f8d} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!\_\_real\_perror@{\_\_real\_perror}}
+\index{\_\_real\_perror@{\_\_real\_perror}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{\_\_real\_perror()}{\_\_real\_perror()}}
+{\footnotesize\ttfamily void \+\_\+\+\_\+real\+\_\+perror (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{s }\end{DoxyParamCaption})}
+
+\Hypertarget{test__log__utils_8c_a8fbd1d76989bb6a085a48aa0f6dc53e9}\label{test__log__utils_8c_a8fbd1d76989bb6a085a48aa0f6dc53e9} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!\_\_wrap\_fopen@{\_\_wrap\_fopen}}
+\index{\_\_wrap\_fopen@{\_\_wrap\_fopen}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{\_\_wrap\_fopen()}{\_\_wrap\_fopen()}}
+{\footnotesize\ttfamily FILE \texorpdfstring{$\ast$}{*} \+\_\+\+\_\+wrap\+\_\+fopen (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{path,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00032}{32}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ Intercepts\ ONLY\ the\ path\ “log/log.txt”}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(path,\ \textcolor{stringliteral}{"{}log/log.txt"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (wrap\_fopen\_fail)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;\ \textcolor{comment}{//\ Força\ falha}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Redirects,\ using\ real\ fopen}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{test__log__utils_8c_a16ae887be1c0eb695ec725bcd0477a62}{\_\_real\_fopen}}(\textcolor{stringliteral}{"{}test/test\_log.txt"{}},\ mode);\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ For\ other\ paths,\ also\ uses\ real\ fopen}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{test__log__utils_8c_a16ae887be1c0eb695ec725bcd0477a62}{\_\_real\_fopen}}(path,\ mode);}
+\DoxyCodeLine{00045\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_a682bba03171a50fcba429bd5d16585f3}\label{test__log__utils_8c_a682bba03171a50fcba429bd5d16585f3} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!\_\_wrap\_perror@{\_\_wrap\_perror}}
+\index{\_\_wrap\_perror@{\_\_wrap\_perror}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{\_\_wrap\_perror()}{\_\_wrap\_perror()}}
+{\footnotesize\ttfamily void \+\_\+\+\_\+wrap\+\_\+perror (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{s }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00049}{49}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ wrap\_perror\_called\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{test__log__utils_8c_a0283bf5b0b88ae44d55c0c9a471b6f8d}{\_\_real\_perror}}(s);\ }
+\DoxyCodeLine{00052\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test__log__utils_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!main@{main}}
+\index{main@{main}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00117}{117}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_aaad15a5d10e50a412d0a6851d0e5091a}{UNITY\_BEGIN}}();}
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__log__utils_8c_a28b90621caeb0a471568aab91831280a}{test\_log\_event\_fopen\_fail}});}
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__log__utils_8c_a356a8a3ccad05e8bf2abb6785de8fbfd}{test\_log\_event\_check\_writing\_no1}});}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{unity__internals_8h_aa519129d3af737eb796fc91720fae26a}{UNITY\_END}}();}
+\DoxyCodeLine{00122\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_a77606b44aaf41b4128433504c207f3d8}\label{test__log__utils_8c_a77606b44aaf41b4128433504c207f3d8} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!read\_line\_test@{read\_line\_test}}
+\index{read\_line\_test@{read\_line\_test}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{read\_line\_test()}{read\_line\_test()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structactuators__abstraction}{actuators\+\_\+abstraction}} read\+\_\+line\+\_\+test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00079}{79}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00080\ \ \ \ \ FILE\ *file\ =\ fopen(\textcolor{stringliteral}{"{}test/test\_log.txt"{}},\ \textcolor{stringliteral}{"{}r"{}});\ \textcolor{comment}{//\ Abrir\ o\ arquivo\ para\ leitura}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{char}\ line[256];}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{while}\ (fgets(line,\ 256,\ file)\ !=\ NULL)\ \{\ \ \textcolor{comment}{//\ Ler\ cada\ linha\ do\ arquivo}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ v1,\ v2,\ v3,\ v4,\ v5;\ \ \textcolor{comment}{//\ Variáveis\ para\ armazenar\ os\ números}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (sscanf(line,\ \textcolor{stringliteral}{"{}\%*[\string^|]\ |\ \%d\ |\ \%d\ |\ \%d\ |\ \%d\ |\ \%d"{}},\ \&v1,\ \&v2,\ \&v3,\ \&v4,\ \&v5)\ ==\ 5)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Valores\ extraídos:\ \%d\ \%d\ \%d\ \%d\ \%d\(\backslash\)n"{}},\ v1,\ v2,\ v3,\ v4,\ v5);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}}\ =\ v1;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}}\ =\ v2;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}}\ =\ v3;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}}\ =\ v4;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}}\ =\ v5;}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \ \ \ \ fclose(file);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}};}
+\DoxyCodeLine{00098\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_a63326a1b70b6e3f070e51687798e02de}\label{test__log__utils_8c_a63326a1b70b6e3f070e51687798e02de} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!setUp@{setUp}}
+\index{setUp@{setUp}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{setUp()}{setUp()}}
+{\footnotesize\ttfamily void set\+Up (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Setup function to initialize AEB input state before each test. 
+
+Setup function to initialize AEB input state before each test. 
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00054}{54}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ wrap\_fopen\_fail\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ std\ -\/>\ fopen\ don't\ fail}}
+\DoxyCodeLine{00056\ \ \ \ \ wrap\_perror\_called\ =\ \textcolor{keyword}{false};\ \textcolor{comment}{//\ Resets\ perror\ state}}
+\DoxyCodeLine{00057\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_ab804e0f66def63262c1d6b4e3d2a2bd7}\label{test__log__utils_8c_ab804e0f66def63262c1d6b4e3d2a2bd7} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!tearDown@{tearDown}}
+\index{tearDown@{tearDown}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{tearDown()}{tearDown()}}
+{\footnotesize\ttfamily void tear\+Down (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Teardown function to clean up after each test. 
+
+Teardown function to clean up after each test. 
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00059}{59}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ clean\ stuff\ up\ here}}
+\DoxyCodeLine{00061\ \ \ \ \ remove(\textcolor{stringliteral}{"{}test/test\_log.txt"{}});}
+\DoxyCodeLine{00062\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_a356a8a3ccad05e8bf2abb6785de8fbfd}\label{test__log__utils_8c_a356a8a3ccad05e8bf2abb6785de8fbfd} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!test\_log\_event\_check\_writing\_no1@{test\_log\_event\_check\_writing\_no1}}
+\index{test\_log\_event\_check\_writing\_no1@{test\_log\_event\_check\_writing\_no1}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_log\_event\_check\_writing\_no1()}{test\_log\_event\_check\_writing\_no1()}}
+{\footnotesize\ttfamily void test\+\_\+log\+\_\+event\+\_\+check\+\_\+writing\+\_\+no1 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00100}{100}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ Try\ to\ write:\ done}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ Verify\ if\ write:\ done}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{//\ If\ write\ correctly,\ read\ last\ line\ and\ assert\ test\ -\/>\ to\ do}}
+\DoxyCodeLine{00104\ \ \ \ \ wrap\_fopen\_fail\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{log__utils_8c_acf303e3f3f7d320a1113be573509bb63}{log\_event}}(\textcolor{stringliteral}{"{}Check\_Writing"{}},\ \mbox{\hyperlink{test__log__utils_8c_a891d95d274ac865ebd7ded656c0ffc1a}{can\_frame\_test}}.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}},\ \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}});}
+\DoxyCodeLine{00107\ \ \ \ \ }
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2}{actuators\_try}}\ =\ \mbox{\hyperlink{test__log__utils_8c_a77606b44aaf41b4128433504c207f3d8}{read\_line\_test}}();}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(\mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}},\ \mbox{\hyperlink{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2}{actuators\_try}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}});}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(\mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}},\ \mbox{\hyperlink{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2}{actuators\_try}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}});}
+\DoxyCodeLine{00112\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(\mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}},\ \mbox{\hyperlink{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2}{actuators\_try}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}});}
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(\mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}},\ \mbox{\hyperlink{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2}{actuators\_try}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}});}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(\mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}},\ \mbox{\hyperlink{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2}{actuators\_try}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}});}
+\DoxyCodeLine{00115\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_a28b90621caeb0a471568aab91831280a}\label{test__log__utils_8c_a28b90621caeb0a471568aab91831280a} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!test\_log\_event\_fopen\_fail@{test\_log\_event\_fopen\_fail}}
+\index{test\_log\_event\_fopen\_fail@{test\_log\_event\_fopen\_fail}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{test\_log\_event\_fopen\_fail()}{test\_log\_event\_fopen\_fail()}}
+{\footnotesize\ttfamily void test\+\_\+log\+\_\+event\+\_\+fopen\+\_\+fail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00065}{65}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{//\ Try\ to\ write:}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{//\ Verify\ if\ write}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ If\ didn't\ write,\ assert\ test}}
+\DoxyCodeLine{00069\ \ \ \ \ wrap\_fopen\_fail\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00070\ \ \ \ \ wrap\_perror\_called\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//\ Chama\ a\ função\ sob\ teste}}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{log__utils_8c_acf303e3f3f7d320a1113be573509bb63}{log\_event}}(\textcolor{stringliteral}{"{}Fopen\_Fail\_Test"{}},\ \mbox{\hyperlink{test__log__utils_8c_a891d95d274ac865ebd7ded656c0ffc1a}{can\_frame\_test}}.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}},\ \mbox{\hyperlink{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}{actuators\_test}});}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//\ Verificações}}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{unity_8h_a6a0527f090dfc0b5ce9724415e51ebe5}{TEST\_ASSERT\_TRUE}}(wrap\_perror\_called);}
+\DoxyCodeLine{00077\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b}\label{test__log__utils_8c_afdb18eff5c2359778a85b6f70e71ef5b} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!actuators\_test@{actuators\_test}}
+\index{actuators\_test@{actuators\_test}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{actuators\_test}{actuators\_test}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structactuators__abstraction}{actuators\+\_\+abstraction}} actuators\+\_\+test}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ .belt\_tightness\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ .door\_lock\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ .should\_activate\_abs\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ .alarm\_led\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ .alarm\_buzzer\ =\ \textcolor{keyword}{false}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00020}{20}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ .belt\_tightness\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00022\ \ \ \ \ .door\_lock\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00023\ \ \ \ \ .should\_activate\_abs\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00024\ \ \ \ \ .alarm\_led\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00025\ \ \ \ \ .alarm\_buzzer\ =\ \textcolor{keyword}{false}}
+\DoxyCodeLine{00026\ \};}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2}\label{test__log__utils_8c_a176ae065d7dd11b1387ac18b88947bc2} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!actuators\_try@{actuators\_try}}
+\index{actuators\_try@{actuators\_try}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{actuators\_try}{actuators\_try}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structactuators__abstraction}{actuators\+\_\+abstraction}} actuators\+\_\+try}
+
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00028}{28}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+\Hypertarget{test__log__utils_8c_ae1e8b5ed1706c9fb46220e501c6de19c}\label{test__log__utils_8c_ae1e8b5ed1706c9fb46220e501c6de19c} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!can\_frame\_empty@{can\_frame\_empty}}
+\index{can\_frame\_empty@{can\_frame\_empty}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_empty}{can\_frame\_empty}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} can\+\_\+frame\+\_\+empty}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ .identifier\ =\ \mbox{\hyperlink{dbc_8h_aae29e3539bd594d7ade539814febe97b}{ID\_EMPTY}},}
+\DoxyCodeLine{\ \ \ \ .dataFrame\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\}\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00016}{16}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ .identifier\ =\ \mbox{\hyperlink{dbc_8h_aae29e3539bd594d7ade539814febe97b}{ID\_EMPTY}},}
+\DoxyCodeLine{00018\ \ \ \ \ .dataFrame\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\}\};}
+
+\end{DoxyCode}
+\Hypertarget{test__log__utils_8c_a891d95d274ac865ebd7ded656c0ffc1a}\label{test__log__utils_8c_a891d95d274ac865ebd7ded656c0ffc1a} 
+\index{test\_log\_utils.c@{test\_log\_utils.c}!can\_frame\_test@{can\_frame\_test}}
+\index{can\_frame\_test@{can\_frame\_test}!test\_log\_utils.c@{test\_log\_utils.c}}
+\doxysubsubsection{\texorpdfstring{can\_frame\_test}{can\_frame\_test}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} can\+\_\+frame\+\_\+test}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ .identifier\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},}
+\DoxyCodeLine{\ \ \ \ .dataFrame\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\}\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{test__log__utils_8c_source_l00012}{12}} of file \mbox{\hyperlink{test__log__utils_8c_source}{test\+\_\+log\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ .identifier\ =\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}},}
+\DoxyCodeLine{00014\ \ \ \ \ .dataFrame\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\}\};}
+
+\end{DoxyCode}

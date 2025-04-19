@@ -1,0 +1,228 @@
+\doxysection{test/test\+\_\+file\+\_\+reader.c File Reference}
+\hypertarget{test__file__reader_8c}{}\label{test__file__reader_8c}\index{test/test\_file\_reader.c@{test/test\_file\_reader.c}}
+{\ttfamily \#include "{}unity.\+h"{}}\newline
+{\ttfamily \#include "{}file\+\_\+reader.\+h"{}}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+Include dependency graph for test\+\_\+file\+\_\+reader.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{test__file__reader_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test__file__reader_8c_a63326a1b70b6e3f070e51687798e02de}{set\+Up}} ()
+\begin{DoxyCompactList}\small\item\em set\+Up function to initialize AEB input state before each test. It opens the file pointed by test\+\_\+filename. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__file__reader_8c_ab804e0f66def63262c1d6b4e3d2a2bd7}{tear\+Down}} ()
+\begin{DoxyCompactList}\small\item\em tear\+Down function to clean up after each test. If test\+\_\+filename pointer is not NULL, the function closes the file and assign test\+\_\+filename to NULL. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__file__reader_8c_a047a587a61691ad8d9bca8c6f5ce5f76}{test\+\_\+open\+\_\+file\+\_\+not\+\_\+null\+\_\+and\+\_\+skip\+\_\+header}} ()
+\begin{DoxyCompactList}\small\item\em Test for the function open\+\_\+file on \doxylink{file__reader_8c}{file\+\_\+reader.\+c} \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__file__reader_8c_aebf839304946e2e07715b2943be18d91}{test\+\_\+read\+\_\+sensor\+\_\+data\+\_\+valid\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Tests for the function read\+\_\+sensor\+\_\+data on \doxylink{file__reader_8c}{file\+\_\+reader.\+c} \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test__file__reader_8c_a9a66b9e3bd77d0c6e05b7cc5ac5141c9}{test\+\_\+read\+\_\+sensor\+\_\+data\+\_\+eof}} ()
+\item 
+int \mbox{\hyperlink{test__file__reader_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{test__file__reader_8c_a8cb69a40bc4c0672112f83362e362f3f}{test\+\_\+filename}} = "{}tcs/cenario.\+txt"{}
+\item 
+FILE \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\+\_\+file}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{test__file__reader_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test__file__reader_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{test\_file\_reader.c@{test\_file\_reader.c}!main@{main}}
+\index{main@{main}!test\_file\_reader.c@{test\_file\_reader.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__file__reader_8c_source_l00090}{90}} of file \mbox{\hyperlink{test__file__reader_8c_source}{test\+\_\+file\+\_\+reader.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00091\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_aaad15a5d10e50a412d0a6851d0e5091a}{UNITY\_BEGIN}}();}
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__file__reader_8c_a047a587a61691ad8d9bca8c6f5ce5f76}{test\_open\_file\_not\_null\_and\_skip\_header}});}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__file__reader_8c_aebf839304946e2e07715b2943be18d91}{test\_read\_sensor\_data\_valid\_data}});}
+\DoxyCodeLine{00095\ \ \ \ \ \mbox{\hyperlink{unity__internals_8h_a27cf08abbe33174b41d808a147cfef11}{RUN\_TEST}}(\mbox{\hyperlink{test__file__reader_8c_a9a66b9e3bd77d0c6e05b7cc5ac5141c9}{test\_read\_sensor\_data\_eof}});}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{unity__internals_8h_aa519129d3af737eb796fc91720fae26a}{UNITY\_END}}();}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__file__reader_8c_a63326a1b70b6e3f070e51687798e02de}\label{test__file__reader_8c_a63326a1b70b6e3f070e51687798e02de} 
+\index{test\_file\_reader.c@{test\_file\_reader.c}!setUp@{setUp}}
+\index{setUp@{setUp}!test\_file\_reader.c@{test\_file\_reader.c}}
+\doxysubsubsection{\texorpdfstring{setUp()}{setUp()}}
+{\footnotesize\ttfamily void set\+Up (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+set\+Up function to initialize AEB input state before each test. It opens the file pointed by test\+\_\+filename. 
+
+Setup function to initialize AEB input state before each test. 
+
+Definition at line \mbox{\hyperlink{test__file__reader_8c_source_l00012}{12}} of file \mbox{\hyperlink{test__file__reader_8c_source}{test\+\_\+file\+\_\+reader.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}}\ =\ \mbox{\hyperlink{file__reader_8c_aa94b18209fcd1bc8f04d607ee8dbcf61}{open\_file}}(\mbox{\hyperlink{test__file__reader_8c_a8cb69a40bc4c0672112f83362e362f3f}{test\_filename}});}
+\DoxyCodeLine{00015\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__file__reader_8c_ab804e0f66def63262c1d6b4e3d2a2bd7}\label{test__file__reader_8c_ab804e0f66def63262c1d6b4e3d2a2bd7} 
+\index{test\_file\_reader.c@{test\_file\_reader.c}!tearDown@{tearDown}}
+\index{tearDown@{tearDown}!test\_file\_reader.c@{test\_file\_reader.c}}
+\doxysubsubsection{\texorpdfstring{tearDown()}{tearDown()}}
+{\footnotesize\ttfamily void tear\+Down (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+tear\+Down function to clean up after each test. If test\+\_\+filename pointer is not NULL, the function closes the file and assign test\+\_\+filename to NULL. 
+
+Teardown function to clean up after each test. 
+
+Definition at line \mbox{\hyperlink{test__file__reader_8c_source_l00022}{22}} of file \mbox{\hyperlink{test__file__reader_8c_source}{test\+\_\+file\+\_\+reader.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{if}(\mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}})}
+\DoxyCodeLine{00025\ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ fclose(\mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}});}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}}\ =\ NULL;}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__file__reader_8c_a047a587a61691ad8d9bca8c6f5ce5f76}\label{test__file__reader_8c_a047a587a61691ad8d9bca8c6f5ce5f76} 
+\index{test\_file\_reader.c@{test\_file\_reader.c}!test\_open\_file\_not\_null\_and\_skip\_header@{test\_open\_file\_not\_null\_and\_skip\_header}}
+\index{test\_open\_file\_not\_null\_and\_skip\_header@{test\_open\_file\_not\_null\_and\_skip\_header}!test\_file\_reader.c@{test\_file\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_open\_file\_not\_null\_and\_skip\_header()}{test\_open\_file\_not\_null\_and\_skip\_header()}}
+{\footnotesize\ttfamily void test\+\_\+open\+\_\+file\+\_\+not\+\_\+null\+\_\+and\+\_\+skip\+\_\+header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Test for the function open\+\_\+file on \doxylink{file__reader_8c}{file\+\_\+reader.\+c} \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}. 
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000008}{Test}}]\end{DoxyRefDesc}
+
+
+Definition at line \mbox{\hyperlink{test__file__reader_8c_source_l00035}{35}} of file \mbox{\hyperlink{test__file__reader_8c_source}{test\+\_\+file\+\_\+reader.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Test\ Case\ ID:\ TC\_FILE\_READER\_001}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Checks\ if\ test\_file\ pointer\ is\ not\ null}}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{unity_8h_afae78efdc83dcc60f08347b8390525b9}{TEST\_ASSERT\_NOT\_NULL}}(\mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}});}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[100];}
+\DoxyCodeLine{00043\ \ \ \ \ fgets(buffer,\ \textcolor{keyword}{sizeof}(buffer),\ \mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}});}
+\DoxyCodeLine{00044\ \ \ \ \ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{/*\ if\ buffer\ is\ the\ same\ as\ the\ second\ line\ of\ the\ file,\ }}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ it\ means\ test\_file\ points\ to\ the\ correct\ line,\ skipping}}
+\DoxyCodeLine{00047\ \textcolor{comment}{\ \ \ \ the\ header}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{unity_8h_a1432f008fb6fb923371d4d0402571bf6}{TEST\_ASSERT\_EQUAL\_STRING}}(\textcolor{stringliteral}{"{}60\ 1\ 108\ 0\ 1\ 1\ 0\ 0\(\backslash\)n"{}},\ buffer);}
+\DoxyCodeLine{00050\ \ \ \ \ }
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__file__reader_8c_a9a66b9e3bd77d0c6e05b7cc5ac5141c9}\label{test__file__reader_8c_a9a66b9e3bd77d0c6e05b7cc5ac5141c9} 
+\index{test\_file\_reader.c@{test\_file\_reader.c}!test\_read\_sensor\_data\_eof@{test\_read\_sensor\_data\_eof}}
+\index{test\_read\_sensor\_data\_eof@{test\_read\_sensor\_data\_eof}!test\_file\_reader.c@{test\_file\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_read\_sensor\_data\_eof()}{test\_read\_sensor\_data\_eof()}}
+{\footnotesize\ttfamily void test\+\_\+read\+\_\+sensor\+\_\+data\+\_\+eof (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{test__file__reader_8c_source_l00079}{79}} of file \mbox{\hyperlink{test__file__reader_8c_source}{test\+\_\+file\+\_\+reader.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00080\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{structsensors__input__data}{sensors\_input\_data}}\ test\_sensor\_data;}
+\DoxyCodeLine{00082\ \ \ \ \ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{//\ Test\ Case\ ID:\ TC\_FILE\_READER\_003}}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{file__reader_8c_a06e72747213ae08275b8a3f9ed2c7ba0}{read\_sensor\_data}}(\mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}},\ \&test\_sensor\_data)\ ==\ 1);}
+\DoxyCodeLine{00085\ \ \ }
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(0,\ \mbox{\hyperlink{file__reader_8c_a06e72747213ae08275b8a3f9ed2c7ba0}{read\_sensor\_data}}(\mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}},\ \&test\_sensor\_data));}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \}}
+
+\end{DoxyCode}
+\Hypertarget{test__file__reader_8c_aebf839304946e2e07715b2943be18d91}\label{test__file__reader_8c_aebf839304946e2e07715b2943be18d91} 
+\index{test\_file\_reader.c@{test\_file\_reader.c}!test\_read\_sensor\_data\_valid\_data@{test\_read\_sensor\_data\_valid\_data}}
+\index{test\_read\_sensor\_data\_valid\_data@{test\_read\_sensor\_data\_valid\_data}!test\_file\_reader.c@{test\_file\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_read\_sensor\_data\_valid\_data()}{test\_read\_sensor\_data\_valid\_data()}}
+{\footnotesize\ttfamily void test\+\_\+read\+\_\+sensor\+\_\+data\+\_\+valid\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tests for the function read\+\_\+sensor\+\_\+data on \doxylink{file__reader_8c}{file\+\_\+reader.\+c} \mbox{[}Sw\+R-\/9\mbox{]}, \mbox{[}Sw\+R-\/11\mbox{]}. 
+
+\begin{DoxyRefDesc}{Test}
+\item[\mbox{\hyperlink{test__test000009}{Test}}]\end{DoxyRefDesc}
+
+
+Definition at line \mbox{\hyperlink{test__file__reader_8c_source_l00057}{57}} of file \mbox{\hyperlink{test__file__reader_8c_source}{test\+\_\+file\+\_\+reader.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00058\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{structsensors__input__data}{sensors\_input\_data}}\ test\_sensor\_data;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Test\ Case\ ID:\ TC\_FILE\_READER\_002}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{/*\ Checks\ if\ the\ function\ successfully\ reads}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ all\ the\ data\ from\ second\ line}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(1,\ \mbox{\hyperlink{file__reader_8c_a06e72747213ae08275b8a3f9ed2c7ba0}{read\_sensor\_data}}(\mbox{\hyperlink{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}{test\_file}},\ \&test\_sensor\_data));}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{/*\ -\/-\/-\/\ REVIEW\ -\/-\/-\/\ */}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ Checks\ if\ values\ match\ expected\ ones\ from\ second\ line}}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(60.0,\ test\_sensor\_data.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}});}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(1,\ test\_sensor\_data.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}});}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(108.0,\ test\_sensor\_data.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}});}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(0,\ test\_sensor\_data.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}});}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(1,\ test\_sensor\_data.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}});}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(1,\ test\_sensor\_data.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}});}
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{unity_8h_af9e5695d6c7cf634206ea6d062cb54c9}{TEST\_ASSERT\_EQUAL}}(0,\ test\_sensor\_data.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}});}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{unity_8h_a2d2e655b5ad3746f3f9079cf6beef3ac}{TEST\_ASSERT\_EQUAL\_FLOAT}}(0.0,test\_sensor\_data.\mbox{\hyperlink{structsensors__input__data_a6d9d7c897f6485d71742ef8166991c22}{relative\_acceleration}});}
+\DoxyCodeLine{00077\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7}\label{test__file__reader_8c_a2aab82b6722ab71d9d958a32484632e7} 
+\index{test\_file\_reader.c@{test\_file\_reader.c}!test\_file@{test\_file}}
+\index{test\_file@{test\_file}!test\_file\_reader.c@{test\_file\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_file}{test\_file}}
+{\footnotesize\ttfamily FILE\texorpdfstring{$\ast$}{*} test\+\_\+file}
+
+
+
+Definition at line \mbox{\hyperlink{test__file__reader_8c_source_l00006}{6}} of file \mbox{\hyperlink{test__file__reader_8c_source}{test\+\_\+file\+\_\+reader.\+c}}.
+
+\Hypertarget{test__file__reader_8c_a8cb69a40bc4c0672112f83362e362f3f}\label{test__file__reader_8c_a8cb69a40bc4c0672112f83362e362f3f} 
+\index{test\_file\_reader.c@{test\_file\_reader.c}!test\_filename@{test\_filename}}
+\index{test\_filename@{test\_filename}!test\_file\_reader.c@{test\_file\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_filename}{test\_filename}}
+{\footnotesize\ttfamily const char\texorpdfstring{$\ast$}{*} test\+\_\+filename = "{}tcs/cenario.\+txt"{}}
+
+
+
+Definition at line \mbox{\hyperlink{test__file__reader_8c_source_l00005}{5}} of file \mbox{\hyperlink{test__file__reader_8c_source}{test\+\_\+file\+\_\+reader.\+c}}.
+

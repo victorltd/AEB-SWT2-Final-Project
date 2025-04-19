@@ -1,0 +1,15 @@
+<map id="test/unity_internals.h" name="test/unity_internals.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="206,5,366,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,84,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,33,98,77,96,72,246,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="108,79,176,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="264,33,179,75,177,70,262,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="201,79,275,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="280,33,256,69,251,66,276,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="300,79,371,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="296,29,322,66,317,69,292,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="395,79,465,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="310,28,395,70,393,75,308,33"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="490,79,557,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="325,28,478,74,476,79,323,33"/>
+</map>

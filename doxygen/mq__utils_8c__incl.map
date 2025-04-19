@@ -1,0 +1,19 @@
+<map id="src/mq_utils.c" name="src/mq_utils.c">
+<area shape="rect" id="Node000001" title="Utilities for handling POSIX message queues." alt="" coords="267,5,379,31"/>
+<area shape="rect" id="Node000002" href="$mq__utils_8h.html" title=" " alt="" coords="51,79,142,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="288,33,147,77,146,72,286,28"/>
+<area shape="rect" id="Node000006" href="$constants_8h.html" title="Defines constants and calibration values for the AEB system." alt="" coords="167,79,264,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="307,33,246,73,243,69,305,28"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="288,79,359,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="326,31,326,65,321,65,321,31"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="383,79,450,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="340,29,392,68,389,72,337,33"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="475,79,545,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="354,28,468,71,466,76,352,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,92,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="91,106,66,142,62,139,87,103"/>
+<area shape="rect" id="Node000004" href="$dbc_8h.html" title=" " alt="" coords="116,152,173,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="107,103,132,139,127,142,102,106"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="109,225,180,251"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="147,178,147,212,142,212,142,178"/>
+</map>

@@ -1,0 +1,63 @@
+\chapter{Software Requirements}
+\hypertarget{software_requirements}{}\label{software_requirements}\index{Software Requirements@{Software Requirements}}
+This page describes the software requirements for the AEB (Autonomous Emergency Braking) system.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Requirement Code   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Action   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Condition    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Requirement Code   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Action   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Condition    }\\\cline{1-3}
+\endhead
+\label{software_requirements_SwR-1}%
+\Hypertarget{software_requirements_SwR-1}%
+{\bfseries{Sw\+R-\/1}}   &The software must calculate the TTC (time to collision) to the obstacle being detected   &As long as an obstacle is being detected    \\\cline{1-3}
+\label{software_requirements_SwR-2}%
+\Hypertarget{software_requirements_SwR-2}%
+{\bfseries{Sw\+R-\/2}}   &The software must send a signal to the ICM to activate an alarm   &When TTC \texorpdfstring{$<$}{<} 2s    \\\cline{1-3}
+\label{software_requirements_SwR-3}%
+\Hypertarget{software_requirements_SwR-3}%
+{\bfseries{Sw\+R-\/3}}   &The software must send a signal to the ABS system to brake the car   &When TTC \texorpdfstring{$<$}{<} 1s and the driver is not pressing the brakes    \\\cline{1-3}
+\label{software_requirements_SwR-4}%
+\Hypertarget{software_requirements_SwR-4}%
+{\bfseries{Sw\+R-\/4}}   &The software must store brake and alarm events   &When TTC \texorpdfstring{$<$}{<} 2s    \\\cline{1-3}
+\label{software_requirements_SwR-5}%
+\Hypertarget{software_requirements_SwR-5}%
+{\bfseries{Sw\+R-\/5}}   &When in off-\/state, the software must keep the ECU active but shouldn’t send messages   &When the driver turns it off    \\\cline{1-3}
+\label{software_requirements_SwR-6}%
+\Hypertarget{software_requirements_SwR-6}%
+{\bfseries{Sw\+R-\/6}}   &When in on-\/state, the software must continuously query sensor data, calculate TTC, and send messages as needed   &When the driver turns it on    \\\cline{1-3}
+\label{software_requirements_SwR-7}%
+\Hypertarget{software_requirements_SwR-7}%
+{\bfseries{Sw\+R-\/7}}   &The software must be able to change the AEB system to standby state   &When the vehicle velocity exceeds 60 km/h or is less than 10 km/h    \\\cline{1-3}
+\label{software_requirements_SwR-8}%
+\Hypertarget{software_requirements_SwR-8}%
+{\bfseries{Sw\+R-\/8}}   &The software must change the AEB system from standby mode to active mode   &When the vehicle slows down to a speed of less than 60 km/h and more than 10 km/h    \\\cline{1-3}
+\label{software_requirements_SwR-9}%
+\Hypertarget{software_requirements_SwR-9}%
+{\bfseries{Sw\+R-\/9}}   &The software must be able to receive data from the sensors   &While is activated    \\\cline{1-3}
+\label{software_requirements_SwR-10}%
+\Hypertarget{software_requirements_SwR-10}%
+{\bfseries{Sw\+R-\/10}}   &The software must be able to calculate the vehicle speed relative to the obstacle detected   &As long as an obstacle is being detected    \\\cline{1-3}
+\label{software_requirements_SwR-11}%
+\Hypertarget{software_requirements_SwR-11}%
+{\bfseries{Sw\+R-\/11}}   &The software must be developed in a way that the functionalities are decoupled and modularized   &During the software development process    \\\cline{1-3}
+\label{software_requirements_SwR-12}%
+\Hypertarget{software_requirements_SwR-12}%
+{\bfseries{Sw\+R-\/12}}   &The software must define the following operational states\+: on-\/state, alarm, brake, off-\/state and standby   &During the software development process    \\\cline{1-3}
+\label{software_requirements_SwR-13}%
+\Hypertarget{software_requirements_SwR-13}%
+{\bfseries{Sw\+R-\/13}}   &All parameters must allow calibration   &When developing or updating the system    \\\cline{1-3}
+\label{software_requirements_SwR-14}%
+\Hypertarget{software_requirements_SwR-14}%
+{\bfseries{Sw\+R-\/14}}   &The software must send a message to deactivate the alarm in the instrument cluster   &When TTC \texorpdfstring{$>$}{>} 2 and alarms are active    \\\cline{1-3}
+\label{software_requirements_SwR-15}%
+\Hypertarget{software_requirements_SwR-15}%
+{\bfseries{Sw\+R-\/15}}   &The CAN message sent by the AEB must signal an imminent collision so that the actuators can take action   &When a collision is imminent    \\\cline{1-3}
+\label{software_requirements_SwR-16}%
+\Hypertarget{software_requirements_SwR-16}%
+{\bfseries{Sw\+R-\/16}}   &The AEB must be kept in the “on-\/state”   &When the vehicle is in reverse mode   \\\cline{1-3}
+\end{longtabu}

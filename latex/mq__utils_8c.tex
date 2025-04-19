@@ -1,0 +1,283 @@
+\doxysection{src/mq\+\_\+utils.c File Reference}
+\hypertarget{mq__utils_8c}{}\label{mq__utils_8c}\index{src/mq\_utils.c@{src/mq\_utils.c}}
+
+
+Utilities for handling POSIX message queues.  
+
+
+{\ttfamily \#include "{}mq\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}constants.\+h"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for mq\+\_\+utils.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mq__utils_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{mq__utils_8c_acb3d9a2722912cafa1aca17ed086f771}{QUEUE\+\_\+\+PERMISSIONS}}~0660
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct mq\+\_\+attr \mbox{\hyperlink{mq__utils_8c_a1e06b8e09ecff9ff95ec9218ad2e6b11}{get\+\_\+mq\+\_\+attr}} ()
+\begin{DoxyCompactList}\small\item\em Gets the default attributes for a message queue. \end{DoxyCompactList}\item 
+mqd\+\_\+t \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\+\_\+mq}} (char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\+\_\+name}})
+\begin{DoxyCompactList}\small\item\em Creates a POSIX message queue. \end{DoxyCompactList}\item 
+mqd\+\_\+t \mbox{\hyperlink{mq__utils_8c_a887671fb12fe2639b7be4a301927e497}{open\+\_\+mq}} (char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\+\_\+name}})
+\begin{DoxyCompactList}\small\item\em Opens a POSIX message queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\+\_\+mq}} (mqd\+\_\+t \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}, char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\+\_\+name}})
+\begin{DoxyCompactList}\small\item\em Closes and unlinks the specified POSIX message queue. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{mq__utils_8c_abee084f2648925ba92404d2d06f98581}{read\+\_\+mq}} (mqd\+\_\+t mq\+\_\+receiver, \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \texorpdfstring{$\ast$}{*}msg\+\_\+read)
+\begin{DoxyCompactList}\small\item\em Reads a message from a POSIX message queue. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\+\_\+mq}} (mqd\+\_\+t mq\+\_\+sender, \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \texorpdfstring{$\ast$}{*}msg)
+\begin{DoxyCompactList}\small\item\em Writes a message from a POSIX message queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utilities for handling POSIX message queues. 
+
+This file contains functions for creating, opening, closing, reading, and writing POSIX message queues. 
+
+Definition in file \mbox{\hyperlink{mq__utils_8c_source}{mq\+\_\+utils.\+c}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{mq__utils_8c_acb3d9a2722912cafa1aca17ed086f771}\label{mq__utils_8c_acb3d9a2722912cafa1aca17ed086f771} 
+\index{mq\_utils.c@{mq\_utils.c}!QUEUE\_PERMISSIONS@{QUEUE\_PERMISSIONS}}
+\index{QUEUE\_PERMISSIONS@{QUEUE\_PERMISSIONS}!mq\_utils.c@{mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{QUEUE\_PERMISSIONS}{QUEUE\_PERMISSIONS}}
+{\footnotesize\ttfamily \#define QUEUE\+\_\+\+PERMISSIONS~0660}
+
+
+
+Definition at line \mbox{\hyperlink{mq__utils_8c_source_l00015}{15}} of file \mbox{\hyperlink{mq__utils_8c_source}{mq\+\_\+utils.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}\label{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517} 
+\index{mq\_utils.c@{mq\_utils.c}!close\_mq@{close\_mq}}
+\index{close\_mq@{close\_mq}!mq\_utils.c@{mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{close\_mq()}{close\_mq()}}
+{\footnotesize\ttfamily void close\+\_\+mq (\begin{DoxyParamCaption}\item[{mqd\+\_\+t}]{mqd,  }\item[{char \texorpdfstring{$\ast$}{*}}]{mq\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Closes and unlinks the specified POSIX message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mqd} & Message queue identifier. \\
+\hline
+{\em mq\+\_\+name} & Name of the message queue to be closed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{mq__utils_8c_source_l00077}{77}} of file \mbox{\hyperlink{mq__utils_8c_source}{mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00078\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Closing\ \%s\ message\ queue\(\backslash\)n"{}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (mq\_close(\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}})\ ==\ -\/1)}
+\DoxyCodeLine{00081\ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Error\ closing\ message\ queue"{}});}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{00084\ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{if}\ (mq\_unlink(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}})\ ==\ -\/1)}
+\DoxyCodeLine{00086\ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Error\ unlinking\ message\ queue"{}});}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \}}
+
+\end{DoxyCode}
+\Hypertarget{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}\label{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf} 
+\index{mq\_utils.c@{mq\_utils.c}!create\_mq@{create\_mq}}
+\index{create\_mq@{create\_mq}!mq\_utils.c@{mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{create\_mq()}{create\_mq()}}
+{\footnotesize\ttfamily mqd\+\_\+t create\+\_\+mq (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{mq\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Creates a POSIX message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mq\+\_\+name} & Name of the message queue to be created. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Message queue identifier (mqd\+\_\+t). 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{mq__utils_8c_source_l00038}{38}} of file \mbox{\hyperlink{mq__utils_8c_source}{mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{struct\ }mq\_attr\ attr\ =\ \mbox{\hyperlink{mq__utils_8c_a1e06b8e09ecff9ff95ec9218ad2e6b11}{get\_mq\_attr}}();}
+\DoxyCodeLine{00041\ \ \ \ \ mqd\_t\ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ =\ mq\_open(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}},\ O\_RDWR\ |\ O\_CREAT\ |\ O\_NONBLOCK,\ \mbox{\hyperlink{mq__utils_8c_acb3d9a2722912cafa1aca17ed086f771}{QUEUE\_PERMISSIONS}},\ \&attr);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ ==\ (mqd\_t)-\/1)}
+\DoxyCodeLine{00043\ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Error\ creating\ message\ queue"{}});}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Queue\ \%s\ created\(\backslash\)n"{}},\ \mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}};}
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}
+\Hypertarget{mq__utils_8c_a1e06b8e09ecff9ff95ec9218ad2e6b11}\label{mq__utils_8c_a1e06b8e09ecff9ff95ec9218ad2e6b11} 
+\index{mq\_utils.c@{mq\_utils.c}!get\_mq\_attr@{get\_mq\_attr}}
+\index{get\_mq\_attr@{get\_mq\_attr}!mq\_utils.c@{mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{get\_mq\_attr()}{get\_mq\_attr()}}
+{\footnotesize\ttfamily struct mq\+\_\+attr get\+\_\+mq\+\_\+attr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets the default attributes for a message queue. 
+
+\begin{DoxyReturn}{Returns}
+A mq\+\_\+attr structure configured with default values. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{mq__utils_8c_source_l00022}{22}} of file \mbox{\hyperlink{mq__utils_8c_source}{mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{struct\ }mq\_attr\ attr;}
+\DoxyCodeLine{00025\ \ \ \ \ attr.mq\_flags\ =\ O\_NONBLOCK;}
+\DoxyCodeLine{00026\ \ \ \ \ attr.mq\_curmsgs\ =\ 0;}
+\DoxyCodeLine{00027\ \ \ \ \ attr.mq\_maxmsg\ =\ \mbox{\hyperlink{constants_8h_abcda99a24ca583d06b2d88c6df456a43}{MQ\_MAX\_MESSAGES}};}
+\DoxyCodeLine{00028\ \ \ \ \ attr.mq\_msgsize\ =\ \mbox{\hyperlink{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}{MQ\_MAX\_MSG\_SIZE}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ attr;}
+\DoxyCodeLine{00030\ \}}
+
+\end{DoxyCode}
+\Hypertarget{mq__utils_8c_a887671fb12fe2639b7be4a301927e497}\label{mq__utils_8c_a887671fb12fe2639b7be4a301927e497} 
+\index{mq\_utils.c@{mq\_utils.c}!open\_mq@{open\_mq}}
+\index{open\_mq@{open\_mq}!mq\_utils.c@{mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{open\_mq()}{open\_mq()}}
+{\footnotesize\ttfamily mqd\+\_\+t open\+\_\+mq (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{mq\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Opens a POSIX message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mq\+\_\+name} & Name of the message queue to be opened. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Message queue identifier (mqd\+\_\+t). 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{mq__utils_8c_source_l00059}{59}} of file \mbox{\hyperlink{mq__utils_8c_source}{mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{struct\ }mq\_attr\ attr\ =\ \mbox{\hyperlink{mq__utils_8c_a1e06b8e09ecff9ff95ec9218ad2e6b11}{get\_mq\_attr}}();}
+\DoxyCodeLine{00062\ \ \ \ \ mqd\_t\ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ =\ mq\_open(\mbox{\hyperlink{test__mq__utils_8c_ae489c9593b1bbb3eec9b12a49a8e3ea2}{mq\_name}},\ O\_RDWR\ |\ O\_NONBLOCK,\ \mbox{\hyperlink{mq__utils_8c_acb3d9a2722912cafa1aca17ed086f771}{QUEUE\_PERMISSIONS}},\ \&attr);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}}\ ==\ (mqd\_t)-\/1)}
+\DoxyCodeLine{00064\ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Error\ opening\ message\ queue"{}});}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{test__mq__utils_8c_af41cafd7242f0c9fc52b22ead7d5ec0d}{mqd}};}
+\DoxyCodeLine{00069\ \}}
+
+\end{DoxyCode}
+\Hypertarget{mq__utils_8c_abee084f2648925ba92404d2d06f98581}\label{mq__utils_8c_abee084f2648925ba92404d2d06f98581} 
+\index{mq\_utils.c@{mq\_utils.c}!read\_mq@{read\_mq}}
+\index{read\_mq@{read\_mq}!mq\_utils.c@{mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{read\_mq()}{read\_mq()}}
+{\footnotesize\ttfamily int read\+\_\+mq (\begin{DoxyParamCaption}\item[{mqd\+\_\+t}]{mq\+\_\+receiver,  }\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \texorpdfstring{$\ast$}{*}}]{msg\+\_\+read }\end{DoxyParamCaption})}
+
+
+
+Reads a message from a POSIX message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mq\+\_\+receiver} & Identifier of the message queue from which the message will be read. \\
+\hline
+{\em msg\+\_\+read} & Pointer to the structure where the read message will be stored, in \doxylink{structcan__msg}{can\+\_\+msg} struct type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{mq__utils_8c_source_l00099}{99}} of file \mbox{\hyperlink{mq__utils_8c_source}{mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00100\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[\mbox{\hyperlink{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}{MQ\_MAX\_MSG\_SIZE}}];}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (mq\_receive(mq\_receiver,\ buffer,\ \mbox{\hyperlink{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}{MQ\_MAX\_MSG\_SIZE}},\ NULL)\ ==\ (mqd\_t)-\/1)}
+\DoxyCodeLine{00103\ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ perror("{}Error\ receiving\ message"{});}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \ \ \ \ memcpy(msg\_read,\ buffer,\ \mbox{\hyperlink{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}{MQ\_MAX\_MSG\_SIZE}});}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00109\ \}}
+
+\end{DoxyCode}
+\Hypertarget{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}\label{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08} 
+\index{mq\_utils.c@{mq\_utils.c}!write\_mq@{write\_mq}}
+\index{write\_mq@{write\_mq}!mq\_utils.c@{mq\_utils.c}}
+\doxysubsubsection{\texorpdfstring{write\_mq()}{write\_mq()}}
+{\footnotesize\ttfamily int write\+\_\+mq (\begin{DoxyParamCaption}\item[{mqd\+\_\+t}]{mq\+\_\+sender,  }\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \texorpdfstring{$\ast$}{*}}]{msg }\end{DoxyParamCaption})}
+
+
+
+Writes a message from a POSIX message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mq\+\_\+receiver} & Identifier of the message queue from which the message will be read. \\
+\hline
+{\em msg\+\_\+read} & Pointer to the \doxylink{structcan__msg}{can\+\_\+msg} struct type used to write a message in the MQ POSIX format. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{mq__utils_8c_source_l00118}{118}} of file \mbox{\hyperlink{mq__utils_8c_source}{mq\+\_\+utils.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00119\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{char}\ buffer[\mbox{\hyperlink{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}{MQ\_MAX\_MSG\_SIZE}}];}
+\DoxyCodeLine{00121\ \ \ \ \ memcpy(buffer,\ msg,\ \mbox{\hyperlink{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}{MQ\_MAX\_MSG\_SIZE}});}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{if}\ (mq\_send(mq\_sender,\ buffer,\ \mbox{\hyperlink{constants_8h_a28deba7f7a074fcec9ad971ac28521ee}{MQ\_MAX\_MSG\_SIZE}},\ 0)\ ==\ -\/1)}
+\DoxyCodeLine{00123\ \ \ \ \ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Error\ sending\ message.\ Message\ queue\ is\ full"{}});}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00128\ \}}
+
+\end{DoxyCode}

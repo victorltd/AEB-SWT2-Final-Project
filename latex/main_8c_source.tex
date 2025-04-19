@@ -1,0 +1,97 @@
+\doxysection{main.\+c}
+\hypertarget{main_8c_source}{}\label{main_8c_source}\index{src/main.c@{src/main.c}}
+\mbox{\hyperlink{main_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <mqueue.h>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <signal.h>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <sys/wait.h>}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mq__utils_8h}{mq\_utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{constants_8h}{constants.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00011}\mbox{\hyperlink{main_8c_a888ff70e2de4c8fbaedc5134dbe2a441}{00011}}\ mqd\_t\ \mbox{\hyperlink{main_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}},\ \mbox{\hyperlink{main_8c_a888ff70e2de4c8fbaedc5134dbe2a441}{actuators\_mq}};}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00012}\mbox{\hyperlink{main_8c_ac2cc1c1a13d42169bed13bf8140c4dcb}{00012}}\ pid\_t\ \mbox{\hyperlink{main_8c_a349c3dd4e74a386448349fd7801b3624}{sensors\_pid}},\ \mbox{\hyperlink{main_8c_ac2dda5a2c9f4861aa3499c4e113517e3}{controller\_pid}},\ \mbox{\hyperlink{main_8c_ac2cc1c1a13d42169bed13bf8140c4dcb}{actuators\_pid}};}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00014}\mbox{\hyperlink{main_8c_a019dfd8a35a919a35cc9e52bb46962ae}{00014}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8c_a019dfd8a35a919a35cc9e52bb46962ae}{wait\_terminate\_execution}}()}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00016}00016\ \ \ \ \ waitpid(\mbox{\hyperlink{main_8c_a349c3dd4e74a386448349fd7801b3624}{sensors\_pid}},\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00017}00017\ \ \ \ \ waitpid(\mbox{\hyperlink{main_8c_ac2dda5a2c9f4861aa3499c4e113517e3}{controller\_pid}},\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00018}00018\ \ \ \ \ waitpid(\mbox{\hyperlink{main_8c_ac2cc1c1a13d42169bed13bf8140c4dcb}{actuators\_pid}},\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00020}00020\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Closing\ message\ queue\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00021}00021\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{main_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}},\ \mbox{\hyperlink{constants_8h_aab9d8e700a34c08a7d8bca1d5a2d31a5}{SENSORS\_MQ}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{main_8c_a888ff70e2de4c8fbaedc5134dbe2a441}{actuators\_mq}},\ \mbox{\hyperlink{constants_8h_ab70848171cb403eb07c6f9e1fecdccd7}{ACTUATORS\_MQ}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00026}\mbox{\hyperlink{main_8c_a8c3fd0b337ed4fd4c8128b4070e54a82}{00026}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{main_8c_a8c3fd0b337ed4fd4c8128b4070e54a82}{terminate\_execution}}(\textcolor{keywordtype}{int}\ sig)}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00027}00027\ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00028}00028\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Closing\ message\ queue\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00029}00029\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{main_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}},\ \mbox{\hyperlink{constants_8h_aab9d8e700a34c08a7d8bca1d5a2d31a5}{SENSORS\_MQ}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00030}00030\ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a504ce44e1f28de45ad533aebf4f83517}{close\_mq}}(\mbox{\hyperlink{main_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}},\ \mbox{\hyperlink{constants_8h_ab70848171cb403eb07c6f9e1fecdccd7}{ACTUATORS\_MQ}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00032}00032\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Closing\ child\ processes\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00033}00033\ \ \ \ \ kill(\mbox{\hyperlink{main_8c_a349c3dd4e74a386448349fd7801b3624}{sensors\_pid}},\ SIGTERM);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00034}00034\ \ \ \ \ kill(\mbox{\hyperlink{main_8c_ac2dda5a2c9f4861aa3499c4e113517e3}{controller\_pid}},\ SIGTERM);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00035}00035\ \ \ \ \ kill(\mbox{\hyperlink{main_8c_ac2cc1c1a13d42169bed13bf8140c4dcb}{actuators\_pid}},\ SIGTERM);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00037}00037\ \ \ \ \ waitpid(\mbox{\hyperlink{main_8c_a349c3dd4e74a386448349fd7801b3624}{sensors\_pid}},\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00038}00038\ \ \ \ \ waitpid(\mbox{\hyperlink{main_8c_ac2dda5a2c9f4861aa3499c4e113517e3}{controller\_pid}},\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00039}00039\ \ \ \ \ waitpid(\mbox{\hyperlink{main_8c_ac2cc1c1a13d42169bed13bf8140c4dcb}{actuators\_pid}},\ NULL,\ 0);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00041}00041\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Execution\ terminated\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00043}00043\ \ \ \ \ exit(0);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00046}\mbox{\hyperlink{main_8c_a29f87724a37fd751f8eb5b33ebb1ad83}{00046}}\ pid\_t\ \mbox{\hyperlink{main_8c_a29f87724a37fd751f8eb5b33ebb1ad83}{create\_processes}}(\textcolor{keywordtype}{char}\ *process\_name)}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00047}00047\ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00048}00048\ \ \ \ \ pid\_t\ child\_pid\ =\ fork();}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{if}\ (child\_pid\ <\ 0)}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00051}00051\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Error\ creating\ auxiliary\ process\ \(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00053}00053\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (child\_pid\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00056}00056\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (execl(process\_name,\ process\_name,\ NULL)\ ==\ -\/1)}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Error\ executing\ the\ process"{}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{return}\ child\_pid;}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00065}00065\ \}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00067}\mbox{\hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{00067}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00069}00069\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Main\ process\ PID:\ \%d\(\backslash\)n"{}},\ getpid());}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00071}00071\ \ \ \ \ \textcolor{comment}{//\ Initialize\ resources}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00072}00072\ \ \ \ \ \mbox{\hyperlink{main_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{constants_8h_aab9d8e700a34c08a7d8bca1d5a2d31a5}{SENSORS\_MQ}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00073}00073\ \ \ \ \ \mbox{\hyperlink{main_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{constants_8h_ab70848171cb403eb07c6f9e1fecdccd7}{ACTUATORS\_MQ}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00075}00075\ \ \ \ \ \textcolor{comment}{//\ Create\ auxiliary\ processes}}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00076}00076\ \ \ \ \ \textcolor{keywordtype}{char}\ *sensors\_process\ =\ \textcolor{stringliteral}{"{}./bin/sensors\_bin"{}};}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordtype}{char}\ *controller\_process\ =\ \textcolor{stringliteral}{"{}./bin/aeb\_controller\_bin"{}};}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00078}00078\ \ \ \ \ \textcolor{keywordtype}{char}\ *actuators\_process\ =\ \textcolor{stringliteral}{"{}./bin/actuators\_bin"{}};}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00080}00080\ \ \ \ \ \mbox{\hyperlink{main_8c_a349c3dd4e74a386448349fd7801b3624}{sensors\_pid}}\ =\ \mbox{\hyperlink{main_8c_a29f87724a37fd751f8eb5b33ebb1ad83}{create\_processes}}(sensors\_process);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{main_8c_ac2dda5a2c9f4861aa3499c4e113517e3}{controller\_pid}}\ =\ \mbox{\hyperlink{main_8c_a29f87724a37fd751f8eb5b33ebb1ad83}{create\_processes}}(controller\_process);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{main_8c_ac2cc1c1a13d42169bed13bf8140c4dcb}{actuators\_pid}}\ =\ \mbox{\hyperlink{main_8c_a29f87724a37fd751f8eb5b33ebb1ad83}{create\_processes}}(actuators\_process);}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00084}00084\ \ \ \ \ signal(SIGINT,\ \mbox{\hyperlink{main_8c_a8c3fd0b337ed4fd4c8128b4070e54a82}{terminate\_execution}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{main_8c_a019dfd8a35a919a35cc9e52bb46962ae}{wait\_terminate\_execution}}();}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00088}00088\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Execution\ finished,\ check\ out\ log/log.txt\ for\ info!\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{return}\ EXIT\_SUCCESS;}
+\DoxyCodeLine{\Hypertarget{main_8c_source_l00091}00091\ \}}
+
+\end{DoxyCode}

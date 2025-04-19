@@ -1,0 +1,207 @@
+\doxysection{sensors.\+c}
+\hypertarget{sensors_8c_source}{}\label{sensors_8c_source}\index{src/sensors.c@{src/sensors.c}}
+\mbox{\hyperlink{sensors_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{constants_8h}{constants.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{mq__utils_8h}{mq\_utils.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{sensors__input_8h}{sensors\_input.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <pthread.h>}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{dbc_8h}{dbc.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{file__reader_8h}{file\_reader.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00012}00012\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{sensors_8c_a7133528f31fb081ea984f84794d3c453}{getSensorsData}}(\textcolor{keywordtype}{void}\ *arg);}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00013}00013\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_ae5c0774d75da2ba5c8393e7056379f0e}{conv2CANCarClusterData}}(\textcolor{keywordtype}{bool}\ on\_off\_aeb\_system);}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00014}00014\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_ace49be97578adbddaa21973fd5dd9a04}{conv2CANVelocityData}}(\textcolor{keywordtype}{bool}\ vehicle\_direction,\ \textcolor{keywordtype}{double}\ relative\_velocity,\ \textcolor{keywordtype}{double}\ relative\_acceleration);}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00015}00015\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_a6a04fa5bdc3138d5d212168f20ddcd2b}{conv2CANObstacleData}}(\textcolor{keywordtype}{bool}\ has\_obstacle,\ \textcolor{keywordtype}{double}\ obstacle\_distance);}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00016}00016\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_a0cba2b3a2b9c32751dd01c0f59b49261}{conv2CANPedalsData}}(\textcolor{keywordtype}{bool}\ brake\_pedal,\ \textcolor{keywordtype}{bool}\ accelerator\_pedal);}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00018}\mbox{\hyperlink{sensors_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{00018}}\ mqd\_t\ \mbox{\hyperlink{sensors_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00019}\mbox{\hyperlink{sensors_8c_a6ad3d00dfd971193e96fb9f18133171f}{00019}}\ pthread\_t\ \mbox{\hyperlink{sensors_8c_a6ad3d00dfd971193e96fb9f18133171f}{sensors\_id}};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00020}\mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{00020}}\ \mbox{\hyperlink{structsensors__input__data}{sensors\_input\_data}}\ \mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00022}\mbox{\hyperlink{sensors_8c_a3bdc4daf576546b0a53294324cafd087}{00022}}\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_a3bdc4daf576546b0a53294324cafd087}{can\_car\_cluster}},\ \mbox{\hyperlink{sensors_8c_a0f18fc7309742ccb54bfca636def5220}{can\_velocity\_sensor}},\ \mbox{\hyperlink{sensors_8c_ae0bb2c4e7f2b0e3531b985f62c467a24}{can\_obstacle\_sensor}},\ \mbox{\hyperlink{sensors_8c_a575c1a5ab2e25499443a20a705cd6d05}{can\_pedals\_sensor}};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00024}00024\ \textcolor{preprocessor}{\#ifndef\ TEST\_MODE\ }}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00025}\mbox{\hyperlink{sensors_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{00025}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sensors_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}}()}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00026}00026\ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00027}00027\ \ \ \ \ \textcolor{keywordtype}{int}\ sensors\_thr;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00029}00029\ \ \ \ \ \mbox{\hyperlink{sensors_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}}\ =\ \mbox{\hyperlink{mq__utils_8c_a95f00e4196a05f378c2656be620edfcf}{create\_mq}}(\mbox{\hyperlink{constants_8h_aab9d8e700a34c08a7d8bca1d5a2d31a5}{SENSORS\_MQ}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *filename\ =\ \textcolor{stringliteral}{"{}tcs/cenario.txt"{}};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00032}00032\ \ \ \ \ FILE\ *file\ =\ \mbox{\hyperlink{file__reader_8c_aa94b18209fcd1bc8f04d607ee8dbcf61}{open\_file}}(filename);\ \textcolor{comment}{//\ uses\ the\ modularized\ function\ to\ open\ the\ file}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00034}00034\ \ \ \ \ sensors\_thr\ =\ pthread\_create(\&\mbox{\hyperlink{sensors_8c_a6ad3d00dfd971193e96fb9f18133171f}{sensors\_id}},\ NULL,\ \mbox{\hyperlink{sensors_8c_a7133528f31fb081ea984f84794d3c453}{getSensorsData}},\ file);\ \textcolor{comment}{//\ Changed\ the\ argument\ from\ null\ to\ file(the\ last\ argument)}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (sensors\_thr\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00036}00036\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Sensors:\ it\ wasn't\ possible\ to\ create\ the\ associated\ thread\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ exit(52);}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00040}00040\ \ \ \ \ sensors\_thr\ =\ pthread\_join(\mbox{\hyperlink{sensors_8c_a6ad3d00dfd971193e96fb9f18133171f}{sensors\_id}},\ NULL);}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00043}00043\ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00055}\mbox{\hyperlink{sensors_8c_a7133528f31fb081ea984f84794d3c453}{00055}}\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{sensors_8c_a7133528f31fb081ea984f84794d3c453}{getSensorsData}}(\textcolor{keywordtype}{void}\ *arg)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00056}00056\ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00057}00057\ \ \ \ \ FILE\ *file\ =\ (FILE\ *)\ arg;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Read\ a\ new\ line\ from\ the\ file\ [SwR-\/9]}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{file__reader_8c_a06e72747213ae08275b8a3f9ed2c7ba0}{read\_sensor\_data}}(file,\ \&\mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}))}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{sensors_8c_a3bdc4daf576546b0a53294324cafd087}{can\_car\_cluster}}\ =\ \mbox{\hyperlink{sensors_8c_ae5c0774d75da2ba5c8393e7056379f0e}{conv2CANCarClusterData}}(\mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}.\mbox{\hyperlink{structsensors__input__data_a7d3eb4bf1acbb1c912830e8808f72168}{on\_off\_aeb\_system}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{sensors_8c_a0f18fc7309742ccb54bfca636def5220}{can\_velocity\_sensor}}\ =\ \mbox{\hyperlink{sensors_8c_ace49be97578adbddaa21973fd5dd9a04}{conv2CANVelocityData}}(\mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}.\mbox{\hyperlink{structsensors__input__data_a0f676ac6033e205e2603c48fecf461ef}{reverseEnabled}},\ \mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}.\mbox{\hyperlink{structsensors__input__data_a446e6e46ec0541ab0b404d93a75ab6ac}{relative\_velocity}},\ \mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}.\mbox{\hyperlink{structsensors__input__data_a6d9d7c897f6485d71742ef8166991c22}{relative\_acceleration}});\ \textcolor{comment}{//\ [SwR-\/10]}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{sensors_8c_ae0bb2c4e7f2b0e3531b985f62c467a24}{can\_obstacle\_sensor}}\ =\ \mbox{\hyperlink{sensors_8c_a6a04fa5bdc3138d5d212168f20ddcd2b}{conv2CANObstacleData}}(\mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}.\mbox{\hyperlink{structsensors__input__data_a3782de9b1037f3ce0036f685de31f165}{has\_obstacle}},\ \mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}.\mbox{\hyperlink{structsensors__input__data_a01371737abb4472988490f1d011be0c9}{obstacle\_distance}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{sensors_8c_a575c1a5ab2e25499443a20a705cd6d05}{can\_pedals\_sensor}}\ =\ \mbox{\hyperlink{sensors_8c_a0cba2b3a2b9c32751dd01c0f59b49261}{conv2CANPedalsData}}(\mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}.\mbox{\hyperlink{structsensors__input__data_a8cc0d9e6c44c3b22ba0ad4e2e3f7d055}{brake\_pedal}},\ \mbox{\hyperlink{sensors_8c_ac45d5dcfa9efd80bcc0ef22fcafc61e3}{sensorsData}}.\mbox{\hyperlink{structsensors__input__data_a605d64229c3a536712761f44feb45251}{accelerator\_pedal}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\_mq}}(\mbox{\hyperlink{sensors_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}},\ \&\mbox{\hyperlink{sensors_8c_a3bdc4daf576546b0a53294324cafd087}{can\_car\_cluster}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\_mq}}(\mbox{\hyperlink{sensors_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}},\ \&\mbox{\hyperlink{sensors_8c_a0f18fc7309742ccb54bfca636def5220}{can\_velocity\_sensor}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\_mq}}(\mbox{\hyperlink{sensors_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}},\ \&\mbox{\hyperlink{sensors_8c_ae0bb2c4e7f2b0e3531b985f62c467a24}{can\_obstacle\_sensor}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{mq__utils_8c_a57d5de8d149ae20eb2026dac0cef7d08}{write\_mq}}(\mbox{\hyperlink{sensors_8c_a074b0ef9bc31934bbf9b2b54e9e9aa43}{sensors\_mq}},\ \&\mbox{\hyperlink{sensors_8c_a575c1a5ab2e25499443a20a705cd6d05}{can\_pedals\_sensor}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//printf("{}New\ line.\(\backslash\)n"{});\ //\ This\ line\ is\ used\ for\ see\ the\ break\ of\ line}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ a\ new\ line\ can't\ be\ read,\ the\ end\ of\ the\ file\ was\ reached}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}EOF\ reached.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ sleep(1);\ \textcolor{comment}{//\ Wait\ for\ 1\ second\ before\ reading\ the\ next\ line}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00085}00085\ \ \ \ \ fclose(file);}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00086}00086\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00088}00088\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00090}00090\ \textcolor{comment}{//\ The\ location\ of\ information\ in\ the\ data\ frame\ location,\ in\ the\ following\ functions,}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00091}00091\ \textcolor{comment}{//\ is\ according\ to\ the\ dbc\ file\ in\ the\ requirements\ specification}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00101}\mbox{\hyperlink{sensors_8c_ae5c0774d75da2ba5c8393e7056379f0e}{00101}}\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_ae5c0774d75da2ba5c8393e7056379f0e}{conv2CANCarClusterData}}(\textcolor{keywordtype}{bool}\ on\_off\_aeb\_system)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00102}00102\ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00103}00103\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ aux\ =\ \{.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aed7b961aae1393ad39496b0d847580d7}{ID\_CAR\_C}},\ .dataFrame\ =\ \mbox{\hyperlink{dbc_8h_af30056253fdd3a5987a1cab7062f7847}{BASE\_DATA\_FRAME}}\};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00105}00105\ \ \ \ \ \textcolor{comment}{//\ Enable\ or\ disable\ AEB\ data\ encapsulation}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00106}00106\ \ \ \ \ \textcolor{keywordflow}{if}\ (on\_off\_aeb\_system)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00107}00107\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00109}00109\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00110}00110\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00111}00111\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00113}00113\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00115}00115\ \ \ \ \ \textcolor{keywordflow}{return}\ aux;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00116}00116\ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00132}\mbox{\hyperlink{sensors_8c_ace49be97578adbddaa21973fd5dd9a04}{00132}}\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_ace49be97578adbddaa21973fd5dd9a04}{conv2CANVelocityData}}(\textcolor{keywordtype}{bool}\ vehicle\_direction,\ \textcolor{keywordtype}{double}\ relative\_velocity,\ \textcolor{keywordtype}{double}\ relative\_acceleration)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00133}00133\ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00134}00134\ \ \ \ \ \textcolor{comment}{//printf("{}Rel\ acel:\ \%lf\(\backslash\)n"{},\ relative\_acceleration);}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00135}00135\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ aux\ =\ \{.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_ae3477def1e243ca2530c658431decd62}{ID\_SPEED\_S}},\ .dataFrame\ =\ \mbox{\hyperlink{dbc_8h_af30056253fdd3a5987a1cab7062f7847}{BASE\_DATA\_FRAME}}\};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00137}00137\ \ \ \ \ \textcolor{comment}{//\ Vehicle\ direction\ (forward\ or\ reverse)\ data\ encapsulation}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00138}00138\ \ \ \ \ \textcolor{keywordflow}{if}\ (vehicle\_direction)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00139}00139\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x01;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00142}00142\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00143}00143\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00145}00145\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00147}00147\ \ \ \ \ \textcolor{comment}{//\ Speed\ data\ ​​encapsulation}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00148}00148\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ data\_speed\ =\ relative\_velocity\ /\ \mbox{\hyperlink{dbc_8h_a646c6bfdb7d9573fc91d5d934d37ef43}{RES\_SPEED\_S}};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00149}00149\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ ms\_speed,\ ls\_speed;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00150}00150\ \ \ \ \ ls\_speed\ =\ data\_speed;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00151}00151\ \ \ \ \ ms\_speed\ =\ data\_speed\ >>\ 8;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00153}00153\ \ \ \ \ \textcolor{comment}{//\ Defines\ most\ and\ least\ significant\ bytes,\ according\ to\ the\ DBC\ specification}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00154}00154\ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ ls\_speed;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00155}00155\ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ ms\_speed;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00157}00157\ \ \ \ \ \textcolor{comment}{//\ Acceleration\ data\ ​​encapsulation}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00158}00158\ \ \ \ \ \textcolor{keywordtype}{double}\ aux\_acel\ =\ relative\_acceleration;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00159}00159\ \ \ \ \ \textcolor{keywordflow}{if}(aux\_acel\ <\ 0)\{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00160}00160\ \ \ \ \ \ \ \ \ aux\_acel\ *=\ -\/1;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[5]\ =\ 0x01;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00162}00162\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00163}00163\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[5]\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00164}00164\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00166}00166\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ data\_acel\ =\ ((aux\_acel\ *\ \mbox{\hyperlink{dbc_8h_a0154563c3cba7f09a1357b5d75c34d59}{RES\_ACCELERATION\_DIV\_S}})\ -\/\ \mbox{\hyperlink{dbc_8h_a6e352da7481d147cdd83581ea8f8dbb9}{OFFSET\_ACCELERATION\_S}});}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00167}00167\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ ms\_acel,\ ls\_acel;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00168}00168\ \ \ \ \ ls\_acel\ =\ data\_acel;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00169}00169\ \ \ \ \ ms\_acel\ =\ data\_acel\ >>\ 8;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00171}00171\ \ \ \ \ \textcolor{comment}{//\ Defines\ most\ and\ least\ significant\ bytes,\ according\ to\ the\ DBC\ specification}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00172}00172\ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[3]\ =\ ls\_acel;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00173}00173\ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[4]\ =\ ms\_acel;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00175}00175\ \ \ \ \ \textcolor{keywordflow}{return}\ aux;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00176}00176\ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00177}00177\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00191}\mbox{\hyperlink{sensors_8c_a6a04fa5bdc3138d5d212168f20ddcd2b}{00191}}\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_a6a04fa5bdc3138d5d212168f20ddcd2b}{conv2CANObstacleData}}(\textcolor{keywordtype}{bool}\ has\_obstacle,\ \textcolor{keywordtype}{double}\ obstacle\_distance)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00192}00192\ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00193}00193\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ aux\ =\ \{.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_a1622c4f92373810c870331dfba0ac7c2}{ID\_OBSTACLE\_S}},\ .dataFrame\ =\ \mbox{\hyperlink{dbc_8h_af30056253fdd3a5987a1cab7062f7847}{BASE\_DATA\_FRAME}}\};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00195}00195\ \ \ \ \ \textcolor{comment}{//\ Obstacle\ detection\ data\ encapsulation}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00196}00196\ \ \ \ \ \textcolor{keywordflow}{if}\ (has\_obstacle)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00197}00197\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x01;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00199}00199\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00200}00200\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00201}00201\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[2]\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00203}00203\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00205}00205\ \ \ \ \ \textcolor{comment}{//\ Obstacle\ distance\ data\ ​​encapsulation}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00206}00206\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ data\_distance\ =\ obstacle\_distance\ /\ \mbox{\hyperlink{dbc_8h_ad208b54e7611f9e1696db6646f2b83a1}{RES\_OBSTACLE\_S}};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00207}00207\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ ms\_distance,\ ls\_distance;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00208}00208\ \ \ \ \ ls\_distance\ =\ data\_distance;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00209}00209\ \ \ \ \ ms\_distance\ =\ data\_distance\ >>\ 8;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00211}00211\ \ \ \ \ \textcolor{comment}{//\ Defines\ most\ and\ least\ significant\ bytes,\ according\ to\ the\ DBC\ specification}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00212}00212\ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ ls\_distance;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00213}00213\ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ ms\_distance;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00215}00215\ \ \ \ \ \textcolor{keywordflow}{return}\ aux;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00216}00216\ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00231}\mbox{\hyperlink{sensors_8c_a0cba2b3a2b9c32751dd01c0f59b49261}{00231}}\ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ \mbox{\hyperlink{sensors_8c_a0cba2b3a2b9c32751dd01c0f59b49261}{conv2CANPedalsData}}(\textcolor{keywordtype}{bool}\ brake\_pedal,\ \textcolor{keywordtype}{bool}\ accelerator\_pedal)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00232}00232\ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00233}00233\ \ \ \ \ \mbox{\hyperlink{structcan__msg}{can\_msg}}\ aux\ =\ \{.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}}\ =\ \mbox{\hyperlink{dbc_8h_aba7d5a0a42bbc6b35c9e5ff899fcbb9f}{ID\_PEDALS}},\ .dataFrame\ =\ \mbox{\hyperlink{dbc_8h_af30056253fdd3a5987a1cab7062f7847}{BASE\_DATA\_FRAME}}\};}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00235}00235\ \ \ \ \ \textcolor{comment}{//\ Brake\ pedal\ activation\ data\ encapsulation}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00236}00236\ \ \ \ \ \textcolor{keywordflow}{if}\ (brake\_pedal)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00237}00237\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00238}00238\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x01;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00239}00239\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00241}00241\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00242}00242\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00243}00243\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00245}00245\ \ \ \ \ \textcolor{comment}{//\ Accelerator\ pedal\ activation\ data\ encapsulation}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00246}00246\ \ \ \ \ \textcolor{keywordflow}{if}\ (accelerator\_pedal)}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00247}00247\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00248}00248\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x01;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00249}00249\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00250}00250\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00251}00251\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00252}00252\ \ \ \ \ \ \ \ \ aux.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ =\ 0x00;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00253}00253\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00254}00254\ }
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00255}00255\ \ \ \ \ \textcolor{keywordflow}{return}\ aux;}
+\DoxyCodeLine{\Hypertarget{sensors_8c_source_l00256}00256\ \}}
+
+\end{DoxyCode}

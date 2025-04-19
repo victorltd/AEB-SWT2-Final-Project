@@ -1,0 +1,300 @@
+\doxysection{src/actuators.c File Reference}
+\hypertarget{actuators_8c}{}\label{actuators_8c}\index{src/actuators.c@{src/actuators.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$mqueue.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include "{}mq\+\_\+utils.\+h"{}}\newline
+{\ttfamily \#include "{}constants.\+h"{}}\newline
+{\ttfamily \#include "{}actuators.\+h"{}}\newline
+{\ttfamily \#include "{}dbc.\+h"{}}\newline
+{\ttfamily \#include "{}log\+\_\+utils.\+h"{}}\newline
+Include dependency graph for actuators.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{actuators_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{actuators_8c_ab0b4f8f98c3eb2f7041948c148ceadf8}{LOOP\+\_\+\+EMPTY\+\_\+\+ITERATIONS\+\_\+\+MAX}}~11
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{actuators_8c_a2e65ffc061b664d39102b09c560ac7a3}{actuators\+Response\+Loop}} (void \texorpdfstring{$\ast$}{*}arg)
+\begin{DoxyCompactList}\small\item\em Main loop for processing actuator messages. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8}{actuators\+Translate\+Can\+Msg}} (\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+frame)
+\item 
+void \mbox{\hyperlink{actuators_8c_a8636c5193582ea95742cd24349cf3aa2}{update\+Internal\+Actuators\+State}} (\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+frame)
+\item 
+int \mbox{\hyperlink{actuators_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+mqd\+\_\+t \mbox{\hyperlink{actuators_8c_a888ff70e2de4c8fbaedc5134dbe2a441}{actuators\+\_\+mq}}
+\item 
+pthread\+\_\+t \mbox{\hyperlink{actuators_8c_ac6b5d6738ab4914747667d9407905730}{actuators\+\_\+id}}
+\item 
+\mbox{\hyperlink{structactuators__abstraction}{actuators\+\_\+abstraction}} \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\+\_\+state}}
+\item 
+\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} \mbox{\hyperlink{actuators_8c_a5d2051893d3d3ea4e0dcc3c647770c95}{captured\+\_\+can\+\_\+frame}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{actuators_8c_ab0b4f8f98c3eb2f7041948c148ceadf8}\label{actuators_8c_ab0b4f8f98c3eb2f7041948c148ceadf8} 
+\index{actuators.c@{actuators.c}!LOOP\_EMPTY\_ITERATIONS\_MAX@{LOOP\_EMPTY\_ITERATIONS\_MAX}}
+\index{LOOP\_EMPTY\_ITERATIONS\_MAX@{LOOP\_EMPTY\_ITERATIONS\_MAX}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{LOOP\_EMPTY\_ITERATIONS\_MAX}{LOOP\_EMPTY\_ITERATIONS\_MAX}}
+{\footnotesize\ttfamily \#define LOOP\+\_\+\+EMPTY\+\_\+\+ITERATIONS\+\_\+\+MAX~11}
+
+
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00013}{13}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{actuators_8c_a2e65ffc061b664d39102b09c560ac7a3}\label{actuators_8c_a2e65ffc061b664d39102b09c560ac7a3} 
+\index{actuators.c@{actuators.c}!actuatorsResponseLoop@{actuatorsResponseLoop}}
+\index{actuatorsResponseLoop@{actuatorsResponseLoop}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{actuatorsResponseLoop()}{actuatorsResponseLoop()}}
+{\footnotesize\ttfamily void \texorpdfstring{$\ast$}{*} actuators\+Response\+Loop (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{arg }\end{DoxyParamCaption})}
+
+
+
+Main loop for processing actuator messages. 
+
+This function runs in a separate thread and continuously reads messages from the actuators message queue. It processes each message to update the internal state of the actuators and logs the event. If the message queue is empty for a specified number of iterations ({\ttfamily LOOP\+\_\+\+EMPTY\+\_\+\+ITERATIONS\+\_\+\+MAX}), the loop exits, signaling that no more messages are expected.
+
+
+\begin{DoxyParams}{Parameters}
+{\em arg} & Unused parameter (can be NULL). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NULL
+\end{DoxyReturn}
+
+\begin{DoxyItemize}
+\item Reads messages from the {\ttfamily actuators\+\_\+mq} message queue using {\ttfamily read\+\_\+mq}.
+\item If a message is successfully read, it resets the {\ttfamily empty\+\_\+mq\+\_\+counter} and processes the message using {\ttfamily actuators\+Translate\+Can\+Msg}.
+\item If the queue is empty, increments the {\ttfamily empty\+\_\+mq\+\_\+counter}.
+\item Logs each processed message using {\ttfamily log\+\_\+event}, including the current state of the actuators.
+\item Waits for 200 milliseconds between iterations using {\ttfamily usleep}.
+\item Exits the loop and prints a message when the {\ttfamily empty\+\_\+mq\+\_\+counter} reaches {\ttfamily LOOP\+\_\+\+EMPTY\+\_\+\+ITERATIONS\+\_\+\+MAX}.
+\end{DoxyItemize}
+
+Implements \doxylink{software_requirements_SwR-4}{Sw\+R-\/4} 
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00083}{83}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00084\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{int}\ empty\_mq\_counter\ =\ 0;}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{while}\ (empty\_mq\_counter\ <\ \mbox{\hyperlink{actuators_8c_ab0b4f8f98c3eb2f7041948c148ceadf8}{LOOP\_EMPTY\_ITERATIONS\_MAX}})}
+\DoxyCodeLine{00087\ \ \ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{mq__utils_8c_abee084f2648925ba92404d2d06f98581}{read\_mq}}(\mbox{\hyperlink{actuators_8c_a888ff70e2de4c8fbaedc5134dbe2a441}{actuators\_mq}},\ \&\mbox{\hyperlink{actuators_8c_a5d2051893d3d3ea4e0dcc3c647770c95}{captured\_can\_frame}})\ !=\ -\/1)}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ empty\_mq\_counter\ =\ 0;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8}{actuatorsTranslateCanMsg}}(\mbox{\hyperlink{actuators_8c_a5d2051893d3d3ea4e0dcc3c647770c95}{captured\_can\_frame}});}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ empty\_mq\_counter++;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ uint32\_t\ event\_id\ =\ \mbox{\hyperlink{actuators_8c_a5d2051893d3d3ea4e0dcc3c647770c95}{captured\_can\_frame}}.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}};\ }
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{log__utils_8c_acf303e3f3f7d320a1113be573509bb63}{log\_event}}(\textcolor{stringliteral}{"{}AEB1"{}},\ event\_id,\ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}});\ \textcolor{comment}{//\ [SwR-\/4]}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ usleep(200000);\ \textcolor{comment}{//\ Deprected,\ change\ for\ function\ other\ later}}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Actuators:\ empty\_mq\_counter\ reached\ the\ limit,\ exiting\(\backslash\)n"{}});}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00108\ \}}
+
+\end{DoxyCode}
+\Hypertarget{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8}\label{actuators_8c_a808bc89bdef3d1eb623c526be876d3d8} 
+\index{actuators.c@{actuators.c}!actuatorsTranslateCanMsg@{actuatorsTranslateCanMsg}}
+\index{actuatorsTranslateCanMsg@{actuatorsTranslateCanMsg}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{actuatorsTranslateCanMsg()}{actuatorsTranslateCanMsg()}}
+{\footnotesize\ttfamily void actuators\+Translate\+Can\+Msg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}}}]{captured\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00110}{110}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00111\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{switch}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ac4e36d6ad06dd50743b62e7414f78184}{identifier}})}
+\DoxyCodeLine{00113\ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{dbc_8h_a371988701ce573f2df413957182b8826}{ID\_AEB\_S}}:}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_a8636c5193582ea95742cd24349cf3aa2}{updateInternalActuatorsState}}(captured\_frame);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{dbc_8h_aae29e3539bd594d7ade539814febe97b}{ID\_EMPTY}}:}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{comment}{//printf("{}Actuators:\ Empty\ message\ received\(\backslash\)n"{});}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Actuators:\ CAN\ Identifier\ unknown\(\backslash\)n"{}});}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \}}
+
+\end{DoxyCode}
+\Hypertarget{actuators_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{actuators_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{actuators.c@{actuators.c}!main@{main}}
+\index{main@{main}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00044}{44}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{actuators_8c_a888ff70e2de4c8fbaedc5134dbe2a441}{actuators\_mq}}\ =\ \mbox{\hyperlink{mq__utils_8c_a887671fb12fe2639b7be4a301927e497}{open\_mq}}(\mbox{\hyperlink{constants_8h_ab70848171cb403eb07c6f9e1fecdccd7}{ACTUATORS\_MQ}});}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ actuators\_thread;}
+\DoxyCodeLine{00049\ \ \ \ \ actuators\_thread\ =\ pthread\_create(\&\mbox{\hyperlink{actuators_8c_ac6b5d6738ab4914747667d9407905730}{actuators\_id}},\ NULL,\ \mbox{\hyperlink{actuators_8c_a2e65ffc061b664d39102b09c560ac7a3}{actuatorsResponseLoop}},\ NULL);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{if}\ (actuators\_thread\ !=\ 0)}
+\DoxyCodeLine{00051\ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ perror(\textcolor{stringliteral}{"{}Actuators:\ it\ wasn't\ possible\ to\ create\ the\ associated\ thread\(\backslash\)n"{}});}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ exit(54);}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ actuators\_thread\ =\ pthread\_join(\mbox{\hyperlink{actuators_8c_ac6b5d6738ab4914747667d9407905730}{actuators\_id}},\ NULL);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00058\ \}}
+
+\end{DoxyCode}
+\Hypertarget{actuators_8c_a8636c5193582ea95742cd24349cf3aa2}\label{actuators_8c_a8636c5193582ea95742cd24349cf3aa2} 
+\index{actuators.c@{actuators.c}!updateInternalActuatorsState@{updateInternalActuatorsState}}
+\index{updateInternalActuatorsState@{updateInternalActuatorsState}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{updateInternalActuatorsState()}{updateInternalActuatorsState()}}
+{\footnotesize\ttfamily void update\+Internal\+Actuators\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcan__msg}{can\+\_\+msg}}}]{captured\+\_\+frame }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00126}{126}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00127\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[1]\ ==\ 0x01)}
+\DoxyCodeLine{00129\ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00135\ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (captured\_frame.\mbox{\hyperlink{structcan__msg_ae7f3f34abc69d7ee28fcd77a53091d54}{dataFrame}}[0]\ ==\ 0x01)}
+\DoxyCodeLine{00137\ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00145\ \ \ \ \ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab7331b3769446808c60936da59a1e3d9}{belt\_tightness}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_a68e97e44238339a9011a5a1bea267444}{door\_lock}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ae99ee78e0fedfcef438eca8b2a3e8964}{should\_activate\_abs}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_ab6e6f15280e566ecf86f06a780cb94a7}{alarm\_led}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}{actuators\_state}}.\mbox{\hyperlink{structactuators__abstraction_afd5b1185a961b17a79fe4fb45a65baa9}{alarm\_buzzer}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{actuators_8c_ac6b5d6738ab4914747667d9407905730}\label{actuators_8c_ac6b5d6738ab4914747667d9407905730} 
+\index{actuators.c@{actuators.c}!actuators\_id@{actuators\_id}}
+\index{actuators\_id@{actuators\_id}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{actuators\_id}{actuators\_id}}
+{\footnotesize\ttfamily pthread\+\_\+t actuators\+\_\+id}
+
+
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00020}{20}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+\Hypertarget{actuators_8c_a888ff70e2de4c8fbaedc5134dbe2a441}\label{actuators_8c_a888ff70e2de4c8fbaedc5134dbe2a441} 
+\index{actuators.c@{actuators.c}!actuators\_mq@{actuators\_mq}}
+\index{actuators\_mq@{actuators\_mq}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{actuators\_mq}{actuators\_mq}}
+{\footnotesize\ttfamily mqd\+\_\+t actuators\+\_\+mq}
+
+
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00019}{19}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+\Hypertarget{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8}\label{actuators_8c_ab919c9cf0d6de1c30bb90ee5636f09b8} 
+\index{actuators.c@{actuators.c}!actuators\_state@{actuators\_state}}
+\index{actuators\_state@{actuators\_state}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{actuators\_state}{actuators\_state}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structactuators__abstraction}{actuators\+\_\+abstraction}} actuators\+\_\+state}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ .belt\_tightness\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ .door\_lock\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{\ \ \ \ .should\_activate\_abs\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ .alarm\_led\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{\ \ \ \ .alarm\_buzzer\ =\ \textcolor{keyword}{true}\}}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00022}{22}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ .belt\_tightness\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00024\ \ \ \ \ .door\_lock\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00025\ \ \ \ \ .should\_activate\_abs\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00026\ \ \ \ \ .alarm\_led\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00027\ \ \ \ \ .alarm\_buzzer\ =\ \textcolor{keyword}{true}\};}
+
+\end{DoxyCode}
+\Hypertarget{actuators_8c_a5d2051893d3d3ea4e0dcc3c647770c95}\label{actuators_8c_a5d2051893d3d3ea4e0dcc3c647770c95} 
+\index{actuators.c@{actuators.c}!captured\_can\_frame@{captured\_can\_frame}}
+\index{captured\_can\_frame@{captured\_can\_frame}!actuators.c@{actuators.c}}
+\doxysubsubsection{\texorpdfstring{captured\_can\_frame}{captured\_can\_frame}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structcan__msg}{can\+\_\+msg}} captured\+\_\+can\+\_\+frame}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ .identifier\ =\ 0x0CFFB027,}
+\DoxyCodeLine{\ \ \ \ .dataFrame\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\}\}}
+
+\end{DoxyCode}
+Captured CAN message 
+
+Definition at line \mbox{\hyperlink{actuators_8c_source_l00029}{29}} of file \mbox{\hyperlink{actuators_8c_source}{actuators.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ .identifier\ =\ 0x0CFFB027,}
+\DoxyCodeLine{00031\ \ \ \ \ .dataFrame\ =\ \{0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF,\ 0xFF\}\};}
+
+\end{DoxyCode}
